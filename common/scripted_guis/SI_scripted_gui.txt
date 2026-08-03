@@ -1,0 +1,1386 @@
+scripted_gui = {
+	
+	state_interactions_menu_gui = {
+
+		context_type = selected_state_context
+
+		window_name = "state_interaction_menu_container"
+
+		parent_window_name = "countrystateview"
+
+		visible = {
+			always = yes
+		}
+
+		effects = {
+			
+			state_interaction_menu_button_click = {
+				if = {
+					limit = {
+						ROOT = { has_country_flag = SI_menu_flag }
+					}
+					ROOT = {
+						clr_country_flag = SI_menu_flag
+						clr_country_flag = SI_menu_2_flag
+					}
+				}
+				else = {
+					ROOT = {
+						set_country_flag = SI_menu_flag
+					}
+				}
+			}
+
+		}
+	}
+
+	######  ####    ######  ##  ##  ######  ######  ######  ####
+	  ##    ##  ##  ##  ##  ### ##  ##      ##      ##      ##  ##
+	  ##    ####    ######  ### ##  ######  ######  ######  ####
+	  ##    ##  ##  ##  ##  ## ###      ##  ##      ##      ##  ##
+	  ##    ##  ##  ##  ##  ##  ##  ######  ##      ######  ##  ##
+
+	######  ######  ######  ##
+	  ##    ##  ##  ##  ##  ##
+	  ##    ##  ##  ##  ##  ##
+	  ##    ##  ##  ##  ##  ##
+	  ##    ######  ######  ######
+
+	state_interactions_transfer_tool_gui = {
+
+		context_type = selected_state_context
+
+		window_name = "state_interactions_state_transfer_container"
+
+		parent_window_name = "state_interaction_container"
+
+		visible = {
+			ROOT = {
+				has_country_flag = SI_menu_2_flag
+			}
+			NOT = {
+				has_game_rule = {
+					rule = si_state_transfer_rules
+					option = SI_STATE_TRANSFER_DISABLED
+				}
+			}
+		}
+
+		effects = {
+			state_transfer_mark_button_click = {
+				add_to_array = {
+					array = ROOT.selected_states_array
+					value = FROM.id
+				}
+			}
+			state_transfer_unmark_button_click = {
+				remove_from_array = {
+					array = ROOT.selected_states_array
+					value = FROM.id
+				}
+			}
+
+			state_transfer_mark_all_button_click = {
+				every_state = {
+					limit = {
+						is_owned_and_controlled_by = FROM.owner
+					}
+					ROOT = {
+						add_to_array = {
+							array = THIS.selected_states_array
+							value = PREV.id
+						}
+					}
+				}
+			}
+
+			state_transfer_unmark_all_button_click = {
+				every_state = {
+					ROOT = {
+						remove_from_array = {
+							array = THIS.selected_states_array
+							value = PREV.id
+						}
+					}
+				}
+			}
+
+			state_transfer_transfer_button_click = {
+				every_state = {
+					limit = {
+						is_in_array = {
+							array = ROOT.selected_states_array
+							value = THIS.id
+						}
+					}
+					transfer_state_to = FROM.owner
+
+					ROOT = {
+						remove_from_array = {
+							array = THIS.selected_states_array
+							value = PREV.id
+						}
+					}
+				}
+			}
+
+			state_transfer_core_button_click = {
+				every_state = {
+					limit = {
+						is_in_array = {
+							array = ROOT.selected_states_array
+							value = THIS.id
+						}
+					}
+					add_core_of = FROM.owner
+
+					ROOT = {
+						remove_from_array = {
+							array = THIS.selected_states_array
+							value = PREV.id
+						}
+					}
+				}
+			}
+		}
+
+		triggers = {
+			state_transfer_mark_button_visible = {
+				NOT = {
+					is_in_array = {
+						array = ROOT.selected_states_array
+						value = FROM.id
+					}
+				}
+			}
+			state_transfer_unmark_button_visible = {
+				is_in_array = {
+					array = ROOT.selected_states_array
+					value = FROM.id
+				}
+			}
+			state_transfer_core_button_visible = {
+				has_game_rule = {
+					rule = si_state_transfer_rules
+					option = SI_STATE_TRANSFER_DEFAULT
+				}
+			}
+
+			state_transfer_mark_button_click_enabled = {
+				OR = {
+					AND = {
+						has_game_rule = {
+							rule = si_state_transfer_rules
+							option = SI_STATE_TRANSFER_DEFAULT
+						}
+						always = yes
+					}
+					AND = {
+						has_game_rule = {
+							rule = si_state_transfer_rules
+							option = SI_STATE_TRANSFER_MP
+						}
+						OR = {
+							FROM = {
+								is_owned_and_controlled_by = ROOT
+							}
+							FROM.owner = {
+								is_subject_of = ROOT
+							}
+						}
+					}
+				}
+			}
+
+			state_transfer_mark_all_button_click_enabled = {
+				OR = {
+					AND = {
+						has_game_rule = {
+							rule = si_state_transfer_rules
+							option = SI_STATE_TRANSFER_DEFAULT
+						}
+						always = yes
+					}
+					AND = {
+						has_game_rule = {
+							rule = si_state_transfer_rules
+							option = SI_STATE_TRANSFER_MP
+						}
+						OR = {
+							FROM = {
+								is_owned_and_controlled_by = ROOT
+							}
+							FROM.owner = {
+								is_subject_of = ROOT
+							}
+						}
+					}
+				}
+				any_state = {
+					is_owned_and_controlled_by = from.owner
+					NOT = {
+						is_in_array = {
+							array = ROOT.selected_states_array
+							value = THIS.id
+						}
+					}
+				}
+			}
+
+			state_transfer_unmark_all_button_click_enabled = {
+				any_state = {
+					is_in_array = {
+						array = ROOT.selected_states_array
+						value = THIS.id
+					}
+				}
+			}
+
+			state_transfer_transfer_button_click_enabled = {
+				any_state = {
+					is_in_array = {
+						array = ROOT.selected_states_array
+						value = THIS.id
+					}
+				}
+			}
+
+			state_transfer_core_button_click_enabled = {
+				any_state = {
+					is_in_array = {
+						array = ROOT.selected_states_array
+						value = THIS.id
+					}
+				}
+			}
+		}
+	}
+
+	######  ##  ##  ######  ######  ####    ######  ######  ######  ######  ######  ##  ##  ######
+	  ##    ### ##    ##    ##      ##  ##  ##  ##  ##        ##      ##    ##  ##  ### ##  ##
+	  ##    ### ##    ##    ######  ####    ######  ##        ##      ##    ##  ##  ### ##  ######
+	  ##    ## ###    ##    ##      ##  ##  ##  ##  ##        ##      ##    ##  ##  ## ###      ##
+	######  ##  ##    ##    ######  ##  ##  ##  ##  ######    ##    ######  ######  ##  ##  ######
+	
+	######  ######  ######  ##
+	  ##    ##  ##  ##  ##  ##
+	  ##    ##  ##  ##  ##  ##
+	  ##    ##  ##  ##  ##  ##
+	  ##    ######  ######  ######
+
+	state_interactions_menuview_gui = {
+
+		context_type = selected_state_context
+
+		window_name = "state_interaction_container"
+
+		parent_window_name = "countrystateview"
+
+		visible = {
+			ROOT = {
+				OR = {
+					is_ai = yes
+					has_country_flag = SI_menu_flag
+				}
+			}
+		}
+
+		properties = {
+			interaction_debug_button = {
+				frame = global.SI_debug_var
+			}
+		}
+
+		######  ######  ######  ######  ######  ######  ######
+		##      ##      ##      ##      ##        ##    ##
+		######  ######  ######  ######  ##        ##    ######
+		##      ##      ##      ##      ##        ##        ##
+		######  ##      ##      ######  ######    ##    ######
+
+		effects = {
+			interaction_debug_button_click = {
+				if = {
+					limit = {
+						check_variable = { global.SI_debug_var = 1 }
+					}
+					set_variable = { global.SI_debug_var = 2 }
+					set_global_flag = SI_debug_flag
+				}
+				else = {
+					set_variable = { global.SI_debug_var = 1 }
+					clr_global_flag = SI_debug_flag
+				}
+			}
+
+			state_menu_transfer_menu_button_click = {
+				if = {
+					limit = {
+						ROOT = { has_country_flag = SI_menu_2_flag }
+					}
+					ROOT = {
+						clr_country_flag = SI_menu_2_flag
+					}
+				}
+				else = {
+					ROOT = {
+						set_country_flag = SI_menu_2_flag
+					}
+				}
+			}
+
+			state_menu_demand_state_button_click = {
+				if = {
+					limit = {
+						ROOT = {
+							NOT = {
+								has_country_flag = SI_AI_temp_personality_coward
+								has_country_flag = SI_AI_temp_personality_decisive
+							}
+						}
+					}
+					ROOT = {
+						random_list = {
+							25 = {
+								set_country_flag = {
+									flag = SI_AI_temp_personality_coward
+									days = 200
+									value = 1
+								}
+							}
+							25 = {
+								set_country_flag = {
+									flag = SI_AI_temp_personality_decisive
+									days = 200
+									value = 1
+								}
+							}
+							40 = { }
+						}
+					}
+				}
+
+				set_variable = { ROOT.temp_calc_var = 1 }
+				set_variable = { ROOT.si_requested_state_cost_pp = FROM.si_demand_state_pp_required }
+				if = {
+					limit = {
+						has_game_rule = {
+							rule = si_wargoal_cost_rules
+							option = SI_WARGOAL_COST_NONE
+						}
+					}
+					set_variable = { ROOT.temp_calc_var = 0 }
+				}
+				if = {
+					limit = {
+						has_game_rule = {
+							rule = si_wargoal_cost_rules
+							option = SI_WARGOAL_COST_HALF
+						}
+					}
+					set_variable = { ROOT.temp_calc_var = 0.5 }
+				}
+				if = {
+					limit = {
+						has_game_rule = {
+							rule = si_wargoal_cost_rules
+							option = SI_WARGOAL_COST_ONEPLUSHALF
+						}
+					}
+					set_variable = { ROOT.temp_calc_var = 1.5 }
+				}
+				if = {
+					limit = {
+						has_game_rule = {
+							rule = si_wargoal_cost_rules
+							option = SI_WARGOAL_COST_DOUBLE
+						}
+					}
+					set_variable = { ROOT.temp_calc_var = 2 }
+				}
+				multiply_variable = { ROOT.si_requested_state_cost_pp = ROOT.temp_calc_var }
+				round_variable = ROOT.si_requested_state_cost_pp
+				multiply_variable = { ROOT.si_requested_state_cost_pp = -1 }
+				clear_variable = ROOT.temp_calc_var
+
+				set_variable = { ROOT.requested_state_@FROM.owner = FROM }
+
+				set_variable = { ROOT.request_target_civilian_factories_@THIS = var:FROM.industrial_complex_level }
+				multiply_variable = { ROOT.request_target_civilian_factories_@THIS = 5 }
+
+				set_variable = { ROOT.request_target_military_factories_@THIS = var:FROM.arms_factory_level }
+				multiply_variable = { ROOT.request_target_military_factories_@THIS = 10 }
+
+				set_variable = { ROOT.si_demanded_state_value = var:THIS.state_and_terrain_strategic_value }
+				divide_variable = { ROOT.si_demanded_state_value = 3 }
+
+				ROOT = {
+					set_variable = { ROOT.total_population_factor_var = 0 }
+					every_owned_state = {
+						add_to_variable = { PREV.total_population_factor_var = THIS.state_population_k }
+					}
+				}
+				FROM.owner = {
+					set_variable = { THIS.total_population_factor_var = 0 }
+					every_owned_state = {
+						add_to_variable = { PREV.total_population_factor_var = THIS.state_population_k }
+					}
+
+					divide_variable = { ROOT.total_population_factor_var = THIS.total_population_factor_var }
+				}
+				clamp_variable = {
+					var = ROOT.total_population_factor_var
+					min = 0.2
+					max = 2.0
+				}
+
+				FROM.owner = {
+					set_variable = { ROOT.relations_value_positive_scaled_@THIS = THIS.opinion@ROOT }
+					clamp_variable = { var = ROOT.relations_value_positive_scaled_@THIS min = 0 }
+					divide_variable = { ROOT.relations_value_positive_scaled_@THIS = 3 }
+					round_variable = ROOT.relations_value_positive_scaled_@THIS
+					# ^^^ At 100 opinion youll get about 33 points or 0 if original value is negative.
+	
+					set_variable = { ROOT.relations_value_negative_scaled_@THIS = THIS.opinion@ROOT }
+					multiply_variable = { ROOT.relations_value_negative_scaled_@THIS = -1 }
+					divide_variable = { ROOT.relations_value_negative_scaled_@THIS = 3 }
+					round_variable = ROOT.relations_value_negative_scaled_@THIS
+					multiply_variable = { ROOT.relations_value_negative_scaled_@THIS = -1 }
+					clamp_variable = { var = ROOT.relations_value_negative_scaled_@THIS max = 0 }
+					# ^^^ At -100 opinion youll get about -33 points or 0 if original value is positive.
+
+					if = {
+						limit = {
+							NOT = { has_idea = SI_AI_reluctance_idea } # So that the reluctance affects second and onwards demands
+						}
+						set_variable = { THIS.si_ai_reluctance_stage = -1 }
+					}
+					add_to_variable = { THIS.si_ai_reluctance_stage = 1 }
+					set_variable = { THIS.si_ai_reluctance_value = global.si_ai_reluctance_points_per_stage }
+					multiply_variable = { THIS.si_ai_reluctance_value = THIS.si_ai_reluctance_stage }
+					multiply_variable = { THIS.si_ai_reluctance_value = -1 }
+
+					add_timed_idea = {
+						idea = SI_AI_reluctance_idea
+						days = var:global.si_ai_reluctance_time_days
+					}
+
+					country_event = {
+						id = sievent.2
+						days = 1
+						random_days = 6
+					}
+				}
+				FROM = {
+					set_state_flag = {
+						flag = SI_state_demand_subject_flag
+						days = 21
+					}
+				}
+				ROOT = {
+					add_political_power = var:PREV.si_demand_state_pp_take
+					add_timed_idea = {
+						idea = SI_major_demands_idea
+						days = var:global.si_demand_state_cooldown_days
+					}
+
+					if = {
+						limit = {
+							ROOT = { is_major = no }
+							FROM.owner = { is_major = no }
+						}
+						add_named_threat = {
+							threat = 1.0
+							name = SI_state_demanded_threat
+						}
+					}
+					else_if = {
+						limit = {
+							OR = {
+								AND = {
+									ROOT = { is_major = yes }
+									FROM.owner = { is_major = no }
+								}
+								AND = {
+									ROOT = { is_major = no }
+									FROM.owner = { is_major = yes }
+								}
+							}
+						}
+						add_named_threat = {
+							threat = 2
+							name = SI_state_demanded_threat
+						}
+					}
+					else = {
+						add_named_threat = {
+							threat = 3
+							name = SI_state_demanded_threat
+						}
+					}
+				}
+
+				# Debug
+				if = {
+					limit = {
+						ROOT = { is_ai = yes }
+						is_debug = yes
+					}
+					log = "(SI) [ROOT.GetName] demanded [FROM.GetName] from [FROM.owner.GetName]"
+				}
+			}
+
+			state_menu_demand_vsl_button_click = {
+				set_variable = { ROOT.temp_calc_var = 1 }
+				set_variable = { ROOT.si_requested_vsl_cost = global.si_demand_vassalisation_pp_required }
+				if = {
+					limit = {
+						has_game_rule = {
+							rule = si_wargoal_cost_rules
+							option = SI_WARGOAL_COST_NONE
+						}
+					}
+					set_variable = { ROOT.temp_calc_var = 0 }
+				}
+				if = {
+					limit = {
+						has_game_rule = {
+							rule = si_wargoal_cost_rules
+							option = SI_WARGOAL_COST_HALF
+						}
+					}
+					set_variable = { ROOT.temp_calc_var = 0.5 }
+				}
+				if = {
+					limit = {
+						has_game_rule = {
+							rule = si_wargoal_cost_rules
+							option = SI_WARGOAL_COST_ONEPLUSHALF
+						}
+					}
+					set_variable = { ROOT.temp_calc_var = 1.5 }
+				}
+				if = {
+					limit = {
+						has_game_rule = {
+							rule = si_wargoal_cost_rules
+							option = SI_WARGOAL_COST_DOUBLE
+						}
+					}
+					set_variable = { ROOT.temp_calc_var = 2 }
+				}
+				multiply_variable = { ROOT.si_requested_vsl_cost = ROOT.temp_calc_var }
+				round_variable = ROOT.si_requested_vsl_cost
+				multiply_variable = { ROOT.si_requested_vsl_cost = -1 }
+				clear_variable = ROOT.temp_calc_var
+
+				ROOT = {
+					set_variable = { ROOT.total_population_factor_var = 0 }
+					every_owned_state = {
+						add_to_variable = { PREV.total_population_factor_var = THIS.state_population_k }
+					}
+				}
+				FROM.owner = {
+					set_variable = { THIS.total_population_factor_var = 0 }
+					every_owned_state = {
+						add_to_variable = { PREV.total_population_factor_var = THIS.state_population_k }
+					}
+
+					divide_variable = { ROOT.total_population_factor_var = THIS.total_population_factor_var }
+				}
+				clamp_variable = {
+					var = ROOT.total_population_factor_var
+					min = 0.2
+					max = 2.0
+				}
+
+				FROM.owner = {
+					set_variable = { ROOT.state_factor_var_@THIS = ROOT.owned_states }
+					divide_variable = { ROOT.state_factor_var_@THIS = THIS.owned_states }
+					clamp_variable = {
+						var = ROOT.state_factor_var_@THIS
+						min = 0.25
+						max = 2.0
+					}
+
+					set_variable = { ROOT.relations_value_positive_scaled_@THIS = THIS.opinion@ROOT }
+					clamp_variable = { var = ROOT.relations_value_positive_scaled_@THIS min = 0 }
+					divide_variable = { ROOT.relations_value_positive_scaled_@THIS = 3 }
+					round_variable = ROOT.relations_value_positive_scaled_@THIS
+					# ^^^ At 100 opinion youll get about 33 points or 0 if original value is negative.
+	
+					set_variable = { ROOT.relations_value_negative_scaled_@THIS = THIS.opinion@ROOT }
+					multiply_variable = { ROOT.relations_value_negative_scaled_@THIS = -1 }
+					divide_variable = { ROOT.relations_value_negative_scaled_@THIS = 3 }
+					round_variable = ROOT.relations_value_negative_scaled_@THIS
+					multiply_variable = { ROOT.relations_value_negative_scaled_@THIS = -1 }
+					clamp_variable = { var = ROOT.relations_value_negative_scaled_@THIS max = 0 }
+					# ^^^ At -100 opinion youll get about -33 points or 0 if original value is positive.
+
+					if = {
+						limit = {
+							NOT = { has_idea = SI_AI_reluctance_idea } # So that the reluctance affects second and onwards demands
+						}
+						set_variable = { THIS.si_ai_reluctance_stage = -1.5 }
+					}
+					add_to_variable = { THIS.si_ai_reluctance_stage = 1.5 }
+					set_variable = { THIS.si_ai_reluctance_value = global.si_ai_reluctance_points_per_stage }
+					multiply_variable = { THIS.si_ai_reluctance_value = THIS.si_ai_reluctance_stage }
+					multiply_variable = { THIS.si_ai_reluctance_value = -1 }
+
+					add_timed_idea = {
+						idea = SI_AI_reluctance_idea
+						days = var:global.si_ai_reluctance_time_days
+					}
+
+					set_country_flag = {
+						flag = SI_country_demand_subject_flag
+						days = 21
+					}
+					country_event = {
+						id = sievent.4
+						days = 1
+						random_days = 6
+					}
+				}
+				ROOT = {
+					add_political_power = var:global.si_demand_vassalisation_pp_take
+					add_timed_idea = {
+						idea = SI_major_demands_idea
+						days = var:global.si_demand_vassalisation_cooldown_days
+					}
+					ROOT = {
+						if = {
+							limit = {
+								ROOT = { is_major = no }
+								FROM.owner = { is_major = no }
+							}
+							add_named_threat = {
+								threat = 2
+								name = SI_vassalisation_demanded_threat
+							}
+						}
+						else_if = {
+							limit = {
+								OR = {
+									AND = {
+										ROOT = { is_major = yes }
+										FROM.owner = { is_major = no }
+									}
+									AND = {
+										ROOT = { is_major = no }
+										FROM.owner = { is_major = yes }
+									}
+								}
+							}
+							add_named_threat = {
+								threat = 4
+								name = SI_vassalisation_demanded_threat
+							}
+						}
+						else = {
+							add_named_threat = {
+								threat = 6
+								name = SI_vassalisation_demanded_threat
+							}
+						}
+					}
+				}
+
+				# Debug
+				if = {
+					limit = {
+						ROOT = { is_ai = yes }
+						is_debug = yes
+					}
+					log = "(SI) [ROOT.GetName] demanded [FROM.owner.GetName] vassalisation"
+				}
+			}
+
+			state_menu_claim_state_button_click = {
+				if = {
+					limit = {
+						NOT = {
+							has_global_flag = SI_debug_flag
+						}
+					}
+					ROOT = {
+						add_command_power = var:global.si_claim_state_cp_take
+						add_timed_idea = {
+							idea = SI_minor_demands_idea
+							days = var:global.si_claim_state_cooldown_days
+						}
+					}
+				}
+				FROM = {
+					add_claim_by = ROOT
+				}
+			}
+
+			state_menu_core_state_button_click = {
+				if = {
+					limit = {
+						NOT = {
+							has_global_flag = SI_debug_flag
+						}
+					}
+					ROOT = {
+						add_command_power = var:PREV.si_core_state_cp_take
+						add_equipment_to_stockpile = {
+							type = infantry_equipment
+							amount = var:PREV.si_core_state_guns_take
+						}
+						add_timed_idea = {
+							idea = SI_minor_demands_idea
+							days = var:global.si_core_state_cooldown_days
+						}
+					}
+				}
+				FROM = {
+					add_core_of = ROOT
+					if = {
+						limit = {
+							check_variable = {
+								var = THIS.si_core_state_cp_required 
+								value = 30
+								compare = not_equals
+							}
+						}
+						set_variable = { THIS.si_core_state_cp_required = 30 }
+						set_variable = { THIS.si_core_state_guns_required = 1500 }
+						set_variable = { THIS.si_core_state_cp_take = -30 }
+						set_variable = { THIS.si_core_state_guns_take = -1500 }
+					}
+				}
+			}
+
+			state_menu_move_capital_button_click = {
+				if = {
+					limit = {
+						NOT = {
+							has_global_flag = SI_debug_flag
+						}
+					}
+					ROOT = {
+						add_political_power = var:ROOT.si_move_capital_pp_take
+						add_timed_idea = {
+							idea = SI_else_demands_idea
+							days = var:global.si_move_capital_cooldown_days
+						}
+					}
+				}
+				ROOT = {
+					set_capital = { state = PREV }
+				}
+			}
+
+			state_menu_border_war_button_click = {
+				FROM = {
+					if = {
+						limit = {
+							any_neighbor_state = {
+								is_owned_by = ROOT
+								ROOT = {
+									divisions_in_state = {
+										size > 2
+										state = PREV
+									}
+								}
+							}
+						}
+						random_neighbor_state = {
+							limit = {
+								is_owned_by = ROOT
+								ROOT = {
+									divisions_in_state = {
+										size > 2
+										state = PREV
+									}
+								}
+							}
+							ROOT = {
+								set_variable = { bw_target_state_attacker = PREV }
+								set_variable = { bw_target_state_defender = PREV.PREV }
+							}
+						}
+					}
+					else_if = {
+						limit = {
+							any_neighbor_state = {
+								is_owned_by = ROOT
+								is_demilitarized_zone = no
+							}
+						}
+						random_neighbor_state = {
+							limit = {
+								is_owned_by = ROOT
+								is_demilitarized_zone = no
+							}
+							ROOT = {
+								set_variable = { bw_target_state_attacker = PREV }
+								set_variable = { bw_target_state_defender = PREV.PREV }
+							}
+						}
+					}
+					else = {
+						random_neighbor_state = {
+							limit = {
+								is_owned_by = ROOT
+							}
+							ROOT = {
+								set_variable = { bw_target_state_attacker = PREV }
+								set_variable = { bw_target_state_defender = PREV.PREV }
+							}
+						}
+					}
+					owner = {
+						ROOT = {
+							add_command_power = global.si_border_war_cp_take
+							add_political_power = global.si_border_war_pp_take
+
+							set_country_flag = {
+								flag = SI_border_war_major_locked_flag_@PREV
+								days = 120
+								value = 1
+							}
+
+							set_variable = { THIS.bw_defender_industry = var:PREV.num_of_military_factories }
+							set_variable = { THIS.bw_attacker_industry = var:THIS.num_of_military_factories }
+
+							if = {
+								limit = {
+									check_variable = { THIS.bw_defender_industry > global.si_border_war_min_industry }
+									check_variable = { PREV.bw_defender_industry > global.si_border_war_min_industry }
+								}
+								set_variable = { THIS.bw_industry_ratio = THIS.bw_defender_industry }
+								divide_variable = { THIS.bw_industry_ratio = THIS.bw_attacker_industry }
+								clamp_variable = {
+									min = 0.25
+									var = THIS.bw_industry_ratio
+									max = 2
+								}
+							}
+							else = {
+								set_variable = { THIS.bw_industry_ratio = 0.7 }
+							}
+
+							set_variable = { THIS.bw_grace_period_days = global.si_border_war_grace_period_days }
+							subtract_from_variable = { THIS.si_border_war_reward_multiplier = global.si_border_war_grace_multiplier_step }
+							clamp_variable = {
+								min = 0
+								var = THIS.si_border_war_reward_multiplier
+							}
+
+							set_variable = { THIS.bw_reward_ratio = THIS.bw_industry_ratio }
+							multiply_variable = { THIS.bw_reward_ratio = THIS.si_border_war_reward_multiplier }
+
+							set_variable = { THIS.bw_xp_reward = global.si_border_war_xp_gain_base }
+							multiply_variable = { THIS.bw_xp_reward = THIS.bw_reward_ratio }
+
+							set_variable = { THIS.bw_ws_reward = global.si_border_war_ws_gain_base }
+							multiply_variable = { THIS.bw_ws_reward = THIS.bw_reward_ratio }
+
+							activate_targeted_decision = {
+								target = PREV
+								decision = SI_border_war_preparation_mission
+							}
+						}
+					}
+					set_state_flag = {
+						flag = BW_locked_flag
+						value = 1
+						days = 8
+					}
+				}
+			}
+
+			state_menu_artillery_button_click = {
+				if = {
+					limit = {
+						NOT = {
+							has_global_flag = SI_debug_flag
+						}
+					}
+					ROOT = {
+						add_command_power = global.si_artillery_cp_take
+						add_equipment_to_stockpile = {
+							type = artillery_equipment
+							amount = global.si_artillery_art_take
+						}
+						add_timed_idea = {
+							idea = SI_minor_demands_idea
+							days = var:global.si_artillery_cooldown_days
+						}
+					}
+				}
+				FROM = {
+					add_dynamic_modifier = {
+						modifier = SI_shelling_modifier
+						days = 30
+						scope = ROOT
+					}
+				}
+			}
+		}
+
+		######  ####    ######  ######  ######  ######  ####    ######
+          ##    ##  ##    ##    ##      ##      ##      ##  ##  ##
+          ##    ####      ##    ##  ##  ##  ##  ######  ####    ######
+          ##    ##  ##    ##    ##  ##  ##  ##  ##      ##  ##      ##
+          ##    ##  ##  ######  ######  ######  ######  ##  ##  ######
+
+		triggers = {
+			interaction_debug_button_visible = {
+				is_debug = yes
+			}
+
+			state_menu_transfer_menu_button_visible = {
+				NOT = {
+					has_game_rule = {
+						rule = si_state_transfer_rules
+						option = SI_STATE_TRANSFER_DISABLED
+					}
+				}
+			}
+
+			state_menu_demand_state_button_click_enabled = {
+				OR = {
+					has_global_flag = SI_debug_flag
+					AND = {
+						ROOT = {
+							has_political_power > var:PREV.si_demand_state_pp_required
+							is_subject = no
+							NOT = {
+								has_idea = SI_major_demands_idea
+							}
+						}
+						FROM = {
+							OR = {
+								AND = {
+									owner = {
+										NOT = {
+											tag = ROOT
+											has_war_with = ROOT
+											is_subject_of = ROOT
+											is_in_faction_with = ROOT
+											ROOT = {
+												has_country_flag = SI_border_war_major_locked_flag_@PREV
+											}
+										}
+										OR = {
+											is_neighbor_of = ROOT
+											any_neighbor_country = {
+												is_subject_of = ROOT
+											}
+										}
+										has_border_war = no
+									}
+									any_neighbor_state = {
+										owner = {
+											OR = {
+												is_subject_of = ROOT
+												tag = ROOT
+											}
+										}
+									}
+								}
+								AND = {
+									OR = {
+										is_claimed_by = ROOT
+										is_core_of = ROOT
+									}
+									is_coastal = yes
+								}
+							}
+							NOT = {
+								has_state_flag = SI_state_demand_subject_flag
+								has_state_flag = BW_locked_flag
+							}
+						}
+					}
+				}
+			}
+			state_menu_demand_vsl_button_click_enabled = {
+				# ROOT = { is_ai = no }
+				OR = {
+					has_global_flag = SI_debug_flag
+					AND = {
+						ROOT = {
+							has_political_power > var:global.si_demand_vassalisation_pp_required
+							is_subject = no
+							NOT = {
+								has_idea = SI_major_demands_idea
+							}
+						}
+						FROM.owner = {
+							has_war = no
+							has_border_war = no
+							NOT = {
+								tag = ROOT
+								is_subject_of = ROOT
+								is_in_faction_with = ROOT
+								has_country_flag = SI_country_demand_subject_flag
+								ROOT = {
+									has_country_flag = SI_border_war_major_locked_flag_@PREV
+								}
+								all_owned_state = {
+									has_state_flag = BW_locked_flag
+								}
+							}
+							OR = {
+								is_neighbor_of = ROOT
+								any_neighbor_country = {
+									is_subject_of = ROOT
+								}
+							}
+						}
+					}
+				}
+			}
+			state_menu_claim_state_button_click_enabled = {
+				ROOT = { is_ai = no }
+				OR = {
+					has_global_flag = SI_debug_flag
+					AND = {
+						ROOT = {
+							command_power > var:global.si_claim_state_cp_required
+							NOT = {
+								has_idea = SI_minor_demands_idea
+							}
+						}
+						OR = {
+							AND = {
+								FROM.owner = {
+									NOT = {
+										tag = ROOT
+										is_in_faction_with = ROOT
+										is_subject_of = ROOT
+									}
+									OR = {
+										is_neighbor_of = ROOT
+										any_neighbor_country = {
+											is_subject_of = ROOT
+										}
+									}
+								}
+								FROM = {
+									NOT = {
+										is_core_of = ROOT
+										is_claimed_by = ROOT
+									}
+								}
+							}
+							# COASTAL CASE
+							AND = {
+								has_game_rule = {
+									rule = si_allow_coastal_claim_rules
+									option = SI_COASTAL_CLAIM_DEFAULT
+								}
+								FROM.owner = {
+									NOT = {
+										tag = ROOT
+										is_in_faction_with = ROOT
+										is_subject_of = ROOT
+									}
+								}
+								FROM = {
+									NOT = {
+										is_core_of = ROOT
+										is_claimed_by = ROOT
+									}
+									is_coastal = yes
+								}
+								ROOT = {
+									any_owned_state = {
+										is_coastal = yes
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			state_menu_core_state_button_click_enabled = {
+				ROOT = { is_ai = no }
+				OR = {
+					has_global_flag = SI_debug_flag
+					AND = {
+						ROOT = {
+							has_equipment = {
+								infantry_equipment > var:PREV.si_core_state_guns_required
+							}
+							command_power > var:PREV.si_core_state_cp_required
+							NOT = {
+								has_idea = SI_minor_demands_idea
+							}
+						}
+						FROM = {
+							if = {
+								limit = {
+									check_variable = { FROM.si_core_state_cp_required = 30 }
+								}
+								resistance < var:global.si_core_state_resistance_required
+								compliance > var:global.si_core_state_compliance_required
+							}
+							NOT = {
+								is_core_of = ROOT
+							}
+						}
+						FROM.owner = {
+							tag = ROOT
+						}
+					}
+				}
+			}
+
+			state_menu_move_capital_button_click_enabled = {
+				ROOT = { is_ai = no }
+				OR = {
+					has_global_flag = SI_debug_flag
+					AND = {
+						FROM = {
+							is_owned_by = ROOT
+							is_capital = no
+							is_core_of = ROOT
+						}
+						ROOT = {
+							has_political_power > var:ROOT.si_move_capital_pp_required
+							NOT = {
+								has_idea = SI_else_demands_idea
+							}
+						}
+					}
+				}
+			}
+
+			state_menu_border_war_button_click_enabled = {
+				ROOT = { is_ai = no }
+				OR = {
+					has_global_flag = SI_debug_flag
+					AND = {
+						ROOT = {
+							command_power > global.si_border_war_cp_required
+							has_political_power > global.si_border_war_pp_required
+							has_war = no
+							has_border_war = no
+							num_divisions > 2
+							NOT = {
+								has_idea = SI_minor_demands_idea
+							}
+						}
+						FROM.owner = {
+							has_war = no
+							has_border_war = no
+							num_divisions > 2
+							NOT = {
+								tag = ROOT
+								is_in_faction_with = ROOT
+								is_subject_of = ROOT
+								has_country_flag = SI_country_demand_subject_flag
+							}
+							all_owned_state = {
+								NOT = {
+									has_state_flag = SI_state_demand_subject_flag
+								}
+							}
+						}
+						FROM = {
+							any_neighbor_state = {
+								owner = {
+									tag = ROOT
+								}
+							}
+							is_demilitarized_zone = no
+						}
+					}
+				}
+			}
+
+			state_menu_artillery_button_click_enabled = {
+				ROOT = { is_ai = no }
+				OR = {
+					has_global_flag = SI_debug_flag
+					AND = {
+						ROOT = {
+							has_equipment = {
+								artillery_equipment > global.si_artillery_art_required
+							}
+							command_power > global.si_artillery_cp_required
+							NOT = { has_idea = SI_minor_demands_idea }
+						}
+						FROM.controller = {
+							NOT = {
+								tag = ROOT
+								is_in_faction_with = ROOT
+								is_subject_of = ROOT
+							}
+							has_war_with = ROOT
+						}
+						FROM = {
+							NOT = {
+								has_dynamic_modifier = {
+									modifier = SI_shelling_modifier
+								}
+							}
+							any_neighbor_state = {
+								controller = {
+									OR = {
+										tag = ROOT
+										is_in_faction_with = ROOT
+										is_subject_of = ROOT
+									}
+								}
+								ROOT = {
+									OR = {
+										any_allied_country = {
+											divisions_in_state = {
+												size > 4
+												state = PREVPREV
+											}
+										}
+										divisions_in_state = {
+											size > 4
+											state = PREV
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+
+		######  ######
+		##  ##    ##
+		######    ##
+		##  ##    ##
+		##  ##  ######
+
+		ai_enabled = {
+			has_game_rule = {
+				rule = si_ai_behaviour_rules
+				option = SI_AI_ALLOWED_RULE
+			}
+		}
+
+		ai_test_interval = 720
+
+		ai_test_variance = 24
+
+		ai_test_scopes = test_neighbouring_states
+
+		ai_check = {
+			check_variable = { var:ai_random < 0.5 }
+			ROOT = { has_political_power > 74 }
+		}
+
+		ai_weights = {
+			state_menu_demand_state_button_click = {
+				ai_will_do = {
+					base = 100
+
+					modifier = {
+						add = var:FROM.state_strategic_value
+					}
+
+					modifier = {
+						factor = 0.3
+					}
+
+					modifier = {
+						add = 25
+						FROM.owner = {
+							has_war = yes
+						}
+					}
+
+					modifier = {
+						add = 50
+						ROOT = { has_war = no }
+					}
+
+					modifier = {
+						add = 50
+						FROM = {
+							is_core_of = ROOT
+						}
+					}
+
+					modifier = {
+						add = 50
+						FROM = {
+							is_claimed_by = ROOT
+						}
+					}
+
+					modifier = {
+						add = 10
+						FROM = {
+							OR = {
+								has_state_category = pastoral
+								has_state_category = small_island
+							}
+						}
+					}
+
+					modifier = {
+						add = 20
+						FROM = {
+							has_state_category = rural
+						}
+					}
+
+					modifier = {
+						add = 30
+						FROM = {
+							has_state_category = town
+						}
+					}
+
+					modifier = {
+						add = 40
+						FROM = {
+							has_state_category = large_town
+						}
+					}
+
+					modifier = {
+						add = 50
+						FROM = {
+							has_state_category = city
+						}
+					}
+
+					modifier = {
+						add = 60
+						FROM = {
+							has_state_category = large_city
+						}
+					}
+
+					modifier = {
+						add = 70
+						FROM = {
+							has_state_category = metropolis
+						}
+					}
+
+					modifier = {
+						add = 80
+						FROM = {
+							has_state_category = megalopolis
+						}
+					}
+
+					modifier = {
+						factor = 0
+						OR = {
+							threat < 0.2
+							ROOT = { has_idea = SI_major_demands_idea }
+						}
+					}
+				}
+			}
+		}
+	}
+}

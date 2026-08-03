@@ -1,0 +1,1139 @@
+on_actions = {
+
+	on_startup = {
+		effect = {
+			set_global_flag = has_mod_arxyfox_state_interactions_in_one # For other potential mods for easier condition setup.
+			
+			set_variable = { global.temp_calc_var = 1 }
+
+			set_variable = { global.si_demand_state_cooldown_days = 45 }
+
+			set_variable = { global.si_demand_vassalisation_cooldown_days = 90 }
+
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = si_claim_cooldown_rules
+						option = SI_CLAIM_COOLDOWN_NONE
+					}
+				}
+				set_variable = { global.temp_calc_var = 0 }
+			}
+			else_if = {
+				limit = {
+					has_game_rule = {
+						rule = si_claim_cooldown_rules
+						option = SI_CLAIM_COOLDOWN_HALF
+					}
+				}
+				set_variable = { global.temp_calc_var = 0.5 }
+			}
+			else_if = {
+				limit = {
+					has_game_rule = {
+						rule = si_claim_cooldown_rules
+						option = SI_CLAIM_COOLDOWN_ONEPLUSHALF
+					}
+				}
+				set_variable = { global.temp_calc_var = 1.5 }
+			}
+			else_if = {
+				limit = {
+					has_game_rule = {
+						rule = si_claim_cooldown_rules
+						option = SI_CLAIM_COOLDOWN_DOUBLE
+					}
+				}
+				set_variable = { global.temp_calc_var = 2 }
+			}
+			else = {
+				set_variable = { global.temp_calc_var = 1 }
+			}
+			set_variable = { global.si_claim_state_cooldown_days = 15 }
+			multiply_variable = { global.si_claim_state_cooldown_days = global.temp_calc_var }
+			round_variable = global.si_claim_state_cooldown_days
+
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = si_core_cooldown_rules
+						option = SI_CORE_COOLDOWN_NONE
+					}
+				}
+				set_variable = { global.temp_calc_var = 0 }
+			}
+			else_if = {
+				limit = {
+					has_game_rule = {
+						rule = si_core_cooldown_rules
+						option = SI_CORE_COOLDOWN_HALF
+					}
+				}
+				set_variable = { global.temp_calc_var = 0.5 }
+			}
+			else_if = {
+				limit = {
+					has_game_rule = {
+						rule = si_core_cooldown_rules
+						option = SI_CORE_COOLDOWN_ONEPLUSHALF
+					}
+				}
+				set_variable = { global.temp_calc_var = 1.5 }
+			}
+			else_if = {
+				limit = {
+					has_game_rule = {
+						rule = si_core_cooldown_rules
+						option = SI_CORE_COOLDOWN_DOUBLE
+					}
+				}
+				set_variable = { global.temp_calc_var = 2 }
+			}
+			else = {
+				set_variable = { global.temp_calc_var = 1 }
+			}
+			set_variable = { global.si_core_state_cooldown_days = 15 }
+			multiply_variable = { global.si_core_state_cooldown_days = global.temp_calc_var }
+			round_variable = global.si_core_state_cooldown_days
+
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = si_move_capital_cooldown_rules
+						option = SI_MOVE_CAPITAL_COOLDOWN_NONE
+					}
+				}
+				set_variable = { global.temp_calc_var = 0 }
+			}
+			else_if = {
+				limit = {
+					has_game_rule = {
+						rule = si_move_capital_cooldown_rules
+						option = SI_MOVE_CAPITAL_COOLDOWN_HALF
+					}
+				}
+				set_variable = { global.temp_calc_var = 0.5 }
+			}
+			else_if = {
+				limit = {
+					has_game_rule = {
+						rule = si_move_capital_cooldown_rules
+						option = SI_MOVE_CAPITAL_COOLDOWN_ONEPLUSHALF
+					}
+				}
+				set_variable = { global.temp_calc_var = 1.5 }
+			}
+			else_if = {
+				limit = {
+					has_game_rule = {
+						rule = si_move_capital_cooldown_rules
+						option = SI_MOVE_CAPITAL_COOLDOWN_DOUBLE
+					}
+				}
+				set_variable = { global.temp_calc_var = 2 }
+			}
+			else = {
+				set_variable = { global.temp_calc_var = 1 }
+			}
+			set_variable = { global.si_move_capital_cooldown_days = 60 }
+			multiply_variable = { global.si_move_capital_cooldown_days = global.temp_calc_var }
+			round_variable = global.si_move_capital_cooldown_days
+
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = si_artillery_cooldown_rules
+						option = SI_ARTILLERY_COOLDOWN_NONE
+					}
+				}
+				set_variable = { global.temp_calc_var = 0 }
+			}
+			else_if = {
+				limit = {
+					has_game_rule = {
+						rule = si_artillery_cooldown_rules
+						option = SI_ARTILLERY_COOLDOWN_HALF
+					}
+				}
+				set_variable = { global.temp_calc_var = 0.5 }
+			}
+			else_if = {
+				limit = {
+					has_game_rule = {
+						rule = si_artillery_cooldown_rules
+						option = SI_ARTILLERY_COOLDOWN_ONEPLUSHALF
+					}
+				}
+				set_variable = { global.temp_calc_var = 1.5 }
+			}
+			else_if = {
+				limit = {
+					has_game_rule = {
+						rule = si_artillery_cooldown_rules
+						option = SI_ARTILLERY_COOLDOWN_DOUBLE
+					}
+				}
+				set_variable = { global.temp_calc_var = 2 }
+			}
+			else = {
+				set_variable = { global.temp_calc_var = 1 }
+			}
+			set_variable = { global.si_artillery_cooldown_days = 50 }
+			multiply_variable = { global.si_artillery_cooldown_days = global.temp_calc_var }
+			round_variable = global.si_artillery_cooldown_days
+
+			set_variable = { global.sr_demand_cooldown_days = 15 }
+
+			set_variable = { global.si_border_war_cooldown_days = 70 }
+			
+			set_variable = { global.si_demand_vassalisation_pp_required = 300 }
+			set_variable = { global.si_demand_vassalisation_pp_take = -300 }
+			
+			set_variable = { global.si_claim_state_cp_required = 15 }
+			set_variable = { global.si_claim_state_cp_take = -15 }
+
+			set_variable = { global.si_artillery_cp_required = 20 }
+			set_variable = { global.si_artillery_cp_take = -20 }
+			set_variable = { global.si_artillery_art_required = 500 }
+			set_variable = { global.si_artillery_art_take = -500 }
+			
+			set_variable = { global.sr_resources_per_factory = 6 }
+			
+			set_variable = { global.si_border_war_cp_required = 50 }
+			set_variable = { global.si_border_war_cp_take = -50 }
+			set_variable = { global.si_border_war_pp_required = 75 }
+			set_variable = { global.si_border_war_pp_take = -75 }
+			
+			set_variable = { global.si_border_war_length_days = 30 }
+			set_variable = { global.si_border_war_target_major_locked_days = 120 }
+			set_variable = { global.si_border_war_xp_gain_base = 35 }
+			set_variable = { global.si_border_war_ws_gain_base = 0.035 }
+			set_variable = { global.si_border_war_grace_period_days = 175 }
+			set_variable = { global.si_border_war_grace_multiplier_step = 0.2 }
+			set_variable = { global.si_border_war_reward_multiplier_default = 1 }
+			add_to_variable = { global.si_border_war_reward_multiplier_default = global.si_border_war_grace_multiplier_step }
+			set_variable = { global.si_border_war_min_industry = 9 }
+
+			every_state = {
+				set_variable = { THIS.si_core_state_cp_required = 50 }
+				set_variable = { THIS.si_core_state_guns_required = 7500 }
+				set_variable = { THIS.si_core_state_cp_take = -50 }
+				set_variable = { THIS.si_core_state_guns_take = -7500 }
+
+				if = {
+					limit = {
+						any_country_with_core = {
+							always = yes
+						}
+					}
+					set_variable = { THIS.si_core_state_cp_required = 30 }
+					set_variable = { THIS.si_core_state_guns_required = 1500 }
+					set_variable = { THIS.si_core_state_cp_take = -30 }
+					set_variable = { THIS.si_core_state_guns_take = -1500 }
+				}
+
+				set_variable = { THIS.sr_oil_target_tag = 0 }
+				set_variable = { THIS.sr_aluminium_target_tag = 0 }
+				set_variable = { THIS.sr_rubber_target_tag = 0 }
+				set_variable = { THIS.sr_tungsten_target_tag = 0 }
+				set_variable = { THIS.sr_steel_target_tag = 0 }
+				set_variable = { THIS.sr_chromium_target_tag = 0 }
+				set_variable = { THIS.sr_coal_target_tag = 0 }
+
+				set_variable = { THIS.si_demand_state_pp_required = 250 }
+				set_variable = { THIS.si_demand_state_pp_take = -250 }
+				if = {
+					limit = {
+						OR = {
+							has_state_category = wasteland
+							has_state_category = enclave
+							has_state_category = tiny_island
+						}
+					}
+					set_variable = { THIS.si_demand_state_pp_required = 200 }
+					set_variable = { THIS.si_demand_state_pp_take = -200 }
+				}
+				if = {
+					limit = {
+						OR = {
+							has_state_category = pastoral
+							has_state_category = small_island
+						}
+					}
+					set_variable = { THIS.si_demand_state_pp_required = 225 }
+					set_variable = { THIS.si_demand_state_pp_take = -225 }
+				}
+				if = {
+					limit = {
+						has_state_category = rural
+					}
+					set_variable = { THIS.si_demand_state_pp_required = 250 }
+					set_variable = { THIS.si_demand_state_pp_take = -250 }
+				}
+				if = {
+					limit = {
+						has_state_category = town
+					}
+					set_variable = { THIS.si_demand_state_pp_required = 275 }
+					set_variable = { THIS.si_demand_state_pp_take = -275 }
+				}
+				if = {
+					limit = {
+						has_state_category = large_town
+					}
+					set_variable = { THIS.si_demand_state_pp_required = 300 }
+					set_variable = { THIS.si_demand_state_pp_take = -300 }
+				}
+				if = {
+					limit = {
+						has_state_category = city
+					}
+					set_variable = { THIS.si_demand_state_pp_required = 325 }
+					set_variable = { THIS.si_demand_state_pp_take = -325 }
+				}
+				if = {
+					limit = {
+						has_state_category = large_city
+					}
+					set_variable = { THIS.si_demand_state_pp_required = 350 }
+					set_variable = { THIS.si_demand_state_pp_take = -350 }
+				}
+				if = {
+					limit = {
+						has_state_category = metropolis
+					}
+					set_variable = { THIS.si_demand_state_pp_required = 375 }
+					set_variable = { THIS.si_demand_state_pp_take = -375 }
+				}
+				if = {
+					limit = {
+						has_state_category = megalopolis
+					}
+					set_variable = { THIS.si_demand_state_pp_required = 400 }
+					set_variable = { THIS.si_demand_state_pp_take = -400 }
+				}
+			}
+			
+			every_possible_country = {
+				set_variable = { THIS.si_move_capital_pp_required = 250 }
+				set_variable = { THIS.si_move_capital_pp_take = -250 }
+
+				set_variable = { THIS.sr_factory_cost_var = 1 }
+
+				set_variable = { THIS.sr_stateid_slot_1 = 0 }
+				set_variable = { THIS.sr_slot_1_factories_sent = 0 }
+				set_variable = { THIS.sr_stateid_slot_2 = 0 }
+				set_variable = { THIS.sr_slot_2_factories_sent = 0 }
+				set_variable = { THIS.sr_stateid_slot_3 = 0 }
+				set_variable = { THIS.sr_slot_3_factories_sent = 0 }
+				set_variable = { THIS.sr_total_factories_sent = 0 }
+
+				add_dynamic_modifier = {
+					modifier = SI_factories_total_take_modifier
+				}
+
+				set_variable = { THIS.si_border_war_reward_multiplier = global.si_border_war_reward_multiplier_default }
+			}
+
+			set_variable = { global.si_core_state_resistance_required = 20 }
+			set_variable = { global.si_core_state_compliance_required = 80 }
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = si_core_required_compliance_rules
+						option = SI_CORE_REQUIRED_100
+					}
+				}
+				set_variable = { global.si_core_state_compliance_required = 99 }
+			}
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = si_core_required_compliance_rules
+						option = SI_CORE_REQUIRED_90
+					}
+				}
+				set_variable = { global.si_core_state_compliance_required = 90 }
+			}
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = si_core_required_compliance_rules
+						option = SI_CORE_REQUIRED_70
+					}
+				}
+				set_variable = { global.si_core_state_compliance_required = 70 }
+			}
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = si_core_required_compliance_rules
+						option = SI_CORE_REQUIRED_60
+					}
+				}
+				set_variable = { global.si_core_state_compliance_required = 60 }
+			}
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = si_core_required_compliance_rules
+						option = SI_CORE_REQUIRED_50
+					}
+				}
+				set_variable = { global.si_core_state_compliance_required = 50 }
+			}
+
+			set_variable = { global.si_ai_reluctance_time_days = 180 }
+			set_variable = { global.si_ai_reluctance_points_per_stage = 15 }
+
+			clear_variable = global.temp_calc_var
+		}
+	}
+
+	on_daily = {
+		effect = {
+
+			if = {
+				limit = {
+					NOT = { has_global_flag = has_mod_arxyfox_state_interactions_in_one }
+				}
+				set_global_flag = has_mod_arxyfox_state_interactions_in_one
+			}
+
+			ROOT = {
+				if = {
+					limit = {
+						check_variable = { THIS.bw_grace_period_days > 0 }
+					}
+					subtract_from_variable = { THIS.bw_grace_period_days = 1 }
+				}
+				if = {
+					limit = {
+						check_variable = { THIS.bw_grace_period_days < 1 }
+						check_variable = {
+							var = THIS.si_border_war_reward_multiplier
+							value = global.si_border_war_reward_multiplier_default
+							compare = not_equals
+						}
+					}
+					set_variable = { THIS.bw_grace_period_days = global.si_border_war_grace_period_days }
+					add_to_variable = { THIS.si_border_war_reward_multiplier = global.si_border_war_grace_multiplier_step }
+					clamp_variable = {
+						var = THIS.si_border_war_reward_multiplier
+						max = global.si_border_war_reward_multiplier_default
+					}
+				}
+			}
+
+			every_state = {
+				if = {
+					limit = {
+						OR = {
+							has_state_category = wasteland
+							has_state_category = enclave
+							has_state_category = tiny_island
+						}
+						check_variable = {
+							var = THIS.si_demand_state_pp_required
+							value = 200
+							compare = not_equals
+						}
+					}
+					set_variable = { THIS.si_demand_state_pp_required = 200 }
+					set_variable = { THIS.si_demand_state_pp_take = -200 }
+				}
+				if = {
+					limit = {
+						OR = {
+							has_state_category = pastoral
+							has_state_category = small_island
+						}
+						check_variable = {
+							var = THIS.si_demand_state_pp_required
+							value = 225
+							compare = not_equals
+						}
+					}
+					set_variable = { THIS.si_demand_state_pp_required = 225 }
+					set_variable = { THIS.si_demand_state_pp_take = -225 }
+				}
+				if = {
+					limit = {
+						has_state_category = rural
+						check_variable = {
+							var = THIS.si_demand_state_pp_required
+							value = 250
+							compare = not_equals
+						}
+					}
+					set_variable = { THIS.si_demand_state_pp_required = 250 }
+					set_variable = { THIS.si_demand_state_pp_take = -250 }
+				}
+				if = {
+					limit = {
+						has_state_category = town
+						check_variable = {
+							var = THIS.si_demand_state_pp_required
+							value = 275
+							compare = not_equals
+						}
+					}
+					set_variable = { THIS.si_demand_state_pp_required = 275 }
+					set_variable = { THIS.si_demand_state_pp_take = -275 }
+				}
+				if = {
+					limit = {
+						has_state_category = large_town
+						check_variable = {
+							var = THIS.si_demand_state_pp_required
+							value = 300
+							compare = not_equals
+						}
+					}
+					set_variable = { THIS.si_demand_state_pp_required = 300 }
+					set_variable = { THIS.si_demand_state_pp_take = -300 }
+				}
+				if = {
+					limit = {
+						has_state_category = city
+						check_variable = {
+							var = THIS.si_demand_state_pp_required
+							value = 325
+							compare = not_equals
+						}
+					}
+					set_variable = { THIS.si_demand_state_pp_required = 325 }
+					set_variable = { THIS.si_demand_state_pp_take = -325 }
+				}
+				if = {
+					limit = {
+						has_state_category = large_city
+						check_variable = {
+							var = THIS.si_demand_state_pp_required
+							value = 350
+							compare = not_equals
+						}
+					}
+					set_variable = { THIS.si_demand_state_pp_required = 350 }
+					set_variable = { THIS.si_demand_state_pp_take = -350 }
+				}
+				if = {
+					limit = {
+						has_state_category = metropolis
+						check_variable = {
+							var = THIS.si_demand_state_pp_required
+							value = 375
+							compare = not_equals
+						}
+					}
+					set_variable = { THIS.si_demand_state_pp_required = 375 }
+					set_variable = { THIS.si_demand_state_pp_take = -375 }
+				}
+				if = {
+					limit = {
+						has_state_category = megalopolis
+						check_variable = {
+							var = THIS.si_demand_state_pp_required
+							value = 400
+							compare = not_equals
+						}
+					}
+					set_variable = { THIS.si_demand_state_pp_required = 400 }
+					set_variable = { THIS.si_demand_state_pp_take = -400 }
+				}
+				if = {
+					limit = {
+						check_variable = {
+							var = THIS.si_demand_state_pp_required
+							value = 0
+							compare = equals
+						}
+					}
+					set_variable = { THIS.si_demand_state_pp_required = 250 }
+					set_variable = { THIS.si_demand_state_pp_take = -250 }
+				}
+			}
+
+			if = {
+				limit = {
+					ROOT = {
+						check_variable = {
+							var = ROOT.si_move_capital_pp_required
+							value = 250
+							compare = equals
+						}
+						has_war = yes
+					}
+				}
+				ROOT = {
+					set_variable = { ROOT.si_move_capital_pp_required = 150 }
+					set_variable = { ROOT.si_move_capital_pp_take = -150 }
+				}
+			}
+			if = {
+				limit = {
+					ROOT = {
+						check_variable = {
+							var = ROOT.si_move_capital_pp_required
+							value = 250
+							compare = not_equals
+						}
+						has_war = no
+					}
+				}
+				ROOT = {
+					set_variable = { ROOT.si_move_capital_pp_required = 250 }
+					set_variable = { ROOT.si_move_capital_pp_take = -250 }
+				}
+			}
+
+			if = {
+				limit = {
+					ROOT = {
+						exists = no
+					}
+					any_state = {
+						is_in_array = {
+							array = ROOT.selected_states_array
+							value = THIS.id
+						}
+					}
+				}
+				ROOT = {
+					clear_array = THIS.selected_states_array
+				}
+			}
+			if = {
+				limit = {
+					ROOT = {
+						exists = no
+						check_variable = { ROOT.si_ai_reluctance_stage > 0 }
+					}
+				}
+				set_variable = { ROOT.si_ai_reluctance_stage = 0 }
+			}
+
+			if = {
+				limit = {
+					ROOT = {
+						NOT = {
+							has_dynamic_modifier = {
+								modifier = SI_factories_total_take_modifier
+							}
+						}
+					}
+				}
+				ROOT = {
+					add_dynamic_modifier = {
+						modifier = SI_factories_total_take_modifier
+					}
+				}
+			}
+
+		}
+	}
+
+	on_state_control_changed = {
+		effect = {
+			
+			every_country = {
+				if = {
+					limit = {
+						is_in_array = {
+							array = THIS.selected_states_array
+							value = FROM.FROM.id
+						}
+					}
+					remove_from_array = {
+						array = THIS.selected_states_array
+						value = FROM.FROM.id
+					}
+				}
+
+				remove_resource_rights = FROM.FROM
+				if = {
+					limit = {
+						is_in_array = {
+							array = THIS.sr_targets_array
+							value = FROM.FROM
+						}
+					}
+					remove_from_array = { THIS.sr_targets_array = FROM.FROM }
+				}
+				
+				if = {
+					limit = {
+						check_variable = { var:THIS.sr_stateid_slot_1 = FROM.FROM }
+						NOT = {
+							is_in_array = { THIS.sr_targets_array = FROM.FROM }
+						}
+					}
+					set_variable = { var:THIS.slot_remove_factories = var:THIS.sr_slot_1_factories_sent }
+					multiply_variable = { var:THIS.slot_remove_factories = -1 }
+					FROM = {
+						add_offsite_building = {
+							type = industrial_complex
+							level = var:PREV.slot_remove_factories
+						}
+					}
+					set_variable = { var:THIS.sr_stateid_slot_1 = 0 }
+					set_variable = { var:THIS.sr_slot_1_factories_sent = 0 }
+				}
+				if = {
+					limit = {
+						check_variable = { var:THIS.sr_stateid_slot_2 = FROM.FROM }
+						NOT = {
+							is_in_array = { THIS.sr_targets_array = FROM.FROM }
+						}
+					}
+					set_variable = { var:THIS.slot_remove_factories = var:THIS.sr_slot_2_factories_sent }
+					multiply_variable = { var:THIS.slot_remove_factories = -1 }
+					FROM = {
+						add_offsite_building = {
+							type = industrial_complex
+							level = var:PREV.slot_remove_factories
+						}
+					}
+					set_variable = { var:THIS.sr_stateid_slot_2 = 0 }
+					set_variable = { var:THIS.sr_slot_2_factories_sent = 0 }
+				}
+				if = {
+					limit = {
+						check_variable = { var:THIS.sr_stateid_slot_3 = FROM.FROM }
+						NOT = {
+							is_in_array = { THIS.sr_targets_array = FROM.FROM }
+						}
+					}
+					set_variable = { var:THIS.slot_remove_factories = var:THIS.sr_slot_3_factories_sent }
+					multiply_variable = { var:THIS.slot_remove_factories = -1 }
+					FROM = {
+						add_offsite_building = {
+							type = industrial_complex
+							level = var:PREV.slot_remove_factories
+						}
+					}
+					set_variable = { var:THIS.sr_stateid_slot_3 = 0 }
+					set_variable = { var:THIS.sr_slot_3_factories_sent = 0 }
+				}
+				clear_variable = var:THIS.slot_remove_factories
+
+				set_variable = { var:THIS.sr_total_factories_sent = 0 }
+				add_to_variable = { var:THIS.sr_total_factories_sent = var:THIS.sr_slot_1_factories_sent }
+				add_to_variable = { var:THIS.sr_total_factories_sent = var:THIS.sr_slot_2_factories_sent }
+				add_to_variable = { var:THIS.sr_total_factories_sent = var:THIS.sr_slot_3_factories_sent }
+
+				FROM.FROM = { clr_state_flag = SR_resources_taken_flag_@PREV }
+				FROM = {
+					if = {
+						limit = {
+							NOT = {
+								if = {
+									limit = {
+										check_variable = { var:PREV.sr_stateid_slot_1 > 0 }
+									}
+									var:PREV.sr_stateid_slot_1 = {
+										is_owned_by = PREV
+									}
+								}
+								if = {
+									limit = {
+										check_variable = { var:PREV.sr_stateid_slot_2 > 0 }
+									}
+									var:PREV.sr_stateid_slot_2 = {
+										is_owned_by = PREV
+									}
+								}
+								if = {
+									limit = {
+										check_variable = { var:PREV.sr_stateid_slot_3 > 0 }
+									}
+									var:PREV.sr_stateid_slot_3 = {
+										is_owned_by = PREV
+									}
+								}
+							}
+							is_in_array = { THIS.sr_targets_array = PREV }
+						}
+						remove_from_array = { THIS.sr_targets_array = PREV }
+					}
+				}
+
+				# Recalculate total factories sent to FROM
+				set_variable = { var:ROOT.sr_factories_sent_@FROM = 0 }
+				if = {
+					limit = {
+						if = {
+							limit = {
+								check_variable = { var:ROOT.sr_stateid_slot_1 > 0 }
+							}
+							var:ROOT.sr_stateid_slot_1 = {
+								is_owned_by = FROM
+							}
+						}
+					}
+					add_to_variable = { var:ROOT.sr_factories_sent_@FROM = var:ROOT.sr_slot_1_factories_sent }
+				}
+				if = {
+					limit = {
+						if = {
+							limit = {
+								check_variable = { var:ROOT.sr_stateid_slot_2 > 0 }
+							}
+							var:ROOT.sr_stateid_slot_2 = {
+								is_owned_by = FROM
+							}
+						}
+					}
+					add_to_variable = { var:ROOT.sr_factories_sent_@FROM = var:ROOT.sr_slot_2_factories_sent }
+				}
+				if = {
+					limit = {
+						if = {
+							limit = {
+								check_variable = { var:ROOT.sr_stateid_slot_3 > 0 }
+							}
+							var:ROOT.sr_stateid_slot_3 = {
+								is_owned_by = FROM
+							}
+						}
+					}
+					add_to_variable = { var:ROOT.sr_factories_sent_@FROM = var:ROOT.sr_slot_3_factories_sent }
+				}
+			}
+
+		}
+	}
+
+	on_annex = {
+		effect = {
+			
+			every_country = {
+				FROM = {
+					set_variable = { var:THIS.sr_stateid_cancel_@PREV = 0 }
+					set_variable = { var:PREV.sr_stateid_cancel_@THIS = 0 }
+
+					set_variable = { var:THIS.sr_contract_cancel_@PREV = 0 }
+					set_variable = { var:PREV.sr_contract_cancel_@THIS = 0 }
+				}
+			}
+
+		}
+	}
+
+	on_declare_war = {
+		effect = {
+			
+			FROM = {
+				every_owned_state = {
+					ROOT = {
+						remove_resource_rights = PREV
+
+						if = {
+							limit = {
+								is_in_array = { THIS.sr_targets_array = PREV }
+							}
+							remove_from_array = { THIS.sr_targets_array = PREV }
+						}
+						
+						if = {
+							limit = {
+								check_variable = { var:THIS.sr_stateid_slot_1 = PREV }
+								NOT = {
+									is_in_array = { THIS.sr_targets_array = PREV }
+								}
+							}
+							set_variable = { var:THIS.slot_remove_factories = var:THIS.sr_slot_1_factories_sent }
+							multiply_variable = { var:THIS.slot_remove_factories = -1 }
+							FROM = {
+								add_offsite_building = {
+									type = industrial_complex
+									level = var:PREV.slot_remove_factories
+								}
+							}
+							set_variable = { var:THIS.sr_stateid_slot_1 = 0 }
+							set_variable = { var:THIS.sr_slot_1_factories_sent = 0 }
+						}
+						if = {
+							limit = {
+								check_variable = { var:THIS.sr_stateid_slot_2 = PREV }
+								NOT = {
+									is_in_array = { THIS.sr_targets_array = PREV }
+								}
+							}
+							set_variable = { var:THIS.slot_remove_factories = var:THIS.sr_slot_2_factories_sent }
+							multiply_variable = { var:THIS.slot_remove_factories = -1 }
+							FROM = {
+								add_offsite_building = {
+									type = industrial_complex
+									level = var:PREV.slot_remove_factories
+								}
+							}
+							set_variable = { var:THIS.sr_stateid_slot_2 = 0 }
+							set_variable = { var:THIS.sr_slot_2_factories_sent = 0 }
+						}
+						if = {
+							limit = {
+								check_variable = { var:THIS.sr_stateid_slot_3 = PREV }
+								NOT = {
+									is_in_array = { THIS.sr_targets_array = PREV }
+								}
+							}
+							set_variable = { var:THIS.slot_remove_factories = var:THIS.sr_slot_3_factories_sent }
+							multiply_variable = { var:THIS.slot_remove_factories = -1 }
+							FROM = {
+								add_offsite_building = {
+									type = industrial_complex
+									level = var:PREV.slot_remove_factories
+								}
+							}
+							set_variable = { var:THIS.sr_stateid_slot_3 = 0 }
+							set_variable = { var:THIS.sr_slot_3_factories_sent = 0 }
+						}
+						clear_variable = var:THIS.slot_remove_factories
+
+						set_variable = { var:THIS.sr_total_factories_sent = 0 }
+						add_to_variable = { var:THIS.sr_total_factories_sent = var:THIS.sr_slot_1_factories_sent }
+						add_to_variable = { var:THIS.sr_total_factories_sent = var:THIS.sr_slot_2_factories_sent }
+						add_to_variable = { var:THIS.sr_total_factories_sent = var:THIS.sr_slot_3_factories_sent }
+
+						PREV = { clr_state_flag = SR_resources_taken_flag_@PREV }
+						FROM = {
+							if = {
+								limit = {
+									NOT = {
+										if = {
+											limit = {
+												check_variable = { var:PREV.sr_stateid_slot_1 > 0 }
+											}
+											var:PREV.sr_stateid_slot_1 = {
+												is_owned_by = PREV
+											}
+										}
+										if = {
+											limit = {
+												check_variable = { var:PREV.sr_stateid_slot_2 > 0 }
+											}
+											var:PREV.sr_stateid_slot_2 = {
+												is_owned_by = PREV
+											}
+										}
+										if = {
+											limit = {
+												check_variable = { var:PREV.sr_stateid_slot_3 > 0 }
+											}
+											var:PREV.sr_stateid_slot_3 = {
+												is_owned_by = PREV
+											}
+										}
+									}
+									is_in_array = { THIS.sr_targets_array = PREV }
+								}
+								remove_from_array = { THIS.sr_targets_array = PREV }
+							}
+						}
+
+						# Recalculate total factories sent to FROM
+						set_variable = { var:THIS.sr_factories_sent_@FROM = 0 }
+						if = {
+							limit = {
+								if = {
+									limit = {
+										check_variable = { var:THIS.sr_stateid_slot_1 > 0 }
+									}
+									var:THIS.sr_stateid_slot_1 = {
+										is_owned_by = FROM
+									}
+								}
+							}
+							add_to_variable = { var:THIS.sr_factories_sent_@FROM = var:THIS.sr_slot_1_factories_sent }
+						}
+						if = {
+							limit = {
+								if = {
+									limit = {
+										check_variable = { var:THIS.sr_stateid_slot_2 > 0 }
+									}
+									var:THIS.sr_stateid_slot_2 = {
+										is_owned_by = FROM
+									}
+								}
+							}
+							add_to_variable = { var:THIS.sr_factories_sent_@FROM = var:THIS.sr_slot_2_factories_sent }
+						}
+						if = {
+							limit = {
+								if = {
+									limit = {
+										check_variable = { var:THIS.sr_stateid_slot_3 > 0 }
+									}
+									var:THIS.sr_stateid_slot_3 = {
+										is_owned_by = FROM
+									}
+								}
+							}
+							add_to_variable = { var:THIS.sr_factories_sent_@FROM = var:THIS.sr_slot_3_factories_sent }
+						}
+					}
+				}
+				set_variable = { THIS.sr_contract_cancel_@ROOT = 0 }
+			}
+
+			ROOT = {
+				every_owned_state = {
+					FROM = {
+						remove_resource_rights = PREV
+
+						if = {
+							limit = {
+								is_in_array = { THIS.sr_targets_array = PREV }
+							}
+							remove_from_array = { THIS.sr_targets_array = PREV }
+						}
+						
+						if = {
+							limit = {
+								check_variable = { var:THIS.sr_stateid_slot_1 = PREV }
+								NOT = {
+									is_in_array = { THIS.sr_targets_array = PREV }
+								}
+							}
+							set_variable = { var:THIS.slot_remove_factories = var:THIS.sr_slot_1_factories_sent }
+							multiply_variable = { var:THIS.slot_remove_factories = -1 }
+							ROOT = {
+								add_offsite_building = {
+									type = industrial_complex
+									level = var:PREV.slot_remove_factories
+								}
+							}
+							set_variable = { var:THIS.sr_stateid_slot_1 = 0 }
+							set_variable = { var:THIS.sr_slot_1_factories_sent = 0 }
+						}
+						if = {
+							limit = {
+								check_variable = { var:THIS.sr_stateid_slot_2 = PREV }
+								NOT = {
+									is_in_array = { THIS.sr_targets_array = PREV }
+								}
+							}
+							set_variable = { var:THIS.slot_remove_factories = var:THIS.sr_slot_2_factories_sent }
+							multiply_variable = { var:THIS.slot_remove_factories = -1 }
+							ROOT = {
+								add_offsite_building = {
+									type = industrial_complex
+									level = var:PREV.slot_remove_factories
+								}
+							}
+							set_variable = { var:THIS.sr_stateid_slot_2 = 0 }
+							set_variable = { var:THIS.sr_slot_2_factories_sent = 0 }
+						}
+						if = {
+							limit = {
+								check_variable = { var:THIS.sr_stateid_slot_3 = PREV }
+								NOT = {
+									is_in_array = { THIS.sr_targets_array = PREV }
+								}
+							}
+							set_variable = { var:THIS.slot_remove_factories = var:THIS.sr_slot_3_factories_sent }
+							multiply_variable = { var:THIS.slot_remove_factories = -1 }
+							ROOT = {
+								add_offsite_building = {
+									type = industrial_complex
+									level = var:PREV.slot_remove_factories
+								}
+							}
+							set_variable = { var:THIS.sr_stateid_slot_3 = 0 }
+							set_variable = { var:THIS.sr_slot_3_factories_sent = 0 }
+						}
+						clear_variable = var:THIS.slot_remove_factories
+
+						set_variable = { var:THIS.sr_total_factories_sent = 0 }
+						add_to_variable = { var:THIS.sr_total_factories_sent = var:THIS.sr_slot_1_factories_sent }
+						add_to_variable = { var:THIS.sr_total_factories_sent = var:THIS.sr_slot_2_factories_sent }
+						add_to_variable = { var:THIS.sr_total_factories_sent = var:THIS.sr_slot_3_factories_sent }
+
+						PREV = { clr_state_flag = SR_resources_taken_flag_@PREV }
+						ROOT = {
+							if = {
+								limit = {
+									NOT = {
+										if = {
+											limit = {
+												check_variable = { var:PREV.sr_stateid_slot_1 > 0 }
+											}
+											var:PREV.sr_stateid_slot_1 = {
+												is_owned_by = PREV
+											}
+										}
+										if = {
+											limit = {
+												check_variable = { var:PREV.sr_stateid_slot_2 > 0 }
+											}
+											var:PREV.sr_stateid_slot_2 = {
+												is_owned_by = PREV
+											}
+										}
+										if = {
+											limit = {
+												check_variable = { var:PREV.sr_stateid_slot_3 > 0 }
+											}
+											var:PREV.sr_stateid_slot_3 = {
+												is_owned_by = PREV
+											}
+										}
+									}
+									is_in_array = { THIS.sr_targets_array = PREV }
+								}
+								remove_from_array = { THIS.sr_targets_array = PREV }
+							}
+						}
+
+						# Recalculate total factories sent to ROOT
+						set_variable = { var:THIS.sr_factories_sent_@ROOT = 0 }
+						if = {
+							limit = {
+								if = {
+									limit = {
+										check_variable = { var:THIS.sr_stateid_slot_1 > 0 }
+									}
+									var:THIS.sr_stateid_slot_1 = {
+										is_owned_by = ROOT
+									}
+								}
+							}
+							add_to_variable = { var:THIS.sr_factories_sent_@ROOT = var:THIS.sr_slot_1_factories_sent }
+						}
+						if = {
+							limit = {
+								if = {
+									limit = {
+										check_variable = { var:THIS.sr_stateid_slot_2 > 0 }
+									}
+									var:THIS.sr_stateid_slot_2 = {
+										is_owned_by = ROOT
+									}
+								}
+							}
+							add_to_variable = { var:THIS.sr_factories_sent_@ROOT = var:THIS.sr_slot_2_factories_sent }
+						}
+						if = {
+							limit = {
+								if = {
+									limit = {
+										check_variable = { var:THIS.sr_stateid_slot_3 > 0 }
+									}
+									var:THIS.sr_stateid_slot_3 = {
+										is_owned_by = ROOT
+									}
+								}
+							}
+							add_to_variable = { var:THIS.sr_factories_sent_@ROOT = var:THIS.sr_slot_3_factories_sent }
+						}
+					}
+				}
+				set_variable = { THIS.sr_contract_cancel_@FROM = 0 }
+			}
+
+		}
+	}
+
+}

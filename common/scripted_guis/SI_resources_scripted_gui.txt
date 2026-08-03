@@ -1,0 +1,2221 @@
+scripted_gui = {
+
+	state_resources_transfer_gui = {
+		context_type = selected_state_context
+
+		window_name = "state_resources_menu_container"
+
+		parent_window_name = "countrystateview"
+
+		visible = {
+			always = yes
+		}
+		# has_global_flag = SI_debug_flag
+
+		effects = {
+			state_resources_nemu_button_click = {
+				ROOT = {
+					if = {
+						limit = {
+							has_country_flag = SI_menu_3_flag
+						}
+						clr_country_flag = SI_menu_3_flag
+					}
+					else = {
+						set_country_flag = SI_menu_3_flag
+					}
+				}
+			}
+		}
+
+		triggers = {
+			state_resources_nemu_button_visible = {
+				has_game_rule = {
+					rule = si_resources_demand_rules
+					option = SI_RESOURCES_DEMAND_DEFAULT
+				}
+			}
+		}
+	}
+	state_resources_transfer_menu_gui = {
+		context_type = selected_state_context
+
+		window_name = "state_resources_container"
+
+		parent_window_name = "countrystateview"
+
+		visible = {
+			ROOT = {
+				has_country_flag = SI_menu_3_flag
+			}
+		}
+		dynamic_lists = {
+			si_country_entry_gridbox = {
+				array = ROOT.sr_targets_array
+				change_scope = yes
+				entry_container = sr_resources_entry_container
+			}
+		}
+		properties = {
+			sr_country_flag = {
+				image = "[THIS.owner.GetFlag]"
+			}
+		}
+		######################################################
+		######  ######  ######  ######  ######  ######  ######
+		##      ##      ##      ##      ##        ##    ##
+		######  ######  ######  ######  ##        ##    ######
+		##      ##      ##      ##      ##        ##        ##
+		######  ##      ##      ######  ######    ##    ######
+		######################################################
+		effects = {
+			sr_menu_cancel_button_click = {
+				ROOT = {
+					if = {
+						limit = {
+							has_country_flag = SI_menu_3_flag
+						}
+						clr_country_flag = SI_menu_3_flag
+					}
+					else = {
+						set_country_flag = SI_menu_3_flag
+					}
+				}
+			}
+			sr_display_cancel_button_click = {
+				if = {
+					limit = {
+						NOT = {
+							has_global_flag = SI_debug_flag
+						}
+					}
+					add_political_power = -25
+				}
+
+				if = {
+					limit = {
+						THIS = {
+							any_state = {
+								state = PREV.id
+							}
+						}
+					}
+					THIS = {
+						ROOT = {
+							set_variable = { THIS.sr_stateid_cancel_@PREV.owner = PREV }
+						}
+					}
+					THIS.owner = {
+						country_event = sr_event.4
+					}
+				}
+				else_if = {
+					limit = {
+						THIS = {
+							any_country = {
+								tag = PREV
+							}
+						}
+					}
+					# For some reasons the clear rights code doesnt work here so if you see this: it works in the event, sad i have to dupe it tho
+					THIS = {
+						ROOT = {
+							set_variable = { THIS.sr_contract_cancel_@PREV = 1 }
+						}
+						country_event = { id = sr_event.3 days = 2 }
+					}
+				}
+			}
+
+			sr_action_clear_button_click = {
+				var:ROOT.sr_state_form = {
+					remove_from_array = { ROOT.transfer_oil_array = THIS }
+					remove_from_array = { ROOT.transfer_aluminium_array = THIS }
+					remove_from_array = { ROOT.transfer_rubber_array = THIS }
+					remove_from_array = { ROOT.transfer_tungsten_array = THIS }
+					remove_from_array = { ROOT.transfer_steel_array = THIS }
+					remove_from_array = { ROOT.transfer_chromium_array = THIS }
+					remove_from_array = { ROOT.transfer_coal_array = THIS }
+				}
+				set_variable = { var:ROOT.sr_state_form = 0 }
+				set_variable = { var:ROOT.sr_factory_cost_var = 1 }
+			}
+			####    ######  ####    ##  ##  ######
+			##  ##  ##      ##  ##  ##  ##  ##    
+			##  ##  ######  ####    ##  ##  ##  ##
+			##  ##  ##      ##  ##  ##  ##  ##  ##
+			####    ######  ####    ######  ######
+			sr_debug_clear_rights_button_click = {
+				every_country = {
+					remove_resource_rights = FROM
+
+					remove_from_array = { THIS.sr_targets_array = FROM }
+					if = {
+						limit = {
+							check_variable = { var:THIS.sr_stateid_slot_1 = FROM }
+							NOT = {
+								is_in_array = { THIS.sr_targets_array = FROM }
+							}
+						}
+						set_variable = { var:THIS.slot_remove_factories = var:THIS.sr_slot_1_factories_sent }
+						multiply_variable = { var:THIS.slot_remove_factories = -1 }
+						FROM.owner = {
+							add_offsite_building = {
+								type = industrial_complex
+								level = var:PREV.slot_remove_factories
+							}
+						}
+						set_variable = { var:THIS.sr_stateid_slot_1 = 0 }
+						set_variable = { var:THIS.sr_slot_1_factories_sent = 0 }
+					}
+					if = {
+						limit = {
+							check_variable = { var:THIS.sr_stateid_slot_2 = FROM }
+							NOT = {
+								is_in_array = { THIS.sr_targets_array = FROM }
+							}
+						}
+						set_variable = { var:THIS.slot_remove_factories = var:THIS.sr_slot_2_factories_sent }
+						multiply_variable = { var:THIS.slot_remove_factories = -1 }
+						FROM.owner = {
+							add_offsite_building = {
+								type = industrial_complex
+								level = var:PREV.slot_remove_factories
+							}
+						}
+						set_variable = { var:THIS.sr_stateid_slot_2 = 0 }
+						set_variable = { var:THIS.sr_slot_2_factories_sent = 0 }
+					}
+					if = {
+						limit = {
+							check_variable = { var:THIS.sr_stateid_slot_3 = FROM }
+							NOT = {
+								is_in_array = { THIS.sr_targets_array = FROM }
+							}
+						}
+						set_variable = { var:THIS.slot_remove_factories = var:THIS.sr_slot_3_factories_sent }
+						multiply_variable = { var:THIS.slot_remove_factories = -1 }
+						FROM.owner = {
+							add_offsite_building = {
+								type = industrial_complex
+								level = var:PREV.slot_remove_factories
+							}
+						}
+						set_variable = { var:THIS.sr_stateid_slot_3 = 0 }
+						set_variable = { var:THIS.sr_slot_3_factories_sent = 0 }
+					}
+					clear_variable = var:THIS.slot_remove_factories
+
+					set_variable = { var:THIS.sr_total_factories_sent = 0 }
+					add_to_variable = { var:THIS.sr_total_factories_sent = var:THIS.sr_slot_1_factories_sent }
+					add_to_variable = { var:THIS.sr_total_factories_sent = var:THIS.sr_slot_2_factories_sent }
+					add_to_variable = { var:THIS.sr_total_factories_sent = var:THIS.sr_slot_3_factories_sent }
+
+					FROM = { clr_state_flag = SR_resources_taken_flag_@PREV }
+					FROM.owner = {
+						if = {
+							limit = {
+								NOT = {
+									var:PREV.sr_stateid_slot_1 = {
+										is_owned_by = PREV
+									}
+									var:PREV.sr_stateid_slot_2 = {
+										is_owned_by = PREV
+									}
+									var:PREV.sr_stateid_slot_3 = {
+										is_owned_by = PREV
+									}
+								}
+								is_in_array = { THIS.sr_targets_array = PREV }
+							}
+							remove_from_array = { THIS.sr_targets_array = PREV }
+						}
+					}
+					
+					# Recalculate total factories sent to FROM.owner
+					set_variable = { var:ROOT.sr_factories_sent_@FROM.owner = 0 }
+					if = {
+						limit = {
+							var:ROOT.sr_stateid_slot_1 = {
+								is_owned_by = FROM.owner
+							}
+						}
+						add_to_variable = { var:ROOT.sr_factories_sent_@FROM.owner = var:ROOT.sr_slot_1_factories_sent }
+					}
+					if = {
+						limit = {
+							var:ROOT.sr_stateid_slot_2 = {
+								is_owned_by = FROM.owner
+							}
+						}
+						add_to_variable = { var:ROOT.sr_factories_sent_@FROM.owner = var:ROOT.sr_slot_2_factories_sent }
+					}
+					if = {
+						limit = {
+							var:ROOT.sr_stateid_slot_3 = {
+								is_owned_by = FROM.owner
+							}
+						}
+						add_to_variable = { var:ROOT.sr_factories_sent_@FROM.owner = var:ROOT.sr_slot_3_factories_sent }
+					}
+				}
+			}
+			####    ######  #    #  ######  ##  ##  ####       ####    ######  ######
+			##  ##  ##      ##  ##  ##  ##  ### ##  ##  ##     ##  ##  ##      ##
+			##  ##  ######  # ## #  ######  ### ##  ##  ##     ####    ######  ######
+			##  ##  ##      #    #  ##  ##  ## ###  ##  ##     ##  ##  ##          ##
+			####    ######  #    #  ##  ##  ##  ##  ####       ##  ##  ######  ######
+			sr_action_demand_res_button_click = {
+				if = {
+					limit = {
+						has_global_flag = SI_debug_flag
+					}
+					if = {
+						limit = {
+							is_in_array = { ROOT.transfer_oil_array = FROM }
+						}
+						FROM.owner = {
+							give_resource_rights = {
+								receiver = ROOT
+								state = FROM
+								resources = { oil }
+							}
+						}
+					}
+					if = {
+						limit = {
+							is_in_array = { ROOT.transfer_aluminium_array = FROM }
+						}
+						FROM.owner = {
+							give_resource_rights = {
+								receiver = ROOT
+								state = FROM
+								resources = { aluminium }
+							}
+						}
+					}
+					if = {
+						limit = {
+							is_in_array = { ROOT.transfer_rubber_array = FROM }
+						}
+						FROM.owner = {
+							give_resource_rights = {
+								receiver = ROOT
+								state = FROM
+								resources = { rubber }
+							}
+						}
+					}
+					if = {
+						limit = {
+							is_in_array = { ROOT.transfer_tungsten_array = FROM }
+						}
+						FROM.owner = {
+							give_resource_rights = {
+								receiver = ROOT
+								state = FROM
+								resources = { tungsten }
+							}
+						}
+					}
+					if = {
+						limit = {
+							is_in_array = { ROOT.transfer_steel_array = FROM }
+						}
+						FROM.owner = {
+							give_resource_rights = {
+								receiver = ROOT
+								state = FROM
+								resources = { steel }
+							}
+						}
+					}
+					if = {
+						limit = {
+							is_in_array = { ROOT.transfer_chromium_array = FROM }
+						}
+						FROM.owner = {
+							give_resource_rights = {
+								receiver = ROOT
+								state = FROM
+								resources = { chromium }
+							}
+						}
+					}
+					if = {
+						limit = {
+							is_in_array = { ROOT.transfer_coal_array = FROM }
+						}
+						FROM.owner = {
+							give_resource_rights = {
+								receiver = ROOT
+								state = FROM
+								resources = { coal }
+							}
+						}
+					}
+					var:ROOT.sr_state_form = {
+						remove_from_array = { ROOT.transfer_oil_array = THIS }
+						remove_from_array = { ROOT.transfer_aluminium_array = THIS }
+						remove_from_array = { ROOT.transfer_rubber_array = THIS }
+						remove_from_array = { ROOT.transfer_tungsten_array = THIS }
+						remove_from_array = { ROOT.transfer_steel_array = THIS }
+						remove_from_array = { ROOT.transfer_chromium_array = THIS }
+						remove_from_array = { ROOT.transfer_coal_array = THIS }
+					}
+					if = {
+						limit = {
+							check_variable = { var:ROOT.sr_stateid_slot_1 = 0 }
+						}
+						set_variable = { var:ROOT.sr_stateid_slot_1 = FROM }
+						set_variable = { var:ROOT.sr_slot_1_factories_sent = var:ROOT.sr_factory_cost_var }
+
+						FROM.owner = {
+							add_offsite_building = {
+								type = industrial_complex
+								level = var:ROOT.sr_slot_1_factories_sent
+							}
+						}
+					}
+					else_if = {
+						limit = {
+							check_variable = { var:ROOT.sr_stateid_slot_2 = 0 }
+						}
+						set_variable = { var:ROOT.sr_stateid_slot_2 = FROM }
+						set_variable = { var:ROOT.sr_slot_2_factories_sent = var:ROOT.sr_factory_cost_var }
+
+						FROM.owner = {
+							add_offsite_building = {
+								type = industrial_complex
+								level = var:ROOT.sr_slot_2_factories_sent
+							}
+						}
+					}
+					else_if = {
+						limit = {
+							check_variable = { var:ROOT.sr_stateid_slot_3 = 0 }
+						}
+						set_variable = { var:ROOT.sr_stateid_slot_3 = FROM }
+						set_variable = { var:ROOT.sr_slot_3_factories_sent = var:ROOT.sr_factory_cost_var }
+
+						FROM.owner = {
+							add_offsite_building = {
+								type = industrial_complex
+								level = var:ROOT.sr_slot_3_factories_sent
+							}
+						}
+					}
+					set_variable = { var:ROOT.sr_total_factories_sent = 0 }
+					add_to_variable = { var:ROOT.sr_total_factories_sent = var:ROOT.sr_slot_1_factories_sent }
+					add_to_variable = { var:ROOT.sr_total_factories_sent = var:ROOT.sr_slot_2_factories_sent }
+					add_to_variable = { var:ROOT.sr_total_factories_sent = var:ROOT.sr_slot_3_factories_sent }
+
+					set_variable = { var:ROOT.sr_state_form = 0 }
+					set_variable = { var:ROOT.sr_factory_cost_var = 1 }
+
+					add_to_array = { ROOT.sr_targets_array = FROM }
+					if = {
+						limit = {
+							FROM.owner = {
+								NOT = {
+									is_in_array = { THIS.sr_targets_array = ROOT }
+								}
+							}
+						}
+						FROM.owner = { add_to_array = { THIS.sr_targets_array = ROOT } }
+					}
+					# Calculate total factories sent to same scope
+					set_variable = { var:ROOT.sr_factories_sent_@FROM.owner = 0 }
+					if = {
+						limit = {
+							var:ROOT.sr_stateid_slot_1 = {
+								is_owned_by = FROM.owner
+							}
+						}
+						add_to_variable = { var:ROOT.sr_factories_sent_@FROM.owner = var:ROOT.sr_slot_1_factories_sent }
+					}
+					if = {
+						limit = {
+							var:ROOT.sr_stateid_slot_2 = {
+								is_owned_by = FROM.owner
+							}
+						}
+						add_to_variable = { var:ROOT.sr_factories_sent_@FROM.owner = var:ROOT.sr_slot_2_factories_sent }
+					}
+					if = {
+						limit = {
+							var:ROOT.sr_stateid_slot_3 = {
+								is_owned_by = FROM.owner
+							}
+						}
+						add_to_variable = { var:ROOT.sr_factories_sent_@FROM.owner = var:ROOT.sr_slot_3_factories_sent }
+					}
+				}
+				else = {
+					set_variable = { ROOT.sr_target_state = FROM }
+					var:ROOT.sr_target_state = {
+						if = {
+							limit = {
+								is_in_array = { ROOT.transfer_oil_array = THIS }
+							}
+							FROM.owner = {
+								add_to_array = { THIS.transfer_oil_from_@ROOT = PREV }
+							}
+						}
+						if = {
+							limit = {
+								is_in_array = { ROOT.transfer_aluminium_array = THIS }
+							}
+							FROM.owner = {
+								add_to_array = { THIS.transfer_aluminium_from_@ROOT = PREV }
+							}
+						}
+						if = {
+							limit = {
+								is_in_array = { ROOT.transfer_rubber_array = THIS }
+							}
+							FROM.owner = {
+								add_to_array = { THIS.transfer_rubber_from_@ROOT = PREV }
+							}
+						}
+						if = {
+							limit = {
+								is_in_array = { ROOT.transfer_tungsten_array = THIS }
+							}
+							FROM.owner = {
+								add_to_array = { THIS.transfer_tungsten_from_@ROOT = PREV }
+							}
+						}
+						if = {
+							limit = {
+								is_in_array = { ROOT.transfer_steel_array = THIS }
+							}
+							FROM.owner = {
+								add_to_array = { THIS.transfer_steel_from_@ROOT = PREV }
+							}
+						}
+						if = {
+							limit = {
+								is_in_array = { ROOT.transfer_chromium_array = THIS }
+							}
+							FROM.owner = {
+								add_to_array = { THIS.transfer_chromium_from_@ROOT = PREV }
+							}
+						}
+						if = {
+							limit = {
+								is_in_array = { ROOT.transfer_coal_array = THIS }
+							}
+							FROM.owner = {
+								add_to_array = { THIS.transfer_coal_from_@ROOT = PREV }
+							}
+						}
+					}
+					var:ROOT.sr_state_form = {
+						remove_from_array = { ROOT.transfer_oil_array = THIS }
+						remove_from_array = { ROOT.transfer_aluminium_array = THIS }
+						remove_from_array = { ROOT.transfer_rubber_array = THIS }
+						remove_from_array = { ROOT.transfer_tungsten_array = THIS }
+						remove_from_array = { ROOT.transfer_steel_array = THIS }
+						remove_from_array = { ROOT.transfer_chromium_array = THIS }
+						remove_from_array = { ROOT.transfer_coal_array = THIS }
+					}
+
+					ROOT = {
+						add_timed_idea = {
+							idea = SI_major_demands_idea
+							days = var:global.sr_demand_cooldown_days
+						}
+						set_variable = { THIS.display_cost_event_var = THIS.sr_factory_cost_var }
+					}
+					set_state_flag = {
+						flag = SR_demands_target_flag
+						days = 30
+					}
+
+					FROM.owner = {
+						country_event = { id = sr_event.1 days = 1 random_days = 6 }
+					}
+				}
+			}
+			######  ######  ##
+			##  ##    ##    ##
+			##  ##    ##    ##
+			##  ##    ##    ##
+			######  ######  ######
+			sr_button_enable_oil_click = {
+				add_to_array = {
+					array = ROOT.transfer_oil_array
+					value = FROM
+				}
+				if = {
+					limit = {
+						check_variable = { var:ROOT.sr_state_form = 0 }
+					}
+					set_variable = { var:ROOT.sr_state_form = FROM }
+				}
+				set_variable = { var:ROOT.sr_factory_cost_var = 0 }
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_oil_array = FROM }
+					}
+					add_to_variable = { var:ROOT.sr_factory_cost_var = FROM.resource@oil }
+				}
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_aluminium_array = FROM }
+					}
+					add_to_variable = { var:ROOT.sr_factory_cost_var = FROM.resource@aluminium }
+				}
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_rubber_array = FROM }
+					}
+					add_to_variable = { var:ROOT.sr_factory_cost_var = FROM.resource@rubber }
+				}
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_tungsten_array = FROM }
+					}
+					add_to_variable = { var:ROOT.sr_factory_cost_var = FROM.resource@tungsten }
+				}
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_steel_array = FROM }
+					}
+					add_to_variable = { var:ROOT.sr_factory_cost_var = FROM.resource@steel }
+				}
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_chromium_array = FROM }
+					}
+					add_to_variable = { var:ROOT.sr_factory_cost_var = FROM.resource@chromium }
+				}
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_coal_array = FROM }
+					}
+					add_to_variable = { var:ROOT.sr_factory_cost_var = FROM.resource@coal }
+				}
+				divide_variable = { var:ROOT.sr_factory_cost_var = var:global.sr_resources_per_factory }
+				add_to_variable = { var:ROOT.sr_factory_cost_var = 0.5 }
+				round_variable = var:ROOT.sr_factory_cost_var
+			}
+			sr_button_disable_oil_click = {
+				remove_from_array = {
+					array = ROOT.transfer_oil_array
+					value = FROM
+				}
+				set_variable = { var:ROOT.sr_factory_cost_var = 0 }
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_oil_array = FROM }
+					}
+					add_to_variable = { var:ROOT.sr_factory_cost_var = FROM.resource@oil }
+				}
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_aluminium_array = FROM }
+					}
+					add_to_variable = { var:ROOT.sr_factory_cost_var = FROM.resource@aluminium }
+				}
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_rubber_array = FROM }
+					}
+					add_to_variable = { var:ROOT.sr_factory_cost_var = FROM.resource@rubber }
+				}
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_tungsten_array = FROM }
+					}
+					add_to_variable = { var:ROOT.sr_factory_cost_var = FROM.resource@tungsten }
+				}
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_steel_array = FROM }
+					}
+					add_to_variable = { var:ROOT.sr_factory_cost_var = FROM.resource@steel }
+				}
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_chromium_array = FROM }
+					}
+					add_to_variable = { var:ROOT.sr_factory_cost_var = FROM.resource@chromium }
+				}
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_coal_array = FROM }
+					}
+					add_to_variable = { var:ROOT.sr_factory_cost_var = FROM.resource@coal }
+				}
+				divide_variable = { var:ROOT.sr_factory_cost_var = var:global.sr_resources_per_factory }
+				add_to_variable = { var:ROOT.sr_factory_cost_var = 0.5 }
+				round_variable = var:ROOT.sr_factory_cost_var
+				if = {
+					limit = {
+						NOT = {
+							is_in_array = { ROOT.transfer_oil_array = FROM }
+							is_in_array = { ROOT.transfer_aluminium_array = FROM }
+							is_in_array = { ROOT.transfer_rubber_array = FROM }
+							is_in_array = { ROOT.transfer_tungsten_array = FROM }
+							is_in_array = { ROOT.transfer_steel_array = FROM }
+							is_in_array = { ROOT.transfer_chromium_array = FROM }
+							is_in_array = { ROOT.transfer_coal_array = FROM }
+						}
+					}
+					set_variable = { var:ROOT.sr_state_form = 0 }
+					set_variable = { var:ROOT.sr_factory_cost_var = 1 }
+				}
+			}
+			######  ##      ##  ##  #    #  ######  ##  ##  ######  ##  ##  #    #
+			##  ##  ##      ##  ##  ##  ##    ##    ### ##    ##    ##  ##  ##  ##
+			######  ##      ##  ##  # ## #    ##    ### ##    ##    ##  ##  # ## #
+			##  ##  ##      ##  ##  #    #    ##    ## ###    ##    ##  ##  #    #
+			##  ##  ######  ######  #    #  ######  ##  ##  ######  ######  #    #
+			sr_button_enable_aluminium_click = {
+				add_to_array = {
+					array = ROOT.transfer_aluminium_array
+					value = FROM
+				}
+				if = {
+					limit = {
+						check_variable = { var:ROOT.sr_state_form = 0 }
+					}
+					set_variable = { var:ROOT.sr_state_form = FROM }
+				}
+				set_variable = { var:ROOT.sr_factory_cost_var = 0 }
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_oil_array = FROM }
+					}
+					add_to_variable = { var:ROOT.sr_factory_cost_var = FROM.resource@oil }
+				}
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_aluminium_array = FROM }
+					}
+					add_to_variable = { var:ROOT.sr_factory_cost_var = FROM.resource@aluminium }
+				}
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_rubber_array = FROM }
+					}
+					add_to_variable = { var:ROOT.sr_factory_cost_var = FROM.resource@rubber }
+				}
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_tungsten_array = FROM }
+					}
+					add_to_variable = { var:ROOT.sr_factory_cost_var = FROM.resource@tungsten }
+				}
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_steel_array = FROM }
+					}
+					add_to_variable = { var:ROOT.sr_factory_cost_var = FROM.resource@steel }
+				}
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_chromium_array = FROM }
+					}
+					add_to_variable = { var:ROOT.sr_factory_cost_var = FROM.resource@chromium }
+				}
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_coal_array = FROM }
+					}
+					add_to_variable = { var:ROOT.sr_factory_cost_var = FROM.resource@coal }
+				}
+				divide_variable = { var:ROOT.sr_factory_cost_var = var:global.sr_resources_per_factory }
+				add_to_variable = { var:ROOT.sr_factory_cost_var = 0.5 }
+				round_variable = var:ROOT.sr_factory_cost_var
+			}
+			sr_button_disable_aluminium_click = {
+				remove_from_array = {
+					array = ROOT.transfer_aluminium_array
+					value = FROM
+				}
+				set_variable = { var:ROOT.sr_factory_cost_var = 0 }
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_oil_array = FROM }
+					}
+					add_to_variable = { var:ROOT.sr_factory_cost_var = FROM.resource@oil }
+				}
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_aluminium_array = FROM }
+					}
+					add_to_variable = { var:ROOT.sr_factory_cost_var = FROM.resource@aluminium }
+				}
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_rubber_array = FROM }
+					}
+					add_to_variable = { var:ROOT.sr_factory_cost_var = FROM.resource@rubber }
+				}
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_tungsten_array = FROM }
+					}
+					add_to_variable = { var:ROOT.sr_factory_cost_var = FROM.resource@tungsten }
+				}
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_steel_array = FROM }
+					}
+					add_to_variable = { var:ROOT.sr_factory_cost_var = FROM.resource@steel }
+				}
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_chromium_array = FROM }
+					}
+					add_to_variable = { var:ROOT.sr_factory_cost_var = FROM.resource@chromium }
+				}
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_coal_array = FROM }
+					}
+					add_to_variable = { var:ROOT.sr_factory_cost_var = FROM.resource@coal }
+				}
+				divide_variable = { var:ROOT.sr_factory_cost_var = var:global.sr_resources_per_factory }
+				add_to_variable = { var:ROOT.sr_factory_cost_var = 0.5 }
+				round_variable = var:ROOT.sr_factory_cost_var
+				if = {
+					limit = {
+						NOT = {
+							is_in_array = { ROOT.transfer_oil_array = FROM }
+							is_in_array = { ROOT.transfer_aluminium_array = FROM }
+							is_in_array = { ROOT.transfer_rubber_array = FROM }
+							is_in_array = { ROOT.transfer_tungsten_array = FROM }
+							is_in_array = { ROOT.transfer_steel_array = FROM }
+							is_in_array = { ROOT.transfer_chromium_array = FROM }
+							is_in_array = { ROOT.transfer_coal_array = FROM }
+						}
+					}
+					set_variable = { var:ROOT.sr_state_form = 0 }
+					set_variable = { var:ROOT.sr_factory_cost_var = 1 }
+				}
+			}
+			####    ##  ##  ####    ####    ######  ####
+			##  ##  ##  ##  ##  ##  ##  ##  ##      ##  ##
+			####    ##  ##  ####    ####    ######  ####
+			##  ##  ##  ##  ##  ##  ##  ##  ##      ##  ##
+			##  ##  ######  ####    ####    ######  ##  ##
+			sr_button_enable_rubber_click = {
+				add_to_array = {
+					array = ROOT.transfer_rubber_array
+					value = FROM
+				}
+				if = {
+					limit = {
+						check_variable = { var:ROOT.sr_state_form = 0 }
+					}
+					set_variable = { var:ROOT.sr_state_form = FROM }
+				}
+				set_variable = { var:ROOT.sr_factory_cost_var = 0 }
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_oil_array = FROM }
+					}
+					add_to_variable = { var:ROOT.sr_factory_cost_var = FROM.resource@oil }
+				}
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_aluminium_array = FROM }
+					}
+					add_to_variable = { var:ROOT.sr_factory_cost_var = FROM.resource@aluminium }
+				}
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_rubber_array = FROM }
+					}
+					add_to_variable = { var:ROOT.sr_factory_cost_var = FROM.resource@rubber }
+				}
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_tungsten_array = FROM }
+					}
+					add_to_variable = { var:ROOT.sr_factory_cost_var = FROM.resource@tungsten }
+				}
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_steel_array = FROM }
+					}
+					add_to_variable = { var:ROOT.sr_factory_cost_var = FROM.resource@steel }
+				}
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_chromium_array = FROM }
+					}
+					add_to_variable = { var:ROOT.sr_factory_cost_var = FROM.resource@chromium }
+				}
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_coal_array = FROM }
+					}
+					add_to_variable = { var:ROOT.sr_factory_cost_var = FROM.resource@coal }
+				}
+				divide_variable = { var:ROOT.sr_factory_cost_var = var:global.sr_resources_per_factory }
+				add_to_variable = { var:ROOT.sr_factory_cost_var = 0.5 }
+				round_variable = var:ROOT.sr_factory_cost_var
+			}
+			sr_button_disable_rubber_click = {
+				remove_from_array = {
+					array = ROOT.transfer_rubber_array
+					value = FROM
+				}
+				set_variable = { var:ROOT.sr_factory_cost_var = 0 }
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_oil_array = FROM }
+					}
+					add_to_variable = { var:ROOT.sr_factory_cost_var = FROM.resource@oil }
+				}
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_aluminium_array = FROM }
+					}
+					add_to_variable = { var:ROOT.sr_factory_cost_var = FROM.resource@aluminium }
+				}
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_rubber_array = FROM }
+					}
+					add_to_variable = { var:ROOT.sr_factory_cost_var = FROM.resource@rubber }
+				}
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_tungsten_array = FROM }
+					}
+					add_to_variable = { var:ROOT.sr_factory_cost_var = FROM.resource@tungsten }
+				}
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_steel_array = FROM }
+					}
+					add_to_variable = { var:ROOT.sr_factory_cost_var = FROM.resource@steel }
+				}
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_chromium_array = FROM }
+					}
+					add_to_variable = { var:ROOT.sr_factory_cost_var = FROM.resource@chromium }
+				}
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_coal_array = FROM }
+					}
+					add_to_variable = { var:ROOT.sr_factory_cost_var = FROM.resource@coal }
+				}
+				divide_variable = { var:ROOT.sr_factory_cost_var = var:global.sr_resources_per_factory }
+				add_to_variable = { var:ROOT.sr_factory_cost_var = 0.5 }
+				round_variable = var:ROOT.sr_factory_cost_var
+				if = {
+					limit = {
+						NOT = {
+							is_in_array = { ROOT.transfer_oil_array = FROM }
+							is_in_array = { ROOT.transfer_aluminium_array = FROM }
+							is_in_array = { ROOT.transfer_rubber_array = FROM }
+							is_in_array = { ROOT.transfer_tungsten_array = FROM }
+							is_in_array = { ROOT.transfer_steel_array = FROM }
+							is_in_array = { ROOT.transfer_chromium_array = FROM }
+							is_in_array = { ROOT.transfer_coal_array = FROM }
+						}
+					}
+					set_variable = { var:ROOT.sr_state_form = 0 }
+					set_variable = { var:ROOT.sr_factory_cost_var = 1 }
+				}
+			}
+			######  ##  ##  ##  ##  ######  ######  ######  ######  ##  ##
+			  ##    ##  ##  ### ##  ##      ##        ##    ##      ### ##
+			  ##    ##  ##  ### ##  ##  ##  ######    ##    ######  ### ##
+			  ##    ##  ##  ## ###  ##  ##      ##    ##    ##      ## ###
+			  ##    ######  ##  ##  ######  ######    ##    ######  ##  ##
+			sr_button_enable_tungsten_click = {
+				add_to_array = {
+					array = ROOT.transfer_tungsten_array
+					value = FROM
+				}
+				if = {
+					limit = {
+						check_variable = { var:ROOT.sr_state_form = 0 }
+					}
+					set_variable = { var:ROOT.sr_state_form = FROM }
+				}
+				set_variable = { var:ROOT.sr_factory_cost_var = 0 }
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_oil_array = FROM }
+					}
+					add_to_variable = { var:ROOT.sr_factory_cost_var = FROM.resource@oil }
+				}
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_aluminium_array = FROM }
+					}
+					add_to_variable = { var:ROOT.sr_factory_cost_var = FROM.resource@aluminium }
+				}
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_rubber_array = FROM }
+					}
+					add_to_variable = { var:ROOT.sr_factory_cost_var = FROM.resource@rubber }
+				}
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_tungsten_array = FROM }
+					}
+					add_to_variable = { var:ROOT.sr_factory_cost_var = FROM.resource@tungsten }
+				}
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_steel_array = FROM }
+					}
+					add_to_variable = { var:ROOT.sr_factory_cost_var = FROM.resource@steel }
+				}
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_chromium_array = FROM }
+					}
+					add_to_variable = { var:ROOT.sr_factory_cost_var = FROM.resource@chromium }
+				}
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_coal_array = FROM }
+					}
+					add_to_variable = { var:ROOT.sr_factory_cost_var = FROM.resource@coal }
+				}
+				divide_variable = { var:ROOT.sr_factory_cost_var = var:global.sr_resources_per_factory }
+				add_to_variable = { var:ROOT.sr_factory_cost_var = 0.5 }
+				round_variable = var:ROOT.sr_factory_cost_var
+			}
+			sr_button_disable_tungsten_click = {
+				remove_from_array = {
+					array = ROOT.transfer_tungsten_array
+					value = FROM
+				}
+				set_variable = { var:ROOT.sr_factory_cost_var = 0 }
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_oil_array = FROM }
+					}
+					add_to_variable = { var:ROOT.sr_factory_cost_var = FROM.resource@oil }
+				}
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_aluminium_array = FROM }
+					}
+					add_to_variable = { var:ROOT.sr_factory_cost_var = FROM.resource@aluminium }
+				}
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_rubber_array = FROM }
+					}
+					add_to_variable = { var:ROOT.sr_factory_cost_var = FROM.resource@rubber }
+				}
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_tungsten_array = FROM }
+					}
+					add_to_variable = { var:ROOT.sr_factory_cost_var = FROM.resource@tungsten }
+				}
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_steel_array = FROM }
+					}
+					add_to_variable = { var:ROOT.sr_factory_cost_var = FROM.resource@steel }
+				}
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_chromium_array = FROM }
+					}
+					add_to_variable = { var:ROOT.sr_factory_cost_var = FROM.resource@chromium }
+				}
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_coal_array = FROM }
+					}
+					add_to_variable = { var:ROOT.sr_factory_cost_var = FROM.resource@coal }
+				}
+				divide_variable = { var:ROOT.sr_factory_cost_var = var:global.sr_resources_per_factory }
+				add_to_variable = { var:ROOT.sr_factory_cost_var = 0.5 }
+				round_variable = var:ROOT.sr_factory_cost_var
+				if = {
+					limit = {
+						NOT = {
+							is_in_array = { ROOT.transfer_oil_array = FROM }
+							is_in_array = { ROOT.transfer_aluminium_array = FROM }
+							is_in_array = { ROOT.transfer_rubber_array = FROM }
+							is_in_array = { ROOT.transfer_tungsten_array = FROM }
+							is_in_array = { ROOT.transfer_steel_array = FROM }
+							is_in_array = { ROOT.transfer_chromium_array = FROM }
+							is_in_array = { ROOT.transfer_coal_array = FROM }
+						}
+					}
+					set_variable = { var:ROOT.sr_state_form = 0 }
+					set_variable = { var:ROOT.sr_factory_cost_var = 1 }
+				}
+			}
+			######  ######  ######  ######  ##
+			##        ##    ##      ##      ##
+			######    ##    ######  ######  ##
+			    ##    ##    ##      ##      ##
+			######    ##    ######  ######  ######
+			sr_button_enable_steel_click = {
+				add_to_array = {
+					array = ROOT.transfer_steel_array
+					value = FROM
+				}
+				if = {
+					limit = {
+						check_variable = { var:ROOT.sr_state_form = 0 }
+					}
+					set_variable = { var:ROOT.sr_state_form = FROM }
+				}
+				set_variable = { var:ROOT.sr_factory_cost_var = 0 }
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_oil_array = FROM }
+					}
+					add_to_variable = { var:ROOT.sr_factory_cost_var = FROM.resource@oil }
+				}
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_aluminium_array = FROM }
+					}
+					add_to_variable = { var:ROOT.sr_factory_cost_var = FROM.resource@aluminium }
+				}
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_rubber_array = FROM }
+					}
+					add_to_variable = { var:ROOT.sr_factory_cost_var = FROM.resource@rubber }
+				}
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_tungsten_array = FROM }
+					}
+					add_to_variable = { var:ROOT.sr_factory_cost_var = FROM.resource@tungsten }
+				}
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_steel_array = FROM }
+					}
+					add_to_variable = { var:ROOT.sr_factory_cost_var = FROM.resource@steel }
+				}
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_chromium_array = FROM }
+					}
+					add_to_variable = { var:ROOT.sr_factory_cost_var = FROM.resource@chromium }
+				}
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_coal_array = FROM }
+					}
+					add_to_variable = { var:ROOT.sr_factory_cost_var = FROM.resource@coal }
+				}
+				divide_variable = { var:ROOT.sr_factory_cost_var = var:global.sr_resources_per_factory }
+				add_to_variable = { var:ROOT.sr_factory_cost_var = 0.5 }
+				round_variable = var:ROOT.sr_factory_cost_var
+			}
+			sr_button_disable_steel_click = {
+				remove_from_array = {
+					array = ROOT.transfer_steel_array
+					value = FROM
+				}
+				set_variable = { var:ROOT.sr_factory_cost_var = 0 }
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_oil_array = FROM }
+					}
+					add_to_variable = { var:ROOT.sr_factory_cost_var = FROM.resource@oil }
+				}
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_aluminium_array = FROM }
+					}
+					add_to_variable = { var:ROOT.sr_factory_cost_var = FROM.resource@aluminium }
+				}
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_rubber_array = FROM }
+					}
+					add_to_variable = { var:ROOT.sr_factory_cost_var = FROM.resource@rubber }
+				}
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_tungsten_array = FROM }
+					}
+					add_to_variable = { var:ROOT.sr_factory_cost_var = FROM.resource@tungsten }
+				}
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_steel_array = FROM }
+					}
+					add_to_variable = { var:ROOT.sr_factory_cost_var = FROM.resource@steel }
+				}
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_chromium_array = FROM }
+					}
+					add_to_variable = { var:ROOT.sr_factory_cost_var = FROM.resource@chromium }
+				}
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_coal_array = FROM }
+					}
+					add_to_variable = { var:ROOT.sr_factory_cost_var = FROM.resource@coal }
+				}
+				divide_variable = { var:ROOT.sr_factory_cost_var = var:global.sr_resources_per_factory }
+				add_to_variable = { var:ROOT.sr_factory_cost_var = 0.5 }
+				round_variable = var:ROOT.sr_factory_cost_var
+				if = {
+					limit = {
+						NOT = {
+							is_in_array = { ROOT.transfer_oil_array = FROM }
+							is_in_array = { ROOT.transfer_aluminium_array = FROM }
+							is_in_array = { ROOT.transfer_rubber_array = FROM }
+							is_in_array = { ROOT.transfer_tungsten_array = FROM }
+							is_in_array = { ROOT.transfer_steel_array = FROM }
+							is_in_array = { ROOT.transfer_chromium_array = FROM }
+							is_in_array = { ROOT.transfer_coal_array = FROM }
+						}
+					}
+					set_variable = { var:ROOT.sr_state_form = 0 }
+					set_variable = { var:ROOT.sr_factory_cost_var = 1 }
+				}
+			}
+			######  ##  ##  ####    ######  #    #  ######  ##  ##  #    #
+			##      ##  ##  ##  ##  ##  ##  ##  ##    ##    ##  ##  ##  ##
+			##      ######  ####    ##  ##  # ## #    ##    ##  ##  # ## #
+			##      ##  ##  ##  ##  ##  ##  #    #    ##    ##  ##  #    #
+			######  ##  ##  ##  ##  ######  #    #  ######  ######  #    #
+			sr_button_enable_chromium_click = {
+				add_to_array = {
+					array = ROOT.transfer_chromium_array
+					value = FROM
+				}
+				if = {
+					limit = {
+						check_variable = { var:ROOT.sr_state_form = 0 }
+					}
+					set_variable = { var:ROOT.sr_state_form = FROM }
+				}
+				set_variable = { var:ROOT.sr_factory_cost_var = 0 }
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_oil_array = FROM }
+					}
+					add_to_variable = { var:ROOT.sr_factory_cost_var = FROM.resource@oil }
+				}
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_aluminium_array = FROM }
+					}
+					add_to_variable = { var:ROOT.sr_factory_cost_var = FROM.resource@aluminium }
+				}
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_rubber_array = FROM }
+					}
+					add_to_variable = { var:ROOT.sr_factory_cost_var = FROM.resource@rubber }
+				}
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_tungsten_array = FROM }
+					}
+					add_to_variable = { var:ROOT.sr_factory_cost_var = FROM.resource@tungsten }
+				}
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_steel_array = FROM }
+					}
+					add_to_variable = { var:ROOT.sr_factory_cost_var = FROM.resource@steel }
+				}
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_chromium_array = FROM }
+					}
+					add_to_variable = { var:ROOT.sr_factory_cost_var = FROM.resource@chromium }
+				}
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_coal_array = FROM }
+					}
+					add_to_variable = { var:ROOT.sr_factory_cost_var = FROM.resource@coal }
+				}
+				divide_variable = { var:ROOT.sr_factory_cost_var = var:global.sr_resources_per_factory }
+				add_to_variable = { var:ROOT.sr_factory_cost_var = 0.5 }
+				round_variable = var:ROOT.sr_factory_cost_var
+			}
+			sr_button_disable_chromium_click = {
+				remove_from_array = {
+					array = ROOT.transfer_chromium_array
+					value = FROM
+				}
+				set_variable = { var:ROOT.sr_factory_cost_var = 0 }
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_oil_array = FROM }
+					}
+					add_to_variable = { var:ROOT.sr_factory_cost_var = FROM.resource@oil }
+				}
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_aluminium_array = FROM }
+					}
+					add_to_variable = { var:ROOT.sr_factory_cost_var = FROM.resource@aluminium }
+				}
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_rubber_array = FROM }
+					}
+					add_to_variable = { var:ROOT.sr_factory_cost_var = FROM.resource@rubber }
+				}
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_tungsten_array = FROM }
+					}
+					add_to_variable = { var:ROOT.sr_factory_cost_var = FROM.resource@tungsten }
+				}
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_steel_array = FROM }
+					}
+					add_to_variable = { var:ROOT.sr_factory_cost_var = FROM.resource@steel }
+				}
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_chromium_array = FROM }
+					}
+					add_to_variable = { var:ROOT.sr_factory_cost_var = FROM.resource@chromium }
+				}
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_coal_array = FROM }
+					}
+					add_to_variable = { var:ROOT.sr_factory_cost_var = FROM.resource@coal }
+				}
+				divide_variable = { var:ROOT.sr_factory_cost_var = var:global.sr_resources_per_factory }
+				add_to_variable = { var:ROOT.sr_factory_cost_var = 0.5 }
+				round_variable = var:ROOT.sr_factory_cost_var
+				if = {
+					limit = {
+						NOT = {
+							is_in_array = { ROOT.transfer_oil_array = FROM }
+							is_in_array = { ROOT.transfer_aluminium_array = FROM }
+							is_in_array = { ROOT.transfer_rubber_array = FROM }
+							is_in_array = { ROOT.transfer_tungsten_array = FROM }
+							is_in_array = { ROOT.transfer_steel_array = FROM }
+							is_in_array = { ROOT.transfer_chromium_array = FROM }
+							is_in_array = { ROOT.transfer_coal_array = FROM }
+						}
+					}
+					set_variable = { var:ROOT.sr_state_form = 0 }
+					set_variable = { var:ROOT.sr_factory_cost_var = 1 }
+				}
+			}
+			######  ######  ######  ##
+			##      ##  ##  ##  ##  ##
+			##      ##  ##  ######  ##
+			##      ##  ##  ##  ##  ##
+			######  ######  ##  ##  ######
+			sr_button_enable_coal_click = {
+				add_to_array = {
+					array = ROOT.transfer_coal_array
+					value = FROM
+				}
+				if = {
+					limit = {
+						check_variable = { var:ROOT.sr_state_form = 0 }
+					}
+					set_variable = { var:ROOT.sr_state_form = FROM }
+				}
+				set_variable = { var:ROOT.sr_factory_cost_var = 0 }
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_oil_array = FROM }
+					}
+					add_to_variable = { var:ROOT.sr_factory_cost_var = FROM.resource@oil }
+				}
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_aluminium_array = FROM }
+					}
+					add_to_variable = { var:ROOT.sr_factory_cost_var = FROM.resource@aluminium }
+				}
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_rubber_array = FROM }
+					}
+					add_to_variable = { var:ROOT.sr_factory_cost_var = FROM.resource@rubber }
+				}
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_tungsten_array = FROM }
+					}
+					add_to_variable = { var:ROOT.sr_factory_cost_var = FROM.resource@tungsten }
+				}
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_steel_array = FROM }
+					}
+					add_to_variable = { var:ROOT.sr_factory_cost_var = FROM.resource@steel }
+				}
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_chromium_array = FROM }
+					}
+					add_to_variable = { var:ROOT.sr_factory_cost_var = FROM.resource@chromium }
+				}
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_coal_array = FROM }
+					}
+					add_to_variable = { var:ROOT.sr_factory_cost_var = FROM.resource@coal }
+				}
+				divide_variable = { var:ROOT.sr_factory_cost_var = var:global.sr_resources_per_factory }
+				add_to_variable = { var:ROOT.sr_factory_cost_var = 0.5 }
+				round_variable = var:ROOT.sr_factory_cost_var
+			}
+			sr_button_disable_coal_click = {
+				remove_from_array = {
+					array = ROOT.transfer_coal_array
+					value = FROM
+				}
+				set_variable = { var:ROOT.sr_factory_cost_var = 0 }
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_oil_array = FROM }
+					}
+					add_to_variable = { var:ROOT.sr_factory_cost_var = FROM.resource@oil }
+				}
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_aluminium_array = FROM }
+					}
+					add_to_variable = { var:ROOT.sr_factory_cost_var = FROM.resource@aluminium }
+				}
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_rubber_array = FROM }
+					}
+					add_to_variable = { var:ROOT.sr_factory_cost_var = FROM.resource@rubber }
+				}
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_tungsten_array = FROM }
+					}
+					add_to_variable = { var:ROOT.sr_factory_cost_var = FROM.resource@tungsten }
+				}
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_steel_array = FROM }
+					}
+					add_to_variable = { var:ROOT.sr_factory_cost_var = FROM.resource@steel }
+				}
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_chromium_array = FROM }
+					}
+					add_to_variable = { var:ROOT.sr_factory_cost_var = FROM.resource@chromium }
+				}
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_coal_array = FROM }
+					}
+					add_to_variable = { var:ROOT.sr_factory_cost_var = FROM.resource@coal }
+				}
+				divide_variable = { var:ROOT.sr_factory_cost_var = var:global.sr_resources_per_factory }
+				add_to_variable = { var:ROOT.sr_factory_cost_var = 0.5 }
+				round_variable = var:ROOT.sr_factory_cost_var
+				if = {
+					limit = {
+						NOT = {
+							is_in_array = { ROOT.transfer_oil_array = FROM }
+							is_in_array = { ROOT.transfer_aluminium_array = FROM }
+							is_in_array = { ROOT.transfer_rubber_array = FROM }
+							is_in_array = { ROOT.transfer_tungsten_array = FROM }
+							is_in_array = { ROOT.transfer_steel_array = FROM }
+							is_in_array = { ROOT.transfer_chromium_array = FROM }
+							is_in_array = { ROOT.transfer_coal_array = FROM }
+						}
+					}
+					set_variable = { var:ROOT.sr_state_form = 0 }
+					set_variable = { var:ROOT.sr_factory_cost_var = 1 }
+				}
+			}
+		}
+		##############################################################
+		######  ####    ######  ######  ######  ######  ####    ######
+		  ##    ##  ##    ##    ##      ##      ##      ##  ##  ##
+		  ##    ####      ##    ##  ##  ##  ##  ######  ####    ######
+		  ##    ##  ##    ##    ##  ##  ##  ##  ##      ##  ##      ##
+		  ##    ##  ##  ######  ######  ######  ######  ##  ##  ######
+		##############################################################
+		triggers = {
+
+			######  ##  ##  ######
+			##      ##  ##    ##
+			##  ##  ##  ##    ##
+			##  ##  ##  ##    ##
+			######  ######  ######
+
+			sr_display_cancel_button_click_enabled = {
+				OR = {
+					has_global_flag = SI_debug_flag
+					ROOT = {
+						has_political_power > 25
+					}
+				}
+
+				if = {
+					limit = {
+						THIS = {
+							any_state = {
+								state = PREV.id
+							}
+						}
+					}
+					THIS = {
+						ROOT = {
+							check_variable = { THIS.sr_stateid_cancel_@PREV.owner = 0 }
+						}
+					}
+				}
+				else_if = {
+					limit = {
+						THIS = {
+							any_country = {
+								tag = PREV
+							}
+						}
+					}
+					THIS = {
+						ROOT = {
+							check_variable = {
+								var = var:THIS.sr_contract_cancel_@PREV
+								value = 1
+								compare = not_equals
+							}
+						}
+					}
+				}
+			}
+
+			sr_display_cost_state_neg_icon_visible = {
+				NOT = {
+					OR = {
+						var:THIS.sr_stateid_slot_1 = {
+							is_owned_by = ROOT
+						}
+						var:THIS.sr_stateid_slot_2 = {
+							is_owned_by = ROOT
+						}
+						var:THIS.sr_stateid_slot_3 = {
+							is_owned_by = ROOT
+						}
+					}
+				}
+			}
+			sr_display_cost_state_pos_icon_visible = {
+				any_state = {
+					OR = {
+						state = var:PREV.sr_stateid_slot_1
+						state = var:PREV.sr_stateid_slot_2
+						state = var:PREV.sr_stateid_slot_3
+					}
+					is_owned_by = ROOT
+				}
+			}
+
+			sr_display_cost_label_slot_1_visible = {
+				THIS = {
+					state = var:ROOT.sr_stateid_slot_1
+				}
+			}
+			sr_display_cost_label_slot_2_visible = {
+				THIS = {
+					state = var:ROOT.sr_stateid_slot_2
+				}
+			}
+			sr_display_cost_label_slot_3_visible = {
+				THIS = {
+					state = var:ROOT.sr_stateid_slot_3
+				}
+			}
+
+			sr_display_cost_label_slot_1_target_visible = {
+				OR = {
+					var:THIS.sr_stateid_slot_1 = {
+						is_owned_by = ROOT
+					}
+					var:THIS.sr_stateid_slot_2 = {
+						is_owned_by = ROOT
+					}
+					var:THIS.sr_stateid_slot_3 = {
+						is_owned_by = ROOT
+					}
+				}
+			}
+
+			sr_target_res_oil_no_visible = {
+				if = {
+					limit = {
+						THIS = {
+							any_country = {
+								tag = PREV
+							}
+						}
+					}
+					NOT = {
+						ROOT = {
+							has_resources_rights = {
+								state = PREV
+								resources = { oil }
+							}
+						}
+					}
+				}
+				if = {
+					limit = {
+						THIS = {
+							NOT = { tag = ROOT }
+							any_state = {
+								is_owned_by = ROOT
+								PREV = {
+									has_resources_rights = {
+										state = PREV
+										resources = { oil }
+									}
+								}
+							}
+						}
+					}
+					always = no
+				}
+			}
+			sr_target_res_aluminium_no_visible = {
+				if = {
+					limit = {
+						THIS = {
+							any_country = {
+								tag = PREV
+							}
+						}
+					}
+					NOT = {
+						ROOT = {
+							has_resources_rights = {
+								state = PREV
+								resources = { aluminium }
+							}
+						}
+					}
+				}
+				if = {
+					limit = {
+						THIS = {
+							NOT = { tag = ROOT }
+							any_state = {
+								is_owned_by = ROOT
+								PREV = {
+									has_resources_rights = {
+										state = PREV
+										resources = { aluminium }
+									}
+								}
+							}
+						}
+					}
+					always = no
+				}
+			}
+			sr_target_res_rubber_no_visible = {
+				if = {
+					limit = {
+						THIS = {
+							any_country = {
+								tag = PREV
+							}
+						}
+					}
+					NOT = {
+						ROOT = {
+							has_resources_rights = {
+								state = PREV
+								resources = { rubber }
+							}
+						}
+					}
+				}
+				if = {
+					limit = {
+						THIS = {
+							NOT = { tag = ROOT }
+							any_state = {
+								is_owned_by = ROOT
+								PREV = {
+									has_resources_rights = {
+										state = PREV
+										resources = { rubber }
+									}
+								}
+							}
+						}
+					}
+					always = no
+				}
+			}
+			sr_target_res_tungsten_no_visible = {
+				if = {
+					limit = {
+						THIS = {
+							any_country = {
+								tag = PREV
+							}
+						}
+					}
+					NOT = {
+						ROOT = {
+							has_resources_rights = {
+								state = PREV
+								resources = { tungsten }
+							}
+						}
+					}
+				}
+				if = {
+					limit = {
+						THIS = {
+							NOT = { tag = ROOT }
+							any_state = {
+								is_owned_by = ROOT
+								PREV = {
+									has_resources_rights = {
+										state = PREV
+										resources = { tungsten }
+									}
+								}
+							}
+						}
+					}
+					always = no
+				}
+			}
+			sr_target_res_steel_no_visible = {
+				if = {
+					limit = {
+						THIS = {
+							any_country = {
+								tag = PREV
+							}
+						}
+					}
+					NOT = {
+						ROOT = {
+							has_resources_rights = {
+								state = PREV
+								resources = { steel }
+							}
+						}
+					}
+				}
+				if = {
+					limit = {
+						THIS = {
+							NOT = { tag = ROOT }
+							any_state = {
+								is_owned_by = ROOT
+								PREV = {
+									has_resources_rights = {
+										state = PREV
+										resources = { steel }
+									}
+								}
+							}
+						}
+					}
+					always = no
+				}
+			}
+			sr_target_res_chromium_no_visible = {
+				if = {
+					limit = {
+						THIS = {
+							any_country = {
+								tag = PREV
+							}
+						}
+					}
+					NOT = {
+						ROOT = {
+							has_resources_rights = {
+								state = PREV
+								resources = { chromium }
+							}
+						}
+					}
+				}
+				if = {
+					limit = {
+						THIS = {
+							NOT = { tag = ROOT }
+							any_state = {
+								is_owned_by = ROOT
+								PREV = {
+									has_resources_rights = {
+										state = PREV
+										resources = { chromium }
+									}
+								}
+							}
+						}
+					}
+					always = no
+				}
+			}
+			sr_target_res_coal_no_visible = {
+				if = {
+					limit = {
+						THIS = {
+							any_country = {
+								tag = PREV
+							}
+						}
+					}
+					NOT = {
+						ROOT = {
+							has_resources_rights = {
+								state = PREV
+								resources = { coal }
+							}
+						}
+					}
+				}
+				if = {
+					limit = {
+						THIS = {
+							NOT = { tag = ROOT }
+							any_state = {
+								is_owned_by = ROOT
+								PREV = {
+									has_resources_rights = {
+										state = PREV
+										resources = { coal }
+									}
+								}
+							}
+						}
+					}
+					always = no
+				}
+			}
+			############################################################
+			############################################################
+			sr_action_demand_res_button_click_enabled = {
+				OR = {
+					is_in_array = { ROOT.transfer_oil_array = FROM }
+					is_in_array = { ROOT.transfer_aluminium_array = FROM }
+					is_in_array = { ROOT.transfer_rubber_array = FROM }
+					is_in_array = { ROOT.transfer_tungsten_array = FROM }
+					is_in_array = { ROOT.transfer_steel_array = FROM }
+					is_in_array = { ROOT.transfer_chromium_array = FROM }
+					is_in_array = { ROOT.transfer_coal_array = FROM }
+				}
+				OR = {
+					check_variable = { var:ROOT.sr_stateid_slot_1 = 0 }
+					check_variable = { var:ROOT.sr_stateid_slot_2 = 0 }
+					check_variable = { var:ROOT.sr_stateid_slot_3 = 0 }
+				}
+				check_variable = {
+					var:ROOT.num_of_civilian_factories_available_for_projects > var:ROOT.sr_factory_cost_var
+				}
+				FROM = {
+					NOT = {
+						has_state_flag = SR_resources_taken_flag_@ROOT
+						has_state_flag = SR_demands_target_flag
+					}
+					owner = {
+						has_war = no
+						ROOT = {
+							NOT = {
+								has_country_flag = rejected_sr_flag_@PREV
+								has_country_flag = SI_border_war_major_locked_flag_@PREV
+							}
+						}
+						all_owned_state = {
+							NOT = {
+								has_state_flag = BW_locked_flag
+							}
+						}
+					}
+				}
+				ROOT = {
+					NOT = {
+						has_idea = SI_major_demands_idea
+					}
+					NOT = {
+						is_embargoed_by = FROM.owner
+					}
+				}
+			}
+			sr_debug_clear_rights_button_visible = {
+				has_global_flag = SI_debug_flag
+			}
+			######  ######  ##
+			##  ##    ##    ##
+			##  ##    ##    ##
+			##  ##    ##    ##
+			######  ######  ######
+			sr_button_enable_oil_click_enabled = {
+				FROM = {
+					oil > 0
+					is_fully_controlled_by = FROM.owner
+				}
+				FROM.owner = {
+					NOT = {
+						tag = ROOT
+						is_in_faction_with = ROOT
+					}
+				}
+				NOT = {
+					any_country = {
+						NOT = { tag = FROM.owner }
+						has_resources_rights = {
+							state = FROM
+							resources = { oil }
+						}
+					}
+				}
+				if = {
+					limit = {
+						check_variable = {
+							var = var:ROOT.sr_state_form
+							value = 0
+							compare = not_equals
+						}
+					}
+					check_variable = { var:ROOT.sr_state_form = FROM }
+				}
+			}
+			sr_button_enable_oil_visible = {
+				NOT = {
+					is_in_array = {
+						array = ROOT.transfer_oil_array
+						value = FROM
+					}
+				}
+			}
+			sr_button_disable_oil_visible = {
+				is_in_array = {
+					array = ROOT.transfer_oil_array
+					value = FROM
+				}
+			}
+			######  ##      ##  ##  #    #  ######  ##  ##  ######  ##  ##  #    #
+			##  ##  ##      ##  ##  ##  ##    ##    ### ##    ##    ##  ##  ##  ##
+			######  ##      ##  ##  # ## #    ##    ### ##    ##    ##  ##  # ## #
+			##  ##  ##      ##  ##  #    #    ##    ## ###    ##    ##  ##  #    #
+			##  ##  ######  ######  #    #  ######  ##  ##  ######  ######  #    #
+			sr_button_enable_aluminium_click_enabled = {
+				FROM = {
+					aluminium > 0
+					is_fully_controlled_by = FROM.owner
+				}
+				FROM.owner = {
+					NOT = {
+						tag = ROOT
+						is_in_faction_with = ROOT
+					}
+				}
+				NOT = {
+					any_country = {
+						NOT = { tag = FROM.owner }
+						has_resources_rights = {
+							state = FROM
+							resources = { aluminium }
+						}
+					}
+				}
+				if = {
+					limit = {
+						check_variable = {
+							var = var:ROOT.sr_state_form
+							value = 0
+							compare = not_equals
+						}
+					}
+					check_variable = { var:ROOT.sr_state_form = FROM }
+				}
+			}
+			sr_button_enable_aluminium_visible = {
+				NOT = {
+					is_in_array = {
+						array = ROOT.transfer_aluminium_array
+						value = FROM
+					}
+				}
+			}
+			sr_button_disable_aluminium_visible = {
+				is_in_array = {
+					array = ROOT.transfer_aluminium_array
+					value = FROM
+				}
+			}
+			####    ##  ##  ####    ####    ######  ####
+			##  ##  ##  ##  ##  ##  ##  ##  ##      ##  ##
+			####    ##  ##  ####    ####    ######  ####
+			##  ##  ##  ##  ##  ##  ##  ##  ##      ##  ##
+			##  ##  ######  ####    ####    ######  ##  ##
+			sr_button_enable_rubber_click_enabled = {
+				FROM = {
+					rubber > 0
+					is_fully_controlled_by = FROM.owner
+				}
+				FROM.owner = {
+					NOT = {
+						tag = ROOT
+						is_in_faction_with = ROOT
+					}
+				}
+				NOT = {
+					any_country = {
+						NOT = { tag = FROM.owner }
+						has_resources_rights = {
+							state = FROM
+							resources = { rubber }
+						}
+					}
+				}
+				if = {
+					limit = {
+						check_variable = {
+							var = var:ROOT.sr_state_form
+							value = 0
+							compare = not_equals
+						}
+					}
+					check_variable = { var:ROOT.sr_state_form = FROM }
+				}
+			}
+			sr_button_enable_rubber_visible = {
+				NOT = {
+					is_in_array = {
+						array = ROOT.transfer_rubber_array
+						value = FROM
+					}
+				}
+			}
+			sr_button_disable_rubber_visible = {
+				is_in_array = {
+					array = ROOT.transfer_rubber_array
+					value = FROM
+				}
+			}
+			######  ##  ##  ##  ##  ######  ######  ######  ######  ##  ##
+			  ##    ##  ##  ### ##  ##      ##        ##    ##      ### ##
+			  ##    ##  ##  ### ##  ##  ##  ######    ##    ######  ### ##
+			  ##    ##  ##  ## ###  ##  ##      ##    ##    ##      ## ###
+			  ##    ######  ##  ##  ######  ######    ##    ######  ##  ##
+			sr_button_enable_tungsten_click_enabled = {
+				FROM = {
+					tungsten > 0
+					is_fully_controlled_by = FROM.owner
+				}
+				FROM.owner = {
+					NOT = {
+						tag = ROOT
+						is_in_faction_with = ROOT
+					}
+				}
+				NOT = {
+					any_country = {
+						NOT = { tag = FROM.owner }
+						has_resources_rights = {
+							state = FROM
+							resources = { tungsten }
+						}
+					}
+				}
+				if = {
+					limit = {
+						check_variable = {
+							var = var:ROOT.sr_state_form
+							value = 0
+							compare = not_equals
+						}
+					}
+					check_variable = { var:ROOT.sr_state_form = FROM }
+				}
+			}
+			sr_button_enable_tungsten_visible = {
+				NOT = {
+					is_in_array = {
+						array = ROOT.transfer_tungsten_array
+						value = FROM
+					}
+				}
+			}
+			sr_button_disable_tungsten_visible = {
+				is_in_array = {
+					array = ROOT.transfer_tungsten_array
+					value = FROM
+				}
+			}
+			######  ######  ######  ######  ##
+			##        ##    ##      ##      ##
+			######    ##    ######  ######  ##
+			    ##    ##    ##      ##      ##
+			######    ##    ######  ######  ######
+			sr_button_enable_steel_click_enabled = {
+				FROM = {
+					steel > 0
+					is_fully_controlled_by = FROM.owner
+				}
+				FROM.owner = {
+					NOT = {
+						tag = ROOT
+						is_in_faction_with = ROOT
+					}
+				}
+				NOT = {
+					any_country = {
+						NOT = { tag = FROM.owner }
+						has_resources_rights = {
+							state = FROM
+							resources = { steel }
+						}
+					}
+				}
+				if = {
+					limit = {
+						check_variable = {
+							var = var:ROOT.sr_state_form
+							value = 0
+							compare = not_equals
+						}
+					}
+					check_variable = { var:ROOT.sr_state_form = FROM }
+				}
+			}
+			sr_button_enable_steel_visible = {
+				NOT = {
+					is_in_array = {
+						array = ROOT.transfer_steel_array
+						value = FROM
+					}
+				}
+			}
+			sr_button_disable_steel_visible = {
+				is_in_array = {
+					array = ROOT.transfer_steel_array
+					value = FROM
+				}
+			}
+			######  ##  ##  ####    ######  #    #  ######  ##  ##  #    #
+			##      ##  ##  ##  ##  ##  ##  ##  ##    ##    ##  ##  ##  ##
+			##      ######  ####    ##  ##  # ## #    ##    ##  ##  # ## #
+			##      ##  ##  ##  ##  ##  ##  #    #    ##    ##  ##  #    #
+			######  ##  ##  ##  ##  ######  #    #  ######  ######  #    #
+			sr_button_enable_chromium_click_enabled = {
+				FROM = {
+					chromium > 0
+					is_fully_controlled_by = FROM.owner
+				}
+				FROM.owner = {
+					NOT = {
+						tag = ROOT
+						is_in_faction_with = ROOT
+					}
+				}
+				NOT = {
+					any_country = {
+						NOT = { tag = FROM.owner }
+						has_resources_rights = {
+							state = FROM
+							resources = { chromium }
+						}
+					}
+				}
+				if = {
+					limit = {
+						check_variable = {
+							var = var:ROOT.sr_state_form
+							value = 0
+							compare = not_equals
+						}
+					}
+					check_variable = { var:ROOT.sr_state_form = FROM }
+				}
+			}
+			sr_button_enable_chromium_visible = {
+				NOT = {
+					is_in_array = {
+						array = ROOT.transfer_chromium_array
+						value = FROM
+					}
+				}
+			}
+			sr_button_disable_chromium_visible = {
+				is_in_array = {
+					array = ROOT.transfer_chromium_array
+					value = FROM
+				}
+			}
+			######  ######  ######  ##
+			##      ##  ##  ##  ##  ##
+			##      ##  ##  ######  ##
+			##      ##  ##  ##  ##  ##
+			######  ######  ##  ##  ######
+			sr_button_enable_coal_click_enabled = {
+				FROM = {
+					coal > 0
+					is_fully_controlled_by = FROM.owner
+				}
+				FROM.owner = {
+					NOT = {
+						tag = ROOT
+						is_in_faction_with = ROOT
+					}
+				}
+				NOT = {
+					any_country = {
+						NOT = { tag = FROM.owner }
+						has_resources_rights = {
+							state = FROM
+							resources = { coal }
+						}
+					}
+				}
+				if = {
+					limit = {
+						check_variable = {
+							var = var:ROOT.sr_state_form
+							value = 0
+							compare = not_equals
+						}
+					}
+					check_variable = { var:ROOT.sr_state_form = FROM }
+				}
+			}
+			sr_button_enable_coal_visible = {
+				NOT = {
+					is_in_array = {
+						array = ROOT.transfer_coal_array
+						value = FROM
+					}
+				}
+			}
+			sr_button_disable_coal_visible = {
+				is_in_array = {
+					array = ROOT.transfer_coal_array
+					value = FROM
+				}
+			}
+		}
+	}
+}

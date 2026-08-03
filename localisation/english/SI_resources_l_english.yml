@@ -1,0 +1,45 @@
+﻿l_english:
+ SI_resourceview_button:0 "Toggle §YResource Demand§! menu\n--------------------\nCooldown:§Y [?global.sr_demand_cooldown_days]§! days (§gMajor interactions§!)"
+
+ SI_resources_menu_header:0 "Resource Rights Demand"
+ SI_resources_menu_state:0 "§Y[FROM.GetName]§!"
+ SI_resources_menu_state_desc:0 "Select needed resources"
+ SI_resources_menu_request_cost:0 "This request will cost:"
+ SI_resources_factories_cost:0 "[?ROOT.sr_factory_cost_var]"
+ SI_resources_debug_clear_rights:0 "§YClear Rights§!"
+ SI_resources_clear_forms:0 "CLEAR ALL"
+ SI_resources_demand_forms:0 "DEMAND"
+ SI_resources_cancel_contract:0 "Cancel the contract (25 £GFX_pol_power )"
+
+ SI_factories_total_take_modifier:0 "Foreign Resources Purchases"
+
+ SI_resources_clear_button_tt:0 "Clear all resource selections."
+ SI_resources_demand_button_tt:0 "Send rights demand with selected resources.\n--------------------\n§YRequirements§!:\n- Any state resources selected\n- Has at most 2 active contract\n- Enough factories\n- [FROM.owner.GetName] is not at war\n- You dont already have resource rights in this state\n- No major demands made recently\n- This state is not target of recent demands.\n- We are not embargoed by [FROM.owner.GetName]"
+
+ SI_RESOURCES_DEMAND_RULES:0 "Resources Demand Rules"
+ SI_RULE_RESOURCES_DEMAND_DEFAULT:0 "Default (Allowed)"
+ SI_RULE_RESOURCES_DEMAND_DEFAULT_DESC:0 "The 'Resources Demand' feature will be allowed."
+ SI_RULE_RESOURCES_DEMAND_NOT_RULE:0 "Off"
+ SI_RULE_RESOURCES_DEMAND_NOT_RULE_DESC:0 "The 'Resources Demand' feature will be off."
+
+ SI_resource_demand_gamerule_no:0 "Off"
+ SI_resource_demand_gamerule_yes:0 "Allowed"
+
+ sr_event.1.t:0 "[FROM.GetNameDefCap] are offering a resource contract"
+ sr_event.1.desc:0 "[FROM.GetAdjectiveCap] diplomats today have came to us with an interesting proposal of giving them rights of raw material in our state of [?FROM.sr_target_state.GetName]. No doubt, this will weaken our resource base, but good economical boost and relations with them may open us to future co-operation programs. What our answer will be?"
+ sr_event.1.a:0 "Excellent economic boost!"
+ sr_event.1.b:0 "We cannot allow to weaken ourselves!"
+
+ sr_event.2.t:0 "[FROM.GetNameDefCap] are rejecting resource contract"
+ sr_event.2.desc:0 "Our diplomats returned from a visit to [FROM.GetNameDef] with an official reply to our recent offer, sadly, not a positive one. [FROM.GetNameDefCap] are rejecting our resource contract offer. They point out that the economic outcome is not viable to them. Although they have a point, can we fully trust and continue diplomatic relations with them?"
+ sr_event.2.a:0 "They have a point."
+ sr_event.2.b:0 "Issue an embargo!"
+
+ sr_event.3.t:0 "[FROM.GetName] -- Contract termination"
+ sr_event.3.desc:0 "The [FROM.GetAdjective] diplomats came today with a notification of termination of our resource contract. Was this a hint for further diplomatic distancing or they want to renew the contract is left unclear, nonetheless the contract appears to be no longer favourable to them."
+ sr_event.3.a:0 "We understand."
+ sr_event.3.b:0 "Not for us -- not for them!"
+
+ sr_event.4.t:0 "[FROM.GetName] -- Contract termination"
+ sr_event.4.desc:0 "The [FROM.GetAdjective] diplomats arrived today with a notification of termination of their resource contract in [?FROM.sr_stateid_cancel_@ROOT.GetName]. Are they done completely or just renewing the contract is left unclear."
+ sr_event.4.a:0 "Pleasure to work with you."

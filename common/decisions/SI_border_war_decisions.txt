@@ -1,0 +1,134 @@
+SI_cats = {
+
+	SI_border_war_preparation_mission = {
+		days_mission_timeout = 10
+
+		fire_only_once = yes
+
+		is_good = no
+
+		war_with_target_on_timeout = yes
+
+		available = {
+			always = no
+		}
+
+		activation = {
+			always = no
+		}
+
+		cancel_trigger = {
+			FROM = {
+				OR = {
+					exists = no
+					is_subject = yes
+					has_war = yes
+				}
+			}
+		}
+
+		cancel_effect = {
+			ROOT = {
+				add_command_power = global.si_border_war_cp_required
+				add_political_power = global.si_border_war_pp_required
+			}
+		}
+
+		timeout_effect = {
+			ROOT = {
+				set_variable = { THIS.bw_resistance_factor = 1.0 }
+				if = {
+					limit = {
+						var:ROOT.bw_target_state_attacker = {
+							is_core_of = PREV.PREV
+							NOT = {
+								is_core_of = ROOT
+							}
+						}
+					}
+					var:ROOT.bw_target_state_attacker = {
+						set_variable = { PREV.bw_resistance_var = THIS.resistance }
+					}
+					divide_variable = { THIS.bw_resistance_var = 100 }
+					subtract_from_variable = { THIS.bw_resistance_factor = THIS.bw_resistance_var }
+				}
+
+				start_border_war = {
+					change_state_after_war = no
+					attacker = {
+						state = ROOT.bw_target_state_attacker
+						num_provinces = 2
+
+						on_lose = bwevent.1
+						on_win = bwevent.2
+					}
+					defender = {
+						state = ROOT.bw_target_state_defender
+						num_provinces = 2
+
+						on_lose = bwevent.3
+						on_win = bwevent.4
+					}
+				}
+				
+				hidden_effect = {
+					set_border_war_data = {
+						attacker = ROOT.bw_target_state_attacker
+						defender = ROOT.bw_target_state_defender
+	
+						attacker_modifier = var:ROOT.bw_resistance_factor
+						defender_modifier = 1.10
+					}
+				}
+
+				add_timed_idea = {
+					idea = SI_minor_demands_idea
+					days = var:global.si_border_war_cooldown_days
+				}
+
+				activate_targeted_decision = {
+					target = FROM
+					decision = SI_border_war_mission
+				}
+			}
+		}
+	}
+
+	SI_border_war_mission = {
+		days_mission_timeout = var:global.si_border_war_length_days
+		days_remove = 1
+
+		fire_only_once = yes
+
+		is_good = no
+
+		available = {
+			always = no
+		}
+
+		activation = {
+			always = no
+		}
+
+		cancel_trigger = {
+			has_border_war = no
+		}
+
+		cancel_effect = {
+			set_variable = { ROOT.bw_target_state_attacker = 0 }
+			set_variable = { ROOT.bw_target_state_defender = 0 }
+		}
+
+		timeout_effect = {
+			finalize_border_war = {
+				attacker = bw_target_state_attacker
+				defender = bw_target_state_defender
+
+				defender_win = yes
+			}
+			set_variable = { ROOT.bw_target_state_attacker = 0 }
+			set_variable = { ROOT.bw_target_state_defender = 0 }
+		}
+	}
+
+}

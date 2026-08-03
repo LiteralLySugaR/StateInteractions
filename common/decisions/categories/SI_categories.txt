@@ -1,0 +1,15 @@
+SI_cats = {
+	priority = 1001
+
+	allowed = {
+		always = yes
+	}
+	visible = {
+		always = yes
+	}
+	available = {
+		always = yes
+	}
+	visible_when_empty = no
+
+}

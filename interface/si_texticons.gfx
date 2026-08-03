@@ -1,0 +1,9 @@
+spriteTypes = {
+
+	spriteType = {
+		name = "GFX_si_artillery_texticon"
+		textureFile = "gfx/interface/si_artillery_texticon.dds"
+		legacy_lazy_load = no
+	}
+
+}

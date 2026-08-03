@@ -1,0 +1,117 @@
+spriteTypes = {
+
+	spriteType = {
+		name = "GFX_SI_state_arrow_button"
+		textureFile = "gfx/interface/SI_state_arrow.dds"
+	}
+
+	spriteType = {
+		name = "GFX_SI_state_menu_button"
+		textureFile = "gfx/interface/SI_state_menu.dds"
+	}
+
+	spriteType = {
+		name = "GFX_SI_state_menu4"
+		textureFile = "gfx/interface/InteractionMenuBackground.dds"
+	}
+
+	spriteType = {
+		name = "GFX_SI_state_transfer_button"
+		textureFile = "gfx/interface/SI_state_transf_menu.dds"
+	}
+
+	spriteType = {
+		name = "GFX_state_buttons_strip"
+		textureFile = "gfx/interface/StateInteractionsStrip.dds"
+		noOfFrames = 8
+	}
+
+	spriteType = {
+		name = "GFX_debug_gfx_strip"
+		textureFile = "gfx/interface/debugGfxStrip.dds"
+		noOfFrames = 2
+	}
+
+	spriteType = {
+		name = "GFX_SI_state_transfer_select_all_button"
+		textureFile = "gfx/interface/StateTransferButtonSelectAll2.dds"
+	}
+
+	spriteType = {
+		name = "GFX_SI_state_transfer_deselect_all_button"
+		textureFile = "gfx/interface/StateTransferButtonDeselectAll2.dds"
+	}
+
+	spriteType = {
+		name = "GFX_SI_mini_icon"
+		textureFile = "gfx/interface/miniicon.dds"
+	}
+
+	spriteType = {
+		name = "GFX_SI_state_transfer_transfer_button"
+		textureFile = "gfx/interface/StateTransferButtonTransfer.dds"
+	}
+
+	spriteType = {
+		name = "GFX_SI_state_transfer_core_button"
+		textureFile = "gfx/interface/StateTransferButtonCore.dds"
+	}
+
+	spriteType = {
+		name = "GFX_SI_resource_transfer_menu"
+		textureFile = "gfx/interface/ResourceTransferMenuButton.dds"
+	}
+
+	spriteType = {
+		name = "GFX_SI_resources_strip"
+		textureFile = "gfx/interface/SI_resources_strip.dds"
+		noOfFrames = 8
+	}
+
+	spriteType = {
+		name = "GFX_SI_resources_strip_cancel"
+		textureFile = "gfx/interface/SI_resources_strip_cancel.dds"
+		noOfFrames = 8
+	}
+
+	spriteType = {
+		name = "GFX_SI_resource_divider"
+		textureFile = "gfx/interface/SI_resource_divider.dds"
+	}
+
+	spriteType = {
+		name = "GFX_SR_interaction_view"
+		textureFile = "gfx/interface/sr_intercation_view.dds"
+	}
+
+	spriteType = {
+		name = "GFX_SR_factories_transfer_state_strip"
+		textureFile = "gfx/interface/factories_transfer_state_strip.dds"
+		noOfFrames = 2
+	}
+
+	spriteType = {
+		name = "GFX_SI_resistance_ownership_icon"
+		textureFile = "gfx/interface/SI_resistance_ownership_icon.dds"
+	}
+
+	spriteType = {
+		name = "GFX_SI_sideicon_state_icon"
+		textureFile = "gfx/interface/InteractionsSideIconState.dds"
+	}
+
+	spriteType = {
+		name = "GFX_SI_sideicon_resources_icon"
+		textureFile = "gfx/interface/InteractionsSideIconResources.dds"
+	}
+
+	spriteType = {
+		name = "GFX_SI_artillery_shelling_icon"
+		textureFile = "gfx/interface/artillery_shelling_icon.dds"
+	}
+
+	spriteType = {
+		name = "GFX_SI_dummy_sprite"
+		textureFile = "gfx/interface/SI_resource_divider.dds"
+	}
+}

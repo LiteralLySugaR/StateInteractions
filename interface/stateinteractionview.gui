@@ -1,0 +1,1187 @@
+guiTypes = {
+
+	containerWindowType = {
+		name = "state_interaction_menu_container"
+
+		buttonType = {
+			name = "state_interaction_menu_button"
+
+			position = { x = 17 y = 13 }
+
+			scale = 0.88
+
+			quadTextureSprite = "GFX_SI_state_menu_button"
+
+			pdx_tooltip = "SI_stateview_button"
+
+			shortcut = "ctrl+shift+s"
+		}
+	}
+	containerWindowType = {
+		name = "state_interaction_container"
+		
+		position = { x = -500 y = -36 }
+
+		size = { width = 467 height = 50 }
+
+		show_position = { x = 3 y = -36 }
+
+		show_animation_type = decelerated
+
+		hide_animation_type = accelerated
+
+		animation_time = 250
+
+		background = {
+			name = "Background"
+
+			spriteType = "GFX_SI_state_menu4"
+		}
+
+		buttonType = {
+			name = "interaction_debug_button"
+
+			scale = 0.9
+
+			position = { x = 12 y = 10 }
+
+			spriteType = GFX_debug_gfx_strip
+			
+			shortcut = "ctrl+alt+d"
+
+			pdx_tooltip = "SI_interaction_debug_button"
+		}
+
+		buttonType = {
+			name = "state_menu_demand_state_button"
+
+			position = { x = 82 y = 8 }
+
+			quadTextureSprite = "GFX_state_buttons_strip"
+			frame = 2
+
+			# shortcut = "ctrl+shift+q"
+
+			pdx_tooltip = "SI_state_demand_button"
+		}
+		buttonType = {
+			name = "state_menu_demand_vsl_button"
+
+			position = { x = 127 y = 8 }
+
+			quadTextureSprite = "GFX_state_buttons_strip"
+			frame = 3
+
+			# shortcut = "ctrl+shift+w"
+
+			pdx_tooltip = "SI_state_vsl_button"
+		}
+		# buttonType = {
+		# 	name = "state_menu_demand_int_button"
+
+		# 	size = { width = 34 height = 34 }
+
+		# 	position = { x = 13 y = 8 }
+
+		# 	quadTextureSprite = "GFX_state_buttons_strip"
+		# 	frame = 1
+
+		# 	pdx_tooltip = "SI_state_int_button"
+		# }
+		buttonType = {
+			name = "state_menu_claim_state_button"
+
+			position = { x = 174 y = 8 }
+
+			quadTextureSprite = "GFX_state_buttons_strip"
+			frame = 4
+
+			# shortcut = "ctrl+shift+e"
+
+			pdx_tooltip = "SI_state_claim_button"
+		}
+		buttonType = {
+			name = "state_menu_core_state_button"
+
+			position = { x = 219 y = 8 }
+
+			quadTextureSprite = "GFX_state_buttons_strip"
+			frame = 5
+
+			# shortcut = "ctrl+shift+r"
+
+			pdx_tooltip = "SI_state_core_button"
+		}
+		buttonType = {
+			name = "state_menu_move_capital_button"
+
+			position = { x = 263 y = 8 }
+
+			quadTextureSprite = "GFX_state_buttons_strip"
+			frame = 6
+
+			# shortcut = "ctrl+shift+t"
+
+			pdx_tooltip = "SI_state_move_cap_button"
+		}
+		buttonType = {
+			name = "state_menu_border_war_button"
+
+			position = { x = 308 y = 8 }
+
+			quadTextureSprite = "GFX_state_buttons_strip"
+			frame = 7
+
+			# shortcut = "ctrl+shift+t"
+
+			pdx_tooltip = "SI_state_border_war_button"
+		}
+		buttonType = {
+			name = "state_menu_artillery_button"
+
+			position = { x = 353 y = 8 }
+
+			quadTextureSprite = "GFX_state_buttons_strip"
+			frame = 8
+
+			# shortcut = "ctrl+shift+t"
+
+			pdx_tooltip = "SI_state_artillery_button"
+		}
+
+		buttonType = {
+			name = "state_menu_transfer_menu_button"
+
+			position = { x = 424 y = 9 }
+
+			quadTextureSprite = "GFX_SI_state_transfer_button"
+
+			shortcut = "ctrl+shift+t"
+
+			scale = 1
+
+			pdx_tooltip = "SI_state_transfer_menu_button"
+		}
+
+
+		
+	}
+	containerWindowType = {
+		name = "state_interactions_state_transfer_container"
+
+		position = { x = 0 y = 316 }
+
+		size = { width = 350 height = 80 }
+
+		fade_time = 250
+
+		fade_type = linear
+
+		moveable = yes
+
+		background = {
+			name = "Background"
+			spriteType = GFX_BPT_areadef_conf_bg
+		}
+
+		instantTextBoxType = {
+			name = "state_transfer_state_name"
+
+			position = { x = 16 y = 6 }
+
+			maxWidth = 320
+
+			font = "hoi_20bs"
+
+			text = "SI_state_transfer_title"
+		}
+
+		buttonType = {
+			name = "state_transfer_mark_button"
+
+			position = { x = 10 y = 36 }
+			
+			quadTextureSprite = "GFX_sort_button_140x29"
+
+			frame = 1
+
+			font = "hoi_18mbs"
+
+			text = "SI_state_mark_button"
+
+			shortcut = "ctrl+z"
+
+			pdx_tooltip = "SI_transfer_mark_state_tt"
+		}
+		buttonType = {
+			name = "state_transfer_unmark_button"
+
+			position = { x = 10 y = 36 }
+			
+			quadTextureSprite = "GFX_sort_button_140x29"
+
+			frame = 2
+
+			font = "hoi_18mbs"
+
+			text = "SI_state_unmark_button"
+
+			shortcut = "ctrl+z"
+
+			pdx_tooltip = "SI_transfer_unmark_state_tt"
+		}
+
+		buttonType = {
+			name = "state_transfer_mark_all_button"
+
+			position = { x = 165 y = 32 }
+
+			spriteType = "GFX_SI_state_transfer_select_all_button"
+
+			font = "hoi_18mbs"
+
+			shortcut = "ctrl+a"
+
+			pdx_tooltip = "SI_transfer_mark_all_tt"
+		}
+
+		buttonType = {
+			name = "state_transfer_unmark_all_button"
+
+			position = { x = 210 y = 32 }
+
+			spriteType = "GFX_SI_state_transfer_deselect_all_button"
+
+			font = "hoi_18mbs"
+
+			shortcut = "ctrl+x"
+
+			pdx_tooltip = "SI_transfer_unmark_all_tt"
+		}
+
+		buttonType = {
+			name = "state_transfer_core_button"
+
+			position = { x = 255 y = 32 }
+
+			spriteType = "GFX_SI_state_transfer_core_button"
+
+			font = "hoi_18mbs"
+
+			shortcut = "ctrl+c"
+
+			pdx_tooltip = "SI_transfer_core_tt"
+		}
+
+		buttonType = {
+			name = "state_transfer_transfer_button"
+
+			position = { x = 300 y = 32 }
+
+			spriteType = "GFX_SI_state_transfer_transfer_button"
+
+			font = "hoi_18mbs"
+
+			shortcut = "ctrl+t"
+
+			pdx_tooltip = "SI_transfer_state_tt"
+		}
+	}
+
+	####    ######  ######  ######  ##  ##  ####    ######  ######  ######
+	##  ##  ##      ##      ##  ##  ##  ##  ##  ##  ##      ##      ##
+	####    ######  ######  ##  ##  ##  ##  ####    ##      ######  ######
+	##  ##  ##          ##  ##  ##  ##  ##  ##  ##  ##      ##          ##
+	##  ##  ######  ######  ######  ######  ##  ##  ######  ######  ######
+
+	containerWindowType = {
+		name = "state_resources_menu_container"
+
+		buttonType = {
+			name = "state_resources_nemu_button"
+
+			# position = { x = 327 y = 409 }
+
+			# quadTextureSprite = "GFX_SI_resource_transfer_menu"
+
+			position = { x = 459 y = 6 }
+
+			quadTextureSprite = "GFX_SI_sideicon_resources_icon"
+
+			scale = 0.7
+
+			pdx_tooltip = "SI_resourceview_button"
+
+			shortcut = "ctrl+shift+r"
+		}
+	}
+	containerWindowType = {
+		name = "state_resources_container"
+
+		position = { x = 461 y = 4 }
+		
+		size = { width = 380 height = 655 }
+		
+		fade_time = 250
+
+		fade_type = linear
+
+		background = {
+			name = "sr_background"
+
+			spriteType = "GFX_tiled_bg"
+		}
+
+		buttonType = {
+			name = "sr_menu_cancel_button"
+
+			position = {
+				x = 15
+				y = 16
+			}
+
+			spriteType = "GFX_delete_template_button"
+
+			pdx_tooltip = "SI_resourceview_button"
+
+			shortcut = "ctrl+shift+r"
+		}
+
+		instantTextBoxType = {
+			name = "sr_header"
+
+			position = { x = 12 y = 18 }
+
+			maxWidth = 354
+
+			maxHeight = 25
+
+			fixedsize = yes
+
+			alwaystransparent = yes
+
+			format = centre
+
+			text = "SI_resources_menu_header"
+
+			font = hoi_24header
+		}
+
+		iconType = {
+			name = "sr_divider_1"
+
+			position = { x = 69 y = 51 }
+
+			spriteType = "GFX_SI_resource_divider"
+		}
+
+		instantTextBoxType = {
+			name = "sr_state_subheader"
+
+			position = { x = 12 y = 68 }
+
+			maxWidth = 354
+
+			maxHeight = 50
+
+			format = centre
+
+			text = "SI_resources_menu_state"
+
+			font = hoi_24header
+		}
+		instantTextBoxType = {
+			name = "sr_state_desc"
+
+			position = { x = 12 y = 94 }
+
+			maxWidth = 354
+
+			maxHeight = 25
+
+			format = centre
+
+			text = "SI_resources_menu_state_desc"
+
+			font = hoi_20b
+		}
+
+		# Resources grid
+		containerWindowType = {
+			name = "sr_resources_grid_container"
+
+			position = { x = 1 y = 110 }
+
+			size = {
+				width = 380
+				height = 150
+			}
+
+			# background = {
+			# 	name = "sr_res_grid_bg"
+
+			# 	spriteType = "GFX_tiled_window"
+			# }
+
+			# Upper grid
+			containerWindowType = {
+				name = "sr_resource_upper_grid_container"
+
+				position = { x = 100 y = 15 }
+
+				# OIL
+				containerWindowType = {
+					name = "sr_oil_container"
+		
+					position = { x = 0 y = 0 }
+		
+					iconType = {
+						name = "sr_oil_icon"
+		
+						position = { x = 0 y = 0 }
+		
+						spriteType = "GFX_SI_resources_strip"
+						frame = 1
+					}
+		
+					buttonType = {
+						name = "sr_button_enable_oil"
+		
+						position = { x = 0 y = 30 }
+		
+						spriteType = "GFX_generic_checkbox"
+						frame = 1
+		
+						scale = 0.8
+					}
+					buttonType = {
+						name = "sr_button_disable_oil"
+		
+						position = { x = 0 y = 30 }
+		
+						spriteType = "GFX_generic_checkbox"
+						frame = 2
+		
+						scale = 0.8
+					}
+				}
+		
+				# ALUMINIUM
+				containerWindowType = {
+					name = "sr_aluminium_container"
+		
+					position = { x = 50 y = 0 }
+		
+					iconType = {
+						name = "sr_aluminium_icon"
+		
+						position = { x = 0 y = 0 }
+		
+						spriteType = "GFX_SI_resources_strip"
+						frame = 2
+					}
+		
+					buttonType = {
+						name = "sr_button_enable_aluminium"
+		
+						position = { x = 0 y = 30 }
+		
+						spriteType = "GFX_generic_checkbox"
+						frame = 1
+		
+						scale = 0.8
+					}
+					buttonType = {
+						name = "sr_button_disable_aluminium"
+		
+						position = { x = 0 y = 30 }
+		
+						spriteType = "GFX_generic_checkbox"
+						frame = 2
+		
+						scale = 0.8
+					}
+				}
+		
+				# RUBBER
+				containerWindowType = {
+					name = "sr_rubber_container"
+		
+					position = { x = 100 y = 0 }
+		
+					iconType = {
+						name = "sr_rubber_icon"
+		
+						position = { x = 0 y = 0 }
+		
+						spriteType = "GFX_SI_resources_strip"
+						frame = 3
+					}
+		
+					buttonType = {
+						name = "sr_button_enable_rubber"
+		
+						position = { x = 0 y = 30 }
+		
+						spriteType = "GFX_generic_checkbox"
+						frame = 1
+		
+						scale = 0.8
+					}
+					buttonType = {
+						name = "sr_button_disable_rubber"
+		
+						position = { x = 0 y = 30 }
+		
+						spriteType = "GFX_generic_checkbox"
+						frame = 2
+		
+						scale = 0.8
+					}
+				}
+		
+				# TUNGSTEN
+				containerWindowType = {
+					name = "sr_tungsten_container"
+		
+					position = { x = 150 y = 0 }
+		
+					iconType = {
+						name = "sr_tungsten_icon"
+		
+						position = { x = 0 y = 0 }
+		
+						spriteType = "GFX_SI_resources_strip"
+						frame = 4
+					}
+		
+					buttonType = {
+						name = "sr_button_enable_tungsten"
+		
+						position = { x = 0 y = 30 }
+		
+						spriteType = "GFX_generic_checkbox"
+						frame = 1
+		
+						scale = 0.8
+					}
+					buttonType = {
+						name = "sr_button_disable_tungsten"
+		
+						position = { x = 0 y = 30 }
+		
+						spriteType = "GFX_generic_checkbox"
+						frame = 2
+		
+						scale = 0.8
+					}
+				}
+			}
+
+			# Lower grid
+			containerWindowType = {
+				name = "sr_resource_lower_grid_container"
+
+				position = { x = 126 y = 15 }
+
+				# STEEL
+				containerWindowType = {
+					name = "sr_steel_container"
+		
+					position = { x = 0 y = 60 }
+		
+					iconType = {
+						name = "sr_steel_icon"
+		
+						position = { x = 0 y = 0 }
+		
+						spriteType = "GFX_SI_resources_strip"
+						frame = 5
+					}
+		
+					buttonType = {
+						name = "sr_button_enable_steel"
+		
+						position = { x = 0 y = 30 }
+		
+						spriteType = "GFX_generic_checkbox"
+						frame = 1
+		
+						scale = 0.8
+					}
+					buttonType = {
+						name = "sr_button_disable_steel"
+		
+						position = { x = 0 y = 30 }
+		
+						spriteType = "GFX_generic_checkbox"
+						frame = 2
+		
+						scale = 0.8
+					}
+				}
+		
+				# CHROMIUM
+				containerWindowType = {
+					name = "sr_chromium_container"
+		
+					position = { x = 50 y = 60 }
+		
+					iconType = {
+						name = "sr_chromium_icon"
+		
+						position = { x = 0 y = 0 }
+		
+						spriteType = "GFX_SI_resources_strip"
+						frame = 6
+					}
+		
+					buttonType = {
+						name = "sr_button_enable_chromium"
+		
+						position = { x = 0 y = 30 }
+		
+						spriteType = "GFX_generic_checkbox"
+						frame = 1
+		
+						scale = 0.8
+					}
+					buttonType = {
+						name = "sr_button_disable_chromium"
+		
+						position = { x = 0 y = 30 }
+		
+						spriteType = "GFX_generic_checkbox"
+						frame = 2
+		
+						scale = 0.8
+					}
+				}
+		
+				# COAL
+				containerWindowType = {
+					name = "sr_coal_container"
+		
+					position = { x = 100 y = 60 }
+		
+					iconType = {
+						name = "sr_coal_icon"
+		
+						position = { x = 0 y = 0 }
+		
+						spriteType = "GFX_SI_resources_strip"
+						frame = 7
+					}
+		
+					buttonType = {
+						name = "sr_button_enable_coal"
+		
+						position = { x = 0 y = 30 }
+		
+						spriteType = "GFX_generic_checkbox"
+						frame = 1
+		
+						scale = 0.8
+					}
+					buttonType = {
+						name = "sr_button_disable_coal"
+		
+						position = { x = 0 y = 30 }
+		
+						spriteType = "GFX_generic_checkbox"
+						frame = 2
+		
+						scale = 0.8
+					}
+				}
+		
+				# ALL
+				# containerWindowType = {
+				# 	name = "sr_all_container"
+		
+				# 	position = { x = 150 y = 60 }
+		
+				# 	iconType = {
+				# 		name = "sr_all_icon"
+		
+				# 		position = { x = 0 y = 0 }
+		
+				# 		spriteType = "GFX_SI_resources_strip"
+				# 		frame = 8
+				# 	}
+		
+				# 	buttonType = {
+				# 		name = "sr_button_enable_all"
+		
+				# 		position = { x = 0 y = 30 }
+		
+				# 		spriteType = "GFX_generic_checkbox"
+		
+				# 		scale = 0.8
+				# 	}
+				# }
+			}
+	
+		}
+
+		######  ######  ######  ######
+		##      ##  ##  ##        ##
+		##      ##  ##  ######    ##
+		##      ##  ##      ##    ##
+		######  ######  ######    ##
+
+		containerWindowType = {
+			name = "sr_cost_container"
+
+			position = { x = 12 y = 250 }
+
+			size = {
+				width = 354
+				height = 60
+			}
+
+			instantTextBoxType = {
+				name = "sr_cost_text"
+
+				position = { x = 0 y = 0 }
+
+				maxWidth = 354
+				maxHeight = 50
+
+				format = centre
+
+				font = hoi_24header
+
+				text = "SI_resources_menu_request_cost"
+			}
+
+			containerWindowType = {
+				name = "sr_cost_actual_cost_container"
+
+				position = { x = 148 y = 30 }
+
+				iconType = {
+					name = "sr_cost_factory"
+
+					position = { x = 0 y = 0 }
+
+					scale = 1.1
+
+					spriteType = "GFX_non_available_factory_icon"
+				}
+
+				instantTextBoxType = {
+					name = "sr_cost_factories_cost_text"
+
+					position = { x = 34 y = 0 }
+
+					font = hoi_24header
+
+					format = left
+
+					maxWidth = 50
+
+					text = "SI_resources_factories_cost"
+				}
+			}
+
+			containerWindowType = {
+				name = "sr_action_container"
+
+				position = { x = 66 y = 66 }
+
+				buttonType = {
+					name = "sr_action_clear_button"
+
+					position = { x = 0 y = 0 }
+
+					spriteType = "GFX_remove"
+
+					buttonFont = hoi_18mbs
+					buttonText = "SI_resources_clear_forms"
+
+					pdx_tooltip = "SI_resources_clear_button_tt"
+				}
+
+				buttonType = {
+					name = "sr_action_demand_res_button"
+
+					position = { x = 120 y = 0 }
+
+					spriteType = "GFX_remove"
+
+					buttonFont = hoi_18mbs
+					buttonText = "SI_resources_demand_forms"
+
+					pdx_tooltip = "SI_resources_demand_button_tt"
+				}
+
+				buttonType = {
+					name = "sr_debug_clear_rights_button"
+
+					position = { x = 60 y = 20 }
+
+					spriteType = "GFX_remove"
+
+					buttonFont = hoi_18mbs
+					buttonText = "SI_resources_debug_clear_rights"
+				}
+			}
+		}
+
+		####    ######  ######  ######  ##      ######  ##  ##
+		##  ##    ##    ##      ##  ##  ##      ##  ##  ##  ##
+		##  ##    ##    ######  ######  ##      ######   #### 
+		##  ##    ##        ##  ##      ##      ##  ##    ## 
+		####    ######  ######  ##      ######  ##  ##    ##
+
+		containerWindowType = {
+			name = "sr_display_container"
+
+			position = {
+				x = 9
+				y = 362
+			}
+
+			size = {
+				width = 362
+				height = 284
+			}
+
+			margin = {
+				top = 12
+				left = 12
+				bottom = 12
+			}
+
+			verticalScrollbar = "sr_view_scrollbar"
+
+			background = {
+				name = "sr_display_bg"
+
+				spriteType = "GFX_tiled_window"
+			}
+
+			gridboxtype = {
+				name = "si_country_entry_gridbox"
+				position = {
+					x = 0 y = 0
+				}
+				size = {
+					width = 337
+					height = 100%%
+				}
+				slotsize = {
+					width = 337
+					height = 50
+				}
+				max_slots_horizontal = 1
+				add_horizontal = no
+			}
+		}
+
+	}
+
+	containerWindowType = {
+		name = "sr_resources_entry_container"
+
+		position = {
+			x = 0
+			y = 0
+		}
+
+		size = {
+			width = 337
+			height = 50
+		}
+
+		background = {
+			name = "sr_interaction_bg"
+			spriteType = "GFX_SR_interaction_view"
+		}
+
+		containerWindowType = {
+			name = "sr_display_entry_state"
+
+			position = {
+				y = 0
+				x = 0
+			}
+
+			buttonType = {
+				name = "sr_country_flag"
+				quadTextureSprite = "GFX_flag_small2"
+				position = {
+					x = 10
+					y = 11
+				}
+			}
+			instantTextBoxType = {
+				name = "sr_target_label"
+				orientation = LEFT
+				position = {
+					x = 55
+					y = 6
+				}
+				maxWidth = 175
+				maxHeight = 20
+				fixedsize = yes
+				font = hoi_18mbs
+				text = "[THIS.GetName]"
+			}
+			containerWindowType = {
+				name = "sr_display_resources_container"
+				position = {
+					x = 55
+					y = 25
+				}
+	
+				iconType = {
+					name = "sr_target_res_oil_yes"
+					position = {
+						x = 0
+						y = 0
+					}
+					spriteType = "GFX_SI_resources_strip"
+					frame = 1
+					scale = 0.7
+				}
+				iconType = {
+					name = "sr_target_res_oil_no"
+					position = {
+						x = 0
+						y = 0
+					}
+					spriteType = "GFX_SI_resources_strip_cancel"
+					frame = 1
+					scale = 0.7
+				}
+	
+				iconType = {
+					name = "sr_target_res_aluminium_yes"
+					position = {
+						x = 20
+						y = 0
+					}
+					spriteType = "GFX_SI_resources_strip"
+					frame = 2
+					scale = 0.7
+				}
+				iconType = {
+					name = "sr_target_res_aluminium_no"
+					position = {
+						x = 20
+						y = 0
+					}
+					spriteType = "GFX_SI_resources_strip_cancel"
+					frame = 2
+					scale = 0.7
+				}
+	
+				iconType = {
+					name = "sr_target_res_rubber_yes"
+					position = {
+						x = 40
+						y = 0
+					}
+					spriteType = "GFX_SI_resources_strip"
+					frame = 3
+					scale = 0.7
+				}
+				iconType = {
+					name = "sr_target_res_rubber_no"
+					position = {
+						x = 40
+						y = 0
+					}
+					spriteType = "GFX_SI_resources_strip_cancel"
+					frame = 3
+					scale = 0.7
+				}
+	
+				iconType = {
+					name = "sr_target_res_tungsten_yes"
+					position = {
+						x = 60
+						y = 0
+					}
+					spriteType = "GFX_SI_resources_strip"
+					frame = 4
+					scale = 0.7
+				}
+				iconType = {
+					name = "sr_target_res_tungsten_no"
+					position = {
+						x = 60
+						y = 0
+					}
+					spriteType = "GFX_SI_resources_strip_cancel"
+					frame = 4
+					scale = 0.7
+				}
+	
+				iconType = {
+					name = "sr_target_res_steel_yes"
+					position = {
+						x = 80
+						y = 0
+					}
+					spriteType = "GFX_SI_resources_strip"
+					frame = 5
+					scale = 0.7
+				}
+				iconType = {
+					name = "sr_target_res_steel_no"
+					position = {
+						x = 80
+						y = 0
+					}
+					spriteType = "GFX_SI_resources_strip_cancel"
+					frame = 5
+					scale = 0.7
+				}
+	
+				iconType = {
+					name = "sr_target_res_chromium_yes"
+					position = {
+						x = 100
+						y = 0
+					}
+					spriteType = "GFX_SI_resources_strip"
+					frame = 6
+					scale = 0.7
+				}
+				iconType = {
+					name = "sr_target_res_chromium_no"
+					position = {
+						x = 100
+						y = 0
+					}
+					spriteType = "GFX_SI_resources_strip_cancel"
+					frame = 6
+					scale = 0.7
+				}
+	
+				iconType = {
+					name = "sr_target_res_coal_yes"
+					position = {
+						x = 120
+						y = 0
+					}
+					spriteType = GFX_SI_resources_strip
+					frame = 7
+					scale = 0.7
+				}
+				iconType = {
+					name = "sr_target_res_coal_no"
+					position = {
+						x = 120
+						y = 0
+					}
+					spriteType = "GFX_SI_resources_strip_cancel"
+					frame = 7
+					scale = 0.7
+				}
+			}
+			containerWindowType = {
+				name = "sr_display_cost_container"
+				position = {
+					x = 240
+					y = 12
+				}
+	
+				iconType = {
+					name = "sr_display_cost_state_neg_icon"
+					position = {
+						x = -35
+						y = 0
+					}
+					spriteType = "GFX_SR_factories_transfer_state_strip"
+					frame = 1
+					scale = 0.8
+				}
+				iconType = {
+					name = "sr_display_cost_state_pos_icon"
+					position = {
+						x = -35
+						y = 0
+					}
+					spriteType = "GFX_SR_factories_transfer_state_strip"
+					frame = 2
+					scale = 0.8
+				}
+				iconType = {
+					name = "sr_display_cost_icon"
+					position = {
+						x = 0
+						y = 0
+					}
+					spriteType = "GFX_non_available_factory_icon"
+				}
+				instantTextBoxType = {
+					name = "sr_display_cost_label_slot_1"
+					orientation = LEFT
+					position = {
+						x = 30
+						y = 1
+					}
+					maxWidth = 50
+					maxHeight = 20
+					fixedsize = yes
+					font = hoi_26mbs
+					text = "[?ROOT.sr_slot_1_factories_sent]"
+				}
+				instantTextBoxType = {
+					name = "sr_display_cost_label_slot_2"
+					orientation = LEFT
+					position = {
+						x = 30
+						y = 1
+					}
+					maxWidth = 50
+					maxHeight = 20
+					fixedsize = yes
+					font = hoi_26mbs
+					text = "[?ROOT.sr_slot_2_factories_sent]"
+				}
+				instantTextBoxType = {
+					name = "sr_display_cost_label_slot_3"
+					orientation = LEFT
+					position = {
+						x = 30
+						y = 1
+					}
+					maxWidth = 50
+					maxHeight = 20
+					fixedsize = yes
+					font = hoi_26mbs
+					text = "[?ROOT.sr_slot_3_factories_sent]"
+				}
+
+				instantTextBoxType = {
+					name = "sr_display_cost_label_slot_1_target"
+					orientation = LEFT
+					position = {
+						x = 30
+						y = 1
+					}
+					maxWidth = 50
+					maxHeight = 20
+					fixedsize = yes
+					font = hoi_26mbs
+					text = "[?THIS.sr_factories_sent_@ROOT]"
+				}
+			}
+			buttonType = {
+				name = "sr_display_cancel_button"
+				position = {
+					x = 300
+					y = 12
+				}
+				spriteType = "GFX_delete_template_button"
+
+				pdx_tooltip = "SI_resources_cancel_contract"
+			}
+		}
+	}
+}

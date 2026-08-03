@@ -1,0 +1,315 @@
+#
+# List of options showing in the Game Rules screen
+#
+# format is:
+# rule_token = {
+#	name = "TEXT_KEY_FOR_NAME"
+#	required_dlc = "Name of the Required DLC"
+#	desc = "TEXT_KEY_FOR_LONG_DESC"
+#	group = "TEXT_KEY_FOR_GROUP"					# Used for filtering. A single rule can be in multiple groups 
+#	icon = gfx_option_token							# Optional icon
+#	option = {										# Unless other specified, the first option is the default option
+#		name = option_token
+#		text = "TEXT_KEY_FOR_OPTION_NAME"
+#		allow_achievements = no						# Achievements cannot be earned if one or more game rules are set to an option that has this property set to no.
+#													# If not specified, this is set to yes for default options and no for all other options.
+#	}
+#	default = {										# Specify an option with the "default" token to override the behavior of treating the first option as the default.
+#		name = option_token
+#		text = "TEXT_KEY_FOR_OPTION_NAME"
+#		...
+#	}
+# }
+
+si_state_transfer_rules = {
+
+	name = "SI_STATE_TRANSFER_RULES"
+	group = "SI_GENERAL_GROUP"
+	icon = GFX_SI_mini_icon
+
+	default = {
+		name = SI_STATE_TRANSFER_DEFAULT
+		text = "SI_RULE_STATE_TRANSFER_DEFAULT"
+		desc = "SI_RULE_STATE_TRANSFER_DEFAULT_DESC"
+	}
+	option = {
+		name = SI_STATE_TRANSFER_MP
+		text = "SI_RULE_STATE_TRANSFER_MP"
+		desc = "SI_RULE_STATE_TRANSFER_MP_DESC"
+	}
+	option = {
+		name = SI_STATE_TRANSFER_DISABLED
+		text = "SI_RULE_STATE_TRANSFER_DISABLED"
+		desc = "SI_RULE_STATE_TRANSFER_DISABLED_DESC"
+	}
+}
+si_ai_behaviour_rules = {
+
+	name = "SI_AI_BEHAVIOUR_RULES"
+	group = "SI_GENERAL_GROUP"
+	icon = GFX_SI_mini_icon
+
+	default = {
+		name = SI_AI_BEHAVIOUR_DEFAULT
+		text = "SI_RULE_AI_BEHAVIOUR_DEFAULT"
+		desc = "SI_RULE_AI_BEHAVIOUR_DEFAULT_DESC"
+	}
+	option = {
+		name = SI_AI_ALLOWED_RULE
+		text = "SI_RULE_AI_ALLOWED_RULE"
+		desc = "SI_RULE_AI_ALLOWED_RULE_DESC"
+	}
+}
+si_increase_ai_rejectance_rules = {
+
+	name = "SI_AI_REJECT_RULES"
+	group = "SI_GENERAL_GROUP"
+	icon = GFX_SI_mini_icon
+
+	default = {
+		name = SI_AI_REJECT_DEFAULT
+		text = "SI_AI_REJECT_DEFAULT"
+		desc = "SI_AI_REJECT_DEFAULT_DESC"
+	}
+	option = {
+		name = SI_AI_REJECT_INCREASED_FOR_PLAYERS
+		text = "SI_AI_REJECT_INCREASED_FOR_PLAYERS"
+		desc = "SI_AI_REJECT_INCREASED_FOR_PLAYERS_DESC"
+	}
+	option = {
+		name = SI_AI_REJECT_DECREASED_FOR_PLAYERS
+		text = "SI_AI_REJECT_DECREASED_FOR_PLAYERS"
+		desc = "SI_AI_REJECT_DECREASED_FOR_PLAYERS_DESC"
+	}
+}
+si_core_required_compliance_rules = {
+
+	name = "SI_CORE_COMPLIANCE_RULES"
+	group = "SI_GENERAL_GROUP"
+	icon = GFX_SI_mini_icon
+
+	default = {
+		name = SI_CORE_REQUIRED_DEFAULT
+		text = "SI_CORE_REQUIRED_DEFAULT"
+		desc = "SI_CORE_REQUIRED_DEFAULT_DESC"
+	}
+	option = {
+		name = SI_CORE_REQUIRED_100
+		text = "SI_CORE_REQUIRED_100"
+		desc = "SI_CORE_REQUIRED_100_DESC"
+	}
+	option = {
+		name = SI_CORE_REQUIRED_90
+		text = "SI_CORE_REQUIRED_90"
+		desc = "SI_CORE_REQUIRED_90_DESC"
+	}
+	option = {
+		name = SI_CORE_REQUIRED_70
+		text = "SI_CORE_REQUIRED_70"
+		desc = "SI_CORE_REQUIRED_70_DESC"
+	}
+	option = {
+		name = SI_CORE_REQUIRED_60
+		text = "SI_CORE_REQUIRED_60"
+		desc = "SI_CORE_REQUIRED_60_DESC"
+	}
+	option = {
+		name = SI_CORE_REQUIRED_50
+		text = "SI_CORE_REQUIRED_50"
+		desc = "SI_CORE_REQUIRED_50_DESC"
+	}
+}
+si_allow_coastal_claim_rules = {
+
+	name = "SI_COASTAL_CLAIM_RULES"
+	group = "SI_GENERAL_GROUP"
+	icon = GFX_SI_mini_icon
+
+	default = {
+		name = SI_COASTAL_CLAIM_DEFAULT
+		text = "SI_COASTAL_CLAIM_DEFAULT"
+		desc = "SI_COASTAL_CLAIM_DEFAULT_DESC"
+	}
+	option = {
+		name = SI_COASTAL_CLAIM_DISABLED
+		text = "SI_COASTAL_CLAIM_DISABLED"
+		desc = "SI_COASTAL_CLAIM_DISABLED_DESC"
+	}
+}
+si_resources_demand_rules = {
+
+	name = "SI_RESOURCES_DEMAND_RULES"
+	group = "SI_GENERAL_GROUP"
+	icon = GFX_SI_mini_icon
+
+	default = {
+		name = SI_RESOURCES_DEMAND_DEFAULT
+		text = "SI_RULE_RESOURCES_DEMAND_DEFAULT"
+		desc = "SI_RULE_RESOURCES_DEMAND_DEFAULT_DESC"
+	}
+	option = {
+		name = SI_RESOURCES_DEMAND_NOT_RULE
+		text = "SI_RULE_RESOURCES_DEMAND_NOT_RULE"
+		desc = "SI_RULE_RESOURCES_DEMAND_NOT_RULE_DESC"
+	}
+}
+si_claim_cooldown_rules = {
+
+	name = "SI_CLAIM_COOLDOWN_RULES"
+	group = "SI_GENERAL_GROUP"
+	icon = GFX_SI_mini_icon
+
+	default = {
+		name = SI_CLAIM_COOLDOWN_DEFAULT
+		text = "SI_RULE_CLAIM_COOLDOWN_DEFAULT"
+		desc = "SI_RULE_CLAIM_COOLDOWN_DEFAULT_DESC"
+	}
+	option = {
+		name = SI_CLAIM_COOLDOWN_NONE
+		text = "SI_RULE_CLAIM_COOLDOWN_NONE"
+		desc = "SI_RULE_CLAIM_COOLDOWN_NONE_DESC"
+	}
+	option = {
+		name = SI_CLAIM_COOLDOWN_HALF
+		text = "SI_RULE_CLAIM_COOLDOWN_HALF"
+		desc = "SI_RULE_CLAIM_COOLDOWN_HALF_DESC"
+	}
+	option = {
+		name = SI_CLAIM_COOLDOWN_ONEPLUSHALF
+		text = "SI_RULE_CLAIM_COOLDOWN_ONEPLUSHALF"
+		desc = "SI_RULE_CLAIM_COOLDOWN_ONEPLUSHALF_DESC"
+	}
+	option = {
+		name = SI_CLAIM_COOLDOWN_DOUBLE
+		text = "SI_RULE_CLAIM_COOLDOWN_DOUBLE"
+		desc = "SI_RULE_CLAIM_COOLDOWN_DOUBLE_DESC"
+	}
+}
+si_core_cooldown_rules = {
+
+	name = "SI_CORE_COOLDOWN_RULES"
+	group = "SI_GENERAL_GROUP"
+	icon = GFX_SI_mini_icon
+
+	default = {
+		name = SI_CORE_COOLDOWN_DEFAULT
+		text = "SI_RULE_CORE_COOLDOWN_DEFAULT"
+		desc = "SI_RULE_CORE_COOLDOWN_DEFAULT_DESC"
+	}
+	option = {
+		name = SI_CORE_COOLDOWN_NONE
+		text = "SI_RULE_CORE_COOLDOWN_NONE"
+		desc = "SI_RULE_CORE_COOLDOWN_NONE_DESC"
+	}
+	option = {
+		name = SI_CORE_COOLDOWN_HALF
+		text = "SI_RULE_CORE_COOLDOWN_HALF"
+		desc = "SI_RULE_CORE_COOLDOWN_HALF_DESC"
+	}
+	option = {
+		name = SI_CORE_COOLDOWN_ONEPLUSHALF
+		text = "SI_RULE_CORE_COOLDOWN_ONEPLUSHALF"
+		desc = "SI_RULE_CORE_COOLDOWN_ONEPLUSHALF_DESC"
+	}
+	option = {
+		name = SI_CORE_COOLDOWN_DOUBLE
+		text = "SI_RULE_CORE_COOLDOWN_DOUBLE"
+		desc = "SI_RULE_CORE_COOLDOWN_DOUBLE_DESC"
+	}
+}
+si_move_capital_cooldown_rules = {
+
+	name = "SI_MOVE_CAPITAL_COOLDOWN_RULES"
+	group = "SI_GENERAL_GROUP"
+	icon = GFX_SI_mini_icon
+
+	default = {
+		name = SI_MOVE_CAPITAL_COOLDOWN_DEFAULT
+		text = "SI_RULE_MOVE_CAPITAL_COOLDOWN_DEFAULT"
+		desc = "SI_RULE_MOVE_CAPITAL_COOLDOWN_DEFAULT_DESC"
+	}
+	option = {
+		name = SI_MOVE_CAPITAL_COOLDOWN_NONE
+		text = "SI_RULE_MOVE_CAPITAL_COOLDOWN_NONE"
+		desc = "SI_RULE_MOVE_CAPITAL_COOLDOWN_NONE_DESC"
+	}
+	option = {
+		name = SI_MOVE_CAPITAL_COOLDOWN_HALF
+		text = "SI_RULE_MOVE_CAPITAL_COOLDOWN_HALF"
+		desc = "SI_RULE_MOVE_CAPITAL_COOLDOWN_HALF_DESC"
+	}
+	option = {
+		name = SI_MOVE_CAPITAL_COOLDOWN_ONEPLUSHALF
+		text = "SI_RULE_MOVE_CAPITAL_COOLDOWN_ONEPLUSHALF"
+		desc = "SI_RULE_MOVE_CAPITAL_COOLDOWN_ONEPLUSHALF_DESC"
+	}
+	option = {
+		name = SI_MOVE_CAPITAL_COOLDOWN_DOUBLE
+		text = "SI_RULE_MOVE_CAPITAL_COOLDOWN_DOUBLE"
+		desc = "SI_RULE_MOVE_CAPITAL_COOLDOWN_DOUBLE_DESC"
+	}
+}
+si_wargoal_cost_rules = {
+
+	name = "SI_WARGOAL_COST_RULES"
+	group = "SI_GENERAL_GROUP"
+	icon = GFX_SI_mini_icon
+
+	default = {
+		name = SI_WARGOAL_COST_DEFAULT
+		text = "SI_RULE_WARGOAL_COST_DEFAULT"
+		desc = "SI_RULE_WARGOAL_COST_DEFAULT_DESC"
+	}
+	option = {
+		name = SI_WARGOAL_COST_NONE
+		text = "SI_RULE_WARGOAL_COST_NONE"
+		desc = "SI_RULE_WARGOAL_COST_NONE_DESC"
+	}
+	option = {
+		name = SI_WARGOAL_COST_HALF
+		text = "SI_RULE_WARGOAL_COST_HALF"
+		desc = "SI_RULE_WARGOAL_COST_HALF_DESC"
+	}
+	option = {
+		name = SI_WARGOAL_COST_ONEPLUSHALF
+		text = "SI_RULE_WARGOAL_COST_ONEPLUSHALF"
+		desc = "SI_RULE_WARGOAL_COST_ONEPLUSHALF_DESC"
+	}
+	option = {
+		name = SI_WARGOAL_COST_DOUBLE
+		text = "SI_RULE_WARGOAL_COST_DOUBLE"
+		desc = "SI_RULE_WARGOAL_COST_DOUBLE_DESC"
+	}
+}
+si_artillery_cooldown_rules = {
+
+	name = "SI_ARTILLERY_RULES"
+	group = "SI_GENERAL_GROUP"
+	icon = GFX_SI_mini_icon
+
+	default = {
+		name = SI_ARTILLERY_DEFAULT
+		text = "SI_RULE_ARTILLERY_COOLDOWN_DEFAULT"
+		desc = "SI_RULE_ARTILLERY_COOLDOWN_DEFAULT_DESC"
+	}
+	option = {
+		name = SI_ARTILLERY_COOLDOWN_NONE
+		text = "SI_RULE_ARTILLERY_COOLDOWN_NONE"
+		desc = "SI_RULE_ARTILLERY_COOLDOWN_NONE_DESC"
+	}
+	option = {
+		name = SI_ARTILLERY_COOLDOWN_HALF
+		text = "SI_RULE_ARTILLERY_COOLDOWN_HALF"
+		desc = "SI_RULE_ARTILLERY_COOLDOWN_HALF_DESC"
+	}
+	option = {
+		name = SI_ARTILLERY_COOLDOWN_ONEPLUSHALF
+		text = "SI_RULE_ARTILLERY_COOLDOWN_ONEPLUSHALF"
+		desc = "SI_RULE_ARTILLERY_COOLDOWN_ONEPLUSHALF_DESC"
+	}
+	option = {
+		name = SI_ARTILLERY_COOLDOWN_DOUBLE
+		text = "SI_RULE_ARTILLERY_COOLDOWN_DOUBLE"
+		desc = "SI_RULE_ARTILLERY_COOLDOWN_DOUBLE_DESC"
+	}
+}

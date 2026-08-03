@@ -1,0 +1,365 @@
+defined_text = {
+	name = SiStateTransferGameRule
+
+	text = {
+		trigger = {
+			has_game_rule = {
+				rule = si_state_transfer_rules
+				option = SI_STATE_TRANSFER_MP
+			}
+		}
+		localization_key = SI_state_transfer_gamerule_mp
+	}
+	text = {
+		trigger = {
+			has_game_rule = {
+				rule = si_state_transfer_rules
+				option = SI_STATE_TRANSFER_DISABLED
+			}
+		}
+		localization_key = SI_state_transfer_gamerule_none
+	}
+	text = {
+		localization_key = SI_state_transfer_gamerule_sp
+	}
+}
+defined_text = {
+	name = SiAiBehaviourRule
+
+	text = {
+		trigger = {
+			has_game_rule = {
+				rule = si_ai_behaviour_rules
+				option = SI_AI_ALLOWED_RULE
+			}
+		}
+		localization_key = SI_ai_behaviour_gamerule_yes
+	}
+	text = {
+		localization_key = SI_ai_behaviour_gamerule_no
+	}
+}
+defined_text = {
+	name = SiAiRejectionRule
+
+	text = {
+		trigger = {
+			has_game_rule = {
+				rule = si_increase_ai_rejectance_rules
+				option = SI_AI_REJECT_INCREASED_FOR_PLAYERS
+			}
+		}
+		localization_key = SI_ai_rejection_gamerule_increase
+	}
+	text = {
+		trigger = {
+			has_game_rule = {
+				rule = si_increase_ai_rejectance_rules
+				option = SI_AI_REJECT_DECREASED_FOR_PLAYERS
+			}
+		}
+		localization_key = SI_ai_rejection_gamerule_decrease
+	}
+	text = {
+		localization_key = SI_ai_rejection_gamerule_default
+	}
+}
+defined_text = {
+	name = SiCoreComplianceRule
+
+	text = {
+		trigger = {
+			has_game_rule = {
+				rule = si_core_required_compliance_rules
+				option = SI_CORE_REQUIRED_100
+			}
+		}
+		localization_key = SI_core_compliance_gamerule_100
+	}
+	text = {
+		trigger = {
+			has_game_rule = {
+				rule = si_core_required_compliance_rules
+				option = SI_CORE_REQUIRED_90
+			}
+		}
+		localization_key = SI_core_compliance_gamerule_90
+	}
+	text = {
+		trigger = {
+			has_game_rule = {
+				rule = si_core_required_compliance_rules
+				option = SI_CORE_REQUIRED_70
+			}
+		}
+		localization_key = SI_core_compliance_gamerule_70
+	}
+	text = {
+		trigger = {
+			has_game_rule = {
+				rule = si_core_required_compliance_rules
+				option = SI_CORE_REQUIRED_60
+			}
+		}
+		localization_key = SI_core_compliance_gamerule_60
+	}
+	text = {
+		trigger = {
+			has_game_rule = {
+				rule = si_core_required_compliance_rules
+				option = SI_CORE_REQUIRED_50
+			}
+		}
+		localization_key = SI_core_compliance_gamerule_50
+	}
+	text = {
+		localization_key = SI_core_compliance_gamerule_80
+	}
+}
+defined_text = {
+	name = SiClaimShoreRule
+
+	text = {
+		trigger = {
+			has_game_rule = {
+				rule = si_allow_coastal_claim_rules
+				option = SI_COASTAL_CLAIM_DISABLED
+			}
+		}
+		localization_key = SI_coastal_claim_gamerule_no
+	}
+	text = {
+		localization_key = SI_coastal_claim_gamerule_yes
+	}
+}
+defined_text = {
+	name = SiResourceDemandRule
+
+	text = {
+		trigger = {
+			has_game_rule = {
+				rule = si_resources_demand_rules
+				option = SI_RESOURCES_DEMAND_NOT_RULE
+			}
+		}
+		localization_key = SI_resource_demand_gamerule_no
+	}
+	text = {
+		localization_key = SI_resource_demand_gamerule_yes
+	}
+}
+defined_text = {
+	name = SiClaimRule
+
+	text = {
+		trigger = {
+			has_game_rule = {
+				rule = si_claim_cooldown_rules
+				option = SI_CLAIM_COOLDOWN_NONE
+			}
+		}
+		localization_key = SI_claim_gamerule_none
+	}
+	text = {
+		trigger = {
+			has_game_rule = {
+				rule = si_claim_cooldown_rules
+				option = SI_CLAIM_COOLDOWN_HALF
+			}
+		}
+		localization_key = SI_claim_gamerule_half
+	}
+	text = {
+		trigger = {
+			has_game_rule = {
+				rule = si_claim_cooldown_rules
+				option = SI_CLAIM_COOLDOWN_ONEPLUSHALF
+			}
+		}
+		localization_key = SI_claim_gamerule_oneplushalf
+	}
+	text = {
+		trigger = {
+			has_game_rule = {
+				rule = si_claim_cooldown_rules
+				option = SI_CLAIM_COOLDOWN_DOUBLE
+			}
+		}
+		localization_key = SI_claim_gamerule_double
+	}
+	text = {
+		localization_key = SI_claim_gamerule_default
+	}
+}
+defined_text = {
+	name = SiCoreRule
+
+	text = {
+		trigger = {
+			has_game_rule = {
+				rule = si_core_cooldown_rules
+				option = SI_CORE_COOLDOWN_NONE
+			}
+		}
+		localization_key = SI_core_gamerule_none
+	}
+	text = {
+		trigger = {
+			has_game_rule = {
+				rule = si_core_cooldown_rules
+				option = SI_CORE_COOLDOWN_HALF
+			}
+		}
+		localization_key = SI_core_gamerule_half
+	}
+	text = {
+		trigger = {
+			has_game_rule = {
+				rule = si_core_cooldown_rules
+				option = SI_CORE_COOLDOWN_ONEPLUSHALF
+			}
+		}
+		localization_key = SI_core_gamerule_oneplushalf
+	}
+	text = {
+		trigger = {
+			has_game_rule = {
+				rule = si_core_cooldown_rules
+				option = SI_CORE_COOLDOWN_DOUBLE
+			}
+		}
+		localization_key = SI_core_gamerule_double
+	}
+	text = {
+		localization_key = SI_core_gamerule_default
+	}
+}
+defined_text = {
+	name = SiCapitalRule
+
+	text = {
+		trigger = {
+			has_game_rule = {
+				rule = si_move_capital_cooldown_rules
+				option = SI_MOVE_CAPITAL_COOLDOWN_NONE
+			}
+		}
+		localization_key = SI_capital_gamerule_none
+	}
+	text = {
+		trigger = {
+			has_game_rule = {
+				rule = si_move_capital_cooldown_rules
+				option = SI_MOVE_CAPITAL_COOLDOWN_HALF
+			}
+		}
+		localization_key = SI_capital_gamerule_half
+	}
+	text = {
+		trigger = {
+			has_game_rule = {
+				rule = si_move_capital_cooldown_rules
+				option = SI_MOVE_CAPITAL_COOLDOWN_ONEPLUSHALF
+			}
+		}
+		localization_key = SI_capital_gamerule_oneplushalf
+	}
+	text = {
+		trigger = {
+			has_game_rule = {
+				rule = si_move_capital_cooldown_rules
+				option = SI_MOVE_CAPITAL_COOLDOWN_DOUBLE
+			}
+		}
+		localization_key = SI_capital_gamerule_double
+	}
+	text = {
+		localization_key = SI_capital_gamerule_default
+	}
+}
+defined_text = {
+	name = SiWargoalCostRule
+
+	text = {
+		trigger = {
+			has_game_rule = {
+				rule = si_wargoal_cost_rules
+				option = SI_WARGOAL_COST_NONE
+			}
+		}
+		localization_key = SI_wargoal_cost_gamerule_none
+	}
+	text = {
+		trigger = {
+			has_game_rule = {
+				rule = si_wargoal_cost_rules
+				option = SI_WARGOAL_COST_HALF
+			}
+		}
+		localization_key = SI_wargoal_cost_gamerule_half
+	}
+	text = {
+		trigger = {
+			has_game_rule = {
+				rule = si_wargoal_cost_rules
+				option = SI_WARGOAL_COST_ONEPLUSHALF
+			}
+		}
+		localization_key = SI_wargoal_cost_gamerule_oneplushalf
+	}
+	text = {
+		trigger = {
+			has_game_rule = {
+				rule = si_wargoal_cost_rules
+				option = SI_WARGOAL_COST_DOUBLE
+			}
+		}
+		localization_key = SI_wargoal_cost_gamerule_double
+	}
+	text = {
+		localization_key = SI_wargoal_cost_gamerule_default
+	}
+}
+defined_text = {
+	name = SiArtilleryRule
+
+	text = {
+		trigger = {
+			has_game_rule = {
+				rule = si_artillery_cooldown_rules
+				option = SI_ARTILLERY_COOLDOWN_NONE
+			}
+		}
+		localization_key = SI_artillery_gamerule_none
+	}
+	text = {
+		trigger = {
+			has_game_rule = {
+				rule = si_artillery_cooldown_rules
+				option = SI_ARTILLERY_COOLDOWN_HALF
+			}
+		}
+		localization_key = SI_artillery_gamerule_half
+	}
+	text = {
+		trigger = {
+			has_game_rule = {
+				rule = si_artillery_cooldown_rules
+				option = SI_ARTILLERY_COOLDOWN_ONEPLUSHALF
+			}
+		}
+		localization_key = SI_artillery_gamerule_oneplushalf
+	}
+	text = {
+		trigger = {
+			has_game_rule = {
+				rule = si_artillery_cooldown_rules
+				option = SI_ARTILLERY_COOLDOWN_DOUBLE
+			}
+		}
+		localization_key = SI_artillery_gamerule_double
+	}
+	text = {
+		localization_key = SI_artillery_gamerule_default
+	}
+}

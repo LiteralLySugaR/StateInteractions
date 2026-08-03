@@ -1,0 +1,918 @@
+add_namespace = sr_event
+
+# Just for easy copy, dont mind this
+# country_event = {
+# 	id = sr_event.0
+
+# 	title = sr_event.0.t
+
+# 	desc = sr_event.0.desc
+
+# 	is_triggered_only = yes
+
+# 	option = {
+# 		name = sr_event.0.a
+
+#		# -------------------- #
+
+# 		ai_chance = {
+# 			base = 1
+# 		}
+# 	}
+
+# 	option = {
+# 		name = sr_event.0.b
+
+#		# -------------------- #
+
+# 		ai_chance = {
+# 			base = 1
+# 		}
+# 	}
+# }
+
+country_event = { # FROM offers resource contract
+	id = sr_event.1
+
+	title = sr_event.1.t
+
+	desc = sr_event.1.desc
+
+	is_triggered_only = yes
+
+	option = { # YES!
+		name = sr_event.1.a
+
+		effect_tooltip = {
+			add_offsite_building = {
+				type = industrial_complex
+				level = var:FROM.display_cost_event_var
+			}
+		}
+
+		hidden_effect = {
+			FROM.sr_target_state = {
+				set_state_flag = SR_resources_taken_flag_@FROM
+			}
+			if = {
+				limit = {
+					FROM = {
+						NOT = {
+							is_embargoed_by = ROOT
+						}
+					}
+				}
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_oil_from_@FROM = FROM.sr_target_state }
+					}
+					ROOT = {
+						give_resource_rights = {
+							receiver = FROM
+							state = FROM.sr_target_state
+							resources = { oil }
+						}
+					}
+				}
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_aluminium_from_@FROM = FROM.sr_target_state }
+					}
+					ROOT = {
+						give_resource_rights = {
+							receiver = FROM
+							state = FROM.sr_target_state
+							resources = { aluminium }
+						}
+					}
+				}
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_rubber_from_@FROM = FROM.sr_target_state }
+					}
+					ROOT = {
+						give_resource_rights = {
+							receiver = FROM
+							state = FROM.sr_target_state
+							resources = { rubber }
+						}
+					}
+				}
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_tungsten_from_@FROM = FROM.sr_target_state }
+					}
+					ROOT = {
+						give_resource_rights = {
+							receiver = FROM
+							state = FROM.sr_target_state
+							resources = { tungsten }
+						}
+					}
+				}
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_steel_from_@FROM = FROM.sr_state_form }
+					}
+					ROOT = {
+						give_resource_rights = {
+							receiver = FROM
+							state = FROM.sr_target_state
+							resources = { steel }
+						}
+					}
+				}
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_chromium_from_@FROM = FROM.sr_target_state }
+					}
+					ROOT = {
+						give_resource_rights = {
+							receiver = FROM
+							state = FROM.sr_target_state
+							resources = { chromium }
+						}
+					}
+				}
+				if = {
+					limit = {
+						is_in_array = { ROOT.transfer_coal_from_@FROM = FROM.sr_target_state }
+					}
+					ROOT = {
+						give_resource_rights = {
+							receiver = FROM
+							state = FROM.sr_target_state
+							resources = { coal }
+						}
+					}
+				}
+				
+				var:FROM.sr_target_state = {
+					remove_from_array = { ROOT.transfer_oil_from_@FROM = THIS }
+					remove_from_array = { ROOT.transfer_aluminium_from_@FROM = THIS }
+					remove_from_array = { ROOT.transfer_rubber_from_@FROM = THIS }
+					remove_from_array = { ROOT.transfer_tungsten_from_@FROM = THIS }
+					remove_from_array = { ROOT.transfer_steel_from_@FROM = THIS }
+					remove_from_array = { ROOT.transfer_chromium_from_@FROM = THIS }
+					remove_from_array = { ROOT.transfer_coal_from_@FROM = THIS }
+				}
+				if = {
+					limit = {
+						check_variable = { var:FROM.sr_stateid_slot_1 = 0 }
+					}
+					set_variable = { var:FROM.sr_stateid_slot_1 = FROM.sr_target_state }
+					set_variable = { var:FROM.sr_slot_1_factories_sent = var:FROM.sr_factory_cost_var }
+		
+					ROOT = {
+						add_offsite_building = {
+							type = industrial_complex
+							level = var:FROM.sr_slot_1_factories_sent
+						}
+					}
+				}
+				else_if = {
+					limit = {
+						check_variable = { var:FROM.sr_stateid_slot_2 = 0 }
+					}
+					set_variable = { var:FROM.sr_stateid_slot_2 = FROM.sr_target_state }
+					set_variable = { var:FROM.sr_slot_2_factories_sent = var:FROM.sr_factory_cost_var }
+		
+					ROOT = {
+						add_offsite_building = {
+							type = industrial_complex
+							level = var:FROM.sr_slot_2_factories_sent
+						}
+					}
+				}
+				else_if = {
+					limit = {
+						check_variable = { var:FROM.sr_stateid_slot_3 = 0 }
+					}
+					set_variable = { var:FROM.sr_stateid_slot_3 = FROM.sr_target_state }
+					set_variable = { var:FROM.sr_slot_3_factories_sent = var:FROM.sr_factory_cost_var }
+		
+					ROOT = {
+						add_offsite_building = {
+							type = industrial_complex
+							level = var:FROM.sr_slot_3_factories_sent
+						}
+					}
+				}
+				set_variable = { var:FROM.sr_total_factories_sent = 0 }
+				add_to_variable = { var:FROM.sr_total_factories_sent = var:FROM.sr_slot_1_factories_sent }
+				add_to_variable = { var:FROM.sr_total_factories_sent = var:FROM.sr_slot_2_factories_sent }
+				add_to_variable = { var:FROM.sr_total_factories_sent = var:FROM.sr_slot_3_factories_sent }
+		
+				set_variable = { var:FROM.sr_factory_cost_var = 1 }
+				add_to_array = { FROM.sr_targets_array = FROM.sr_target_state }
+				set_variable = { var:FROM.sr_target_state = 0 }
+				if = {
+					limit = {
+						ROOT = {
+							NOT = {
+								is_in_array = { THIS.sr_targets_array = FROM }
+							}
+						}
+					}
+					ROOT = { add_to_array = { THIS.sr_targets_array = FROM } }
+				}
+				# Calculate total factories sent to same scope
+				set_variable = { var:FROM.sr_factories_sent_@ROOT = 0 }
+				if = {
+					limit = {
+						var:FROM.sr_stateid_slot_1 = {
+							is_owned_by = ROOT
+						}
+					}
+					add_to_variable = { var:FROM.sr_factories_sent_@ROOT = var:FROM.sr_slot_1_factories_sent }
+				}
+				if = {
+					limit = {
+						var:FROM.sr_stateid_slot_2 = {
+							is_owned_by = ROOT
+						}
+					}
+					add_to_variable = { var:FROM.sr_factories_sent_@ROOT = var:FROM.sr_slot_2_factories_sent }
+				}
+				if = {
+					limit = {
+						var:FROM.sr_stateid_slot_3 = {
+							is_owned_by = ROOT
+						}
+					}
+					add_to_variable = { var:FROM.sr_factories_sent_@ROOT = var:FROM.sr_slot_3_factories_sent }
+				}
+			}
+		}
+
+		# -------------------- #
+
+		ai_chance = {
+			base = 40
+
+			modifier = {
+				add = var:ROOT.opinion@FROM
+			}
+			modifier = {
+				add = 15
+				has_government = FROM
+			}
+			modifier = {
+				factor = 0.6
+				any_core_state = {
+					is_owned_by = FROM
+				}
+			}
+			modifier = {
+				factor = 2
+				FROM = { is_ai = no }
+				has_game_rule = {
+					rule = si_increase_ai_rejectance_rules
+					option = SI_AI_REJECT_DECREASED_FOR_PLAYERS
+				}
+			}
+			modifier = {
+				factor = 0.5
+				FROM = { is_ai = no }
+				has_game_rule = {
+					rule = si_increase_ai_rejectance_rules
+					option = SI_AI_REJECT_INCREASED_FOR_PLAYERS
+				}
+			}
+		}
+	}
+
+	option = { # NAH!
+		name = sr_event.1.b
+
+		if = {
+			limit = {
+				FROM = {
+					NOT = {
+						is_embargoed_by = ROOT
+					}
+				}
+			}
+			FROM = {
+				set_country_flag = {
+					flag = rejected_sr_flag_@ROOT
+					days = 75
+					value = 1
+				}
+				country_event = { id = sr_event.2 days = 1 random_days = 6 }
+			}
+		}
+
+		# -------------------- #
+
+		ai_chance = {
+			base = 60
+
+			modifier = {
+				add = -25
+				has_opinion = {
+					target = FROM
+					value < 10
+				}
+			}
+			modifier = {
+				add = 15
+				NOT = { has_government = FROM }
+			}
+			modifier = {
+				factor = 2
+				any_core_state = {
+					is_owned_by = FROM
+				}
+			}
+			modifier = {
+				factor = 0.5
+				FROM = { is_ai = no }
+				has_game_rule = {
+					rule = si_increase_ai_rejectance_rules
+					option = SI_AI_REJECT_DECREASED_FOR_PLAYERS
+				}
+			}
+			modifier = {
+				factor = 2
+				FROM = { is_ai = no }
+				has_game_rule = {
+					rule = si_increase_ai_rejectance_rules
+					option = SI_AI_REJECT_INCREASED_FOR_PLAYERS
+				}
+			}
+		}
+	}
+}
+
+country_event = { # FROM rejects resource contract
+	id = sr_event.2
+
+	title = sr_event.2.t
+
+	desc = sr_event.2.desc
+
+	is_triggered_only = yes
+
+	option = { # OK.
+		name = sr_event.2.a
+
+		# -------------------- #
+
+		ai_chance = {
+			base = 50
+
+			modifier = {
+				add = var:ROOT.opinion@FROM
+			}
+			modifier = {
+				add = 15
+				has_government = FROM
+			}
+			modifier = {
+				factor = 0.6
+				any_core_state = {
+					is_owned_by = FROM
+				}
+			}
+			modifier = {
+				factor = 2
+				FROM = { is_ai = no }
+				has_game_rule = {
+					rule = si_increase_ai_rejectance_rules
+					option = SI_AI_REJECT_DECREASED_FOR_PLAYERS
+				}
+			}
+			modifier = {
+				factor = 0.5
+				FROM = { is_ai = no }
+				has_game_rule = {
+					rule = si_increase_ai_rejectance_rules
+					option = SI_AI_REJECT_INCREASED_FOR_PLAYERS
+				}
+			}
+		}
+	}
+
+	option = { # EMBARGO!
+		name = sr_event.2.b
+
+		send_embargo = FROM
+		FROM = { send_embargo = ROOT }
+
+		# -------------------- #
+
+		ai_chance = {
+			base = 50
+
+			modifier = {
+				add = -25
+				has_opinion = {
+					target = FROM
+					value < 10
+				}
+			}
+			modifier = {
+				add = 15
+				NOT = { has_government = FROM }
+			}
+			modifier = {
+				factor = 2
+				any_core_state = {
+					is_owned_by = FROM
+				}
+			}
+			modifier = {
+				factor = 0.5
+				FROM = { is_ai = no }
+				has_game_rule = {
+					rule = si_increase_ai_rejectance_rules
+					option = SI_AI_REJECT_DECREASED_FOR_PLAYERS
+				}
+			}
+			modifier = {
+				factor = 2
+				FROM = { is_ai = no }
+				has_game_rule = {
+					rule = si_increase_ai_rejectance_rules
+					option = SI_AI_REJECT_INCREASED_FOR_PLAYERS
+				}
+			}
+		}
+	}
+}
+
+country_event = { # FROM terminates contract (for contract sender)
+	id = sr_event.3
+
+	title = sr_event.3.t
+
+	desc = sr_event.3.desc
+
+	is_triggered_only = yes
+
+	option = { # OK.
+		name = sr_event.3.a
+
+		FROM = {
+			every_owned_state = {
+				ROOT = {
+					remove_resource_rights = PREV
+
+					remove_from_array = { THIS.sr_targets_array = PREV }
+					if = {
+						limit = {
+							check_variable = { var:THIS.sr_stateid_slot_1 = PREV }
+							NOT = {
+								is_in_array = { THIS.sr_targets_array = PREV }
+							}
+						}
+						set_variable = { var:THIS.slot_remove_factories = var:THIS.sr_slot_1_factories_sent }
+						multiply_variable = { var:THIS.slot_remove_factories = -1 }
+						FROM = {
+							add_offsite_building = {
+								type = industrial_complex
+								level = var:PREV.slot_remove_factories
+							}
+						}
+						set_variable = { var:THIS.sr_stateid_slot_1 = 0 }
+						set_variable = { var:THIS.sr_slot_1_factories_sent = 0 }
+					}
+					if = {
+						limit = {
+							check_variable = { var:THIS.sr_stateid_slot_2 = PREV }
+							NOT = {
+								is_in_array = { THIS.sr_targets_array = PREV }
+							}
+						}
+						set_variable = { var:THIS.slot_remove_factories = var:THIS.sr_slot_2_factories_sent }
+						multiply_variable = { var:THIS.slot_remove_factories = -1 }
+						FROM = {
+							add_offsite_building = {
+								type = industrial_complex
+								level = var:PREV.slot_remove_factories
+							}
+						}
+						set_variable = { var:THIS.sr_stateid_slot_2 = 0 }
+						set_variable = { var:THIS.sr_slot_2_factories_sent = 0 }
+					}
+					if = {
+						limit = {
+							check_variable = { var:THIS.sr_stateid_slot_3 = PREV }
+							NOT = {
+								is_in_array = { THIS.sr_targets_array = PREV }
+							}
+						}
+						set_variable = { var:THIS.slot_remove_factories = var:THIS.sr_slot_3_factories_sent }
+						multiply_variable = { var:THIS.slot_remove_factories = -1 }
+						FROM = {
+							add_offsite_building = {
+								type = industrial_complex
+								level = var:PREV.slot_remove_factories
+							}
+						}
+						set_variable = { var:THIS.sr_stateid_slot_3 = 0 }
+						set_variable = { var:THIS.sr_slot_3_factories_sent = 0 }
+					}
+					clear_variable = var:THIS.slot_remove_factories
+
+					set_variable = { var:THIS.sr_total_factories_sent = 0 }
+					add_to_variable = { var:THIS.sr_total_factories_sent = var:THIS.sr_slot_1_factories_sent }
+					add_to_variable = { var:THIS.sr_total_factories_sent = var:THIS.sr_slot_2_factories_sent }
+					add_to_variable = { var:THIS.sr_total_factories_sent = var:THIS.sr_slot_3_factories_sent }
+
+					PREV = { clr_state_flag = SR_resources_taken_flag_@PREV }
+					FROM = {
+						if = {
+							limit = {
+								NOT = {
+									var:PREV.sr_stateid_slot_1 = {
+										is_owned_by = PREV
+									}
+									var:PREV.sr_stateid_slot_2 = {
+										is_owned_by = PREV
+									}
+									var:PREV.sr_stateid_slot_3 = {
+										is_owned_by = PREV
+									}
+								}
+								is_in_array = { THIS.sr_targets_array = PREV }
+							}
+							remove_from_array = { THIS.sr_targets_array = PREV }
+						}
+					}
+					
+					# Recalculate total factories sent to FROM
+					set_variable = { var:THIS.sr_factories_sent_@FROM = 0 }
+					if = {
+						limit = {
+							var:THIS.sr_stateid_slot_1 = {
+								is_owned_by = FROM
+							}
+						}
+						add_to_variable = { var:THIS.sr_factories_sent_@FROM = var:THIS.sr_slot_1_factories_sent }
+					}
+					if = {
+						limit = {
+							var:THIS.sr_stateid_slot_2 = {
+								is_owned_by = FROM
+							}
+						}
+						add_to_variable = { var:THIS.sr_factories_sent_@FROM = var:THIS.sr_slot_2_factories_sent }
+					}
+					if = {
+						limit = {
+							var:THIS.sr_stateid_slot_3 = {
+								is_owned_by = FROM
+							}
+						}
+						add_to_variable = { var:THIS.sr_factories_sent_@FROM = var:THIS.sr_slot_3_factories_sent }
+					}
+				}
+			}
+			set_variable = { THIS.sr_contract_cancel_@ROOT = 0 }
+		}
+
+		# -------------------- #
+
+		ai_chance = {
+			base = 50
+
+			modifier = {
+				add = var:ROOT.opinion@FROM
+			}
+			modifier = {
+				add = 15
+				has_government = FROM
+			}
+			modifier = {
+				factor = 0.6
+				any_core_state = {
+					is_owned_by = FROM
+				}
+			}
+			modifier = {
+				factor = 2
+				FROM = { is_ai = no }
+				has_game_rule = {
+					rule = si_increase_ai_rejectance_rules
+					option = SI_AI_REJECT_DECREASED_FOR_PLAYERS
+				}
+			}
+			modifier = {
+				factor = 0.5
+				FROM = { is_ai = no }
+				has_game_rule = {
+					rule = si_increase_ai_rejectance_rules
+					option = SI_AI_REJECT_INCREASED_FOR_PLAYERS
+				}
+			}
+		}
+	}
+
+	option = { # EMBARGO!
+		name = sr_event.3.b
+
+		FROM = {
+			every_owned_state = {
+				ROOT = {
+					remove_resource_rights = PREV
+
+					remove_from_array = { THIS.sr_targets_array = PREV }
+					if = {
+						limit = {
+							check_variable = { var:THIS.sr_stateid_slot_1 = PREV }
+							NOT = {
+								is_in_array = { THIS.sr_targets_array = PREV }
+							}
+						}
+						set_variable = { var:THIS.slot_remove_factories = var:THIS.sr_slot_1_factories_sent }
+						multiply_variable = { var:THIS.slot_remove_factories = -1 }
+						FROM = {
+							add_offsite_building = {
+								type = industrial_complex
+								level = var:PREV.slot_remove_factories
+							}
+						}
+						set_variable = { var:THIS.sr_stateid_slot_1 = 0 }
+						set_variable = { var:THIS.sr_slot_1_factories_sent = 0 }
+					}
+					if = {
+						limit = {
+							check_variable = { var:THIS.sr_stateid_slot_2 = PREV }
+							NOT = {
+								is_in_array = { THIS.sr_targets_array = PREV }
+							}
+						}
+						set_variable = { var:THIS.slot_remove_factories = var:THIS.sr_slot_2_factories_sent }
+						multiply_variable = { var:THIS.slot_remove_factories = -1 }
+						FROM = {
+							add_offsite_building = {
+								type = industrial_complex
+								level = var:PREV.slot_remove_factories
+							}
+						}
+						set_variable = { var:THIS.sr_stateid_slot_2 = 0 }
+						set_variable = { var:THIS.sr_slot_2_factories_sent = 0 }
+					}
+					if = {
+						limit = {
+							check_variable = { var:THIS.sr_stateid_slot_3 = PREV }
+							NOT = {
+								is_in_array = { THIS.sr_targets_array = PREV }
+							}
+						}
+						set_variable = { var:THIS.slot_remove_factories = var:THIS.sr_slot_3_factories_sent }
+						multiply_variable = { var:THIS.slot_remove_factories = -1 }
+						FROM = {
+							add_offsite_building = {
+								type = industrial_complex
+								level = var:PREV.slot_remove_factories
+							}
+						}
+						set_variable = { var:THIS.sr_stateid_slot_3 = 0 }
+						set_variable = { var:THIS.sr_slot_3_factories_sent = 0 }
+					}
+					clear_variable = var:THIS.slot_remove_factories
+
+					set_variable = { var:THIS.sr_total_factories_sent = 0 }
+					add_to_variable = { var:THIS.sr_total_factories_sent = var:THIS.sr_slot_1_factories_sent }
+					add_to_variable = { var:THIS.sr_total_factories_sent = var:THIS.sr_slot_2_factories_sent }
+					add_to_variable = { var:THIS.sr_total_factories_sent = var:THIS.sr_slot_3_factories_sent }
+
+					PREV = { clr_state_flag = SR_resources_taken_flag_@PREV }
+					FROM = {
+						if = {
+							limit = {
+								NOT = {
+									var:PREV.sr_stateid_slot_1 = {
+										is_owned_by = PREV
+									}
+									var:PREV.sr_stateid_slot_2 = {
+										is_owned_by = PREV
+									}
+									var:PREV.sr_stateid_slot_3 = {
+										is_owned_by = PREV
+									}
+								}
+								is_in_array = { THIS.sr_targets_array = PREV }
+							}
+							remove_from_array = { THIS.sr_targets_array = PREV }
+						}
+					}
+					
+					# Recalculate total factories sent to FROM
+					set_variable = { var:THIS.sr_factories_sent_@FROM = 0 }
+					if = {
+						limit = {
+							var:THIS.sr_stateid_slot_1 = {
+								is_owned_by = FROM
+							}
+						}
+						add_to_variable = { var:THIS.sr_factories_sent_@FROM = var:THIS.sr_slot_1_factories_sent }
+					}
+					if = {
+						limit = {
+							var:THIS.sr_stateid_slot_2 = {
+								is_owned_by = FROM
+							}
+						}
+						add_to_variable = { var:THIS.sr_factories_sent_@FROM = var:THIS.sr_slot_2_factories_sent }
+					}
+					if = {
+						limit = {
+							var:THIS.sr_stateid_slot_3 = {
+								is_owned_by = FROM
+							}
+						}
+						add_to_variable = { var:THIS.sr_factories_sent_@FROM = var:THIS.sr_slot_3_factories_sent }
+					}
+				}
+			}
+			set_variable = { THIS.sr_contract_cancel_@ROOT = 0 }
+		}
+
+		send_embargo = FROM
+		FROM = { send_embargo = ROOT }
+
+		# -------------------- #
+
+		ai_chance = {
+			base = 50
+
+			modifier = {
+				add = -25
+				has_opinion = {
+					target = FROM
+					value < 10
+				}
+			}
+			modifier = {
+				add = 15
+				NOT = { has_government = FROM }
+			}
+			modifier = {
+				factor = 2
+				any_core_state = {
+					is_owned_by = FROM
+				}
+			}
+			modifier = {
+				factor = 0.5
+				FROM = { is_ai = no }
+				has_game_rule = {
+					rule = si_increase_ai_rejectance_rules
+					option = SI_AI_REJECT_DECREASED_FOR_PLAYERS
+				}
+			}
+			modifier = {
+				factor = 2
+				FROM = { is_ai = no }
+				has_game_rule = {
+					rule = si_increase_ai_rejectance_rules
+					option = SI_AI_REJECT_INCREASED_FOR_PLAYERS
+				}
+			}
+		}
+	}
+}
+
+
+# FROM.sr_stateid_cancel_@ROOT			-- State
+country_event = { # FROM terminates contract (for contract reciever)
+	id = sr_event.4
+
+	title = sr_event.4.t
+
+	desc = sr_event.4.desc
+
+	is_triggered_only = yes
+
+	option = { # OK.
+		name = sr_event.4.a
+
+		set_temp_variable = { stateid_temp_a = FROM.sr_stateid_cancel_@ROOT } # I understand you, code, easier to read. (stateid_cancel var kinda doesnt work here)
+		FROM = {
+			remove_resource_rights = stateid_temp_a
+		}
+		remove_from_array = { FROM.sr_targets_array = stateid_temp_a }
+		if = {
+			limit = {
+				check_variable = { var:FROM.sr_stateid_slot_1 = stateid_temp_a }
+				NOT = {
+					is_in_array = { FROM.sr_targets_array = stateid_temp_a }
+				}
+			}
+			set_variable = { var:FROM.slot_remove_factories = var:FROM.sr_slot_1_factories_sent }
+			multiply_variable = { var:FROM.slot_remove_factories = -1 }
+			ROOT = {
+				add_offsite_building = {
+					type = industrial_complex
+					level = var:FROM.slot_remove_factories
+				}
+			}
+			set_variable = { var:FROM.sr_stateid_slot_1 = 0 }
+			set_variable = { var:FROM.sr_slot_1_factories_sent = 0 }
+		}
+		if = {
+			limit = {
+				check_variable = { var:FROM.sr_stateid_slot_2 = stateid_temp_a }
+				NOT = {
+					is_in_array = { FROM.sr_targets_array = stateid_temp_a }
+				}
+			}
+			set_variable = { var:FROM.slot_remove_factories = var:FROM.sr_slot_2_factories_sent }
+			multiply_variable = { var:FROM.slot_remove_factories = -1 }
+			ROOT = {
+				add_offsite_building = {
+					type = industrial_complex
+					level = var:FROM.slot_remove_factories
+				}
+			}
+			set_variable = { var:FROM.sr_stateid_slot_2 = 0 }
+			set_variable = { var:FROM.sr_slot_2_factories_sent = 0 }
+		}
+		if = {
+			limit = {
+				check_variable = { var:FROM.sr_stateid_slot_3 = stateid_temp_a }
+				NOT = {
+					is_in_array = { FROM.sr_targets_array = stateid_temp_a }
+				}
+			}
+			set_variable = { var:FROM.slot_remove_factories = var:FROM.sr_slot_3_factories_sent }
+			multiply_variable = { var:FROM.slot_remove_factories = -1 }
+			ROOT = {
+				add_offsite_building = {
+					type = industrial_complex
+					level = var:FROM.slot_remove_factories
+				}
+			}
+			set_variable = { var:FROM.sr_stateid_slot_3 = 0 }
+			set_variable = { var:FROM.sr_slot_3_factories_sent = 0 }
+		}
+		clear_variable = var:FROM.slot_remove_factories
+
+		set_variable = { var:FROM.sr_total_factories_sent = 0 }
+		add_to_variable = { var:FROM.sr_total_factories_sent = var:FROM.sr_slot_1_factories_sent }
+		add_to_variable = { var:FROM.sr_total_factories_sent = var:FROM.sr_slot_2_factories_sent }
+		add_to_variable = { var:FROM.sr_total_factories_sent = var:FROM.sr_slot_3_factories_sent }
+
+		stateid_temp_a = { clr_state_flag = SR_resources_taken_flag_@PREV }
+		ROOT = {
+			if = {
+				limit = {
+					NOT = {
+						var:FROM.sr_stateid_slot_1 = {
+							is_owned_by = PREV
+						}
+						var:FROM.sr_stateid_slot_2 = {
+							is_owned_by = PREV
+						}
+						var:FROM.sr_stateid_slot_3 = {
+							is_owned_by = PREV
+						}
+					}
+					is_in_array = { THIS.sr_targets_array = FROM }
+				}
+				remove_from_array = { THIS.sr_targets_array = FROM }
+			}
+		}
+		
+		# Recalculate total factories sent to ROOT
+		set_variable = { var:FROM.sr_factories_sent_@ROOT = 0 }
+		if = {
+			limit = {
+				var:FROM.sr_stateid_slot_1 = {
+					is_owned_by = ROOT
+				}
+			}
+			add_to_variable = { var:FROM.sr_factories_sent_@ROOT = var:FROM.sr_slot_1_factories_sent }
+		}
+		if = {
+			limit = {
+				var:FROM.sr_stateid_slot_2 = {
+					is_owned_by = ROOT
+				}
+			}
+			add_to_variable = { var:FROM.sr_factories_sent_@ROOT = var:FROM.sr_slot_2_factories_sent }
+		}
+		if = {
+			limit = {
+				var:FROM.sr_stateid_slot_3 = {
+					is_owned_by = ROOT
+				}
+			}
+			add_to_variable = { var:FROM.sr_factories_sent_@ROOT = var:FROM.sr_slot_3_factories_sent }
+		}
+
+		clear_variable = stateid_temp_a
+		set_variable = { FROM.sr_stateid_cancel_@ROOT = 0 }
+
+
+		# -------------------- #
+
+		ai_chance = {
+			base = 10
+		}
+	}
+}

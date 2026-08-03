@@ -1,0 +1,86 @@
+add_namespace = bwevent
+
+country_event = { # Border-War Lost (Attacker)
+	id = bwevent.1
+	timeout_days = 7
+	is_triggered_only = yes
+
+	title = bwevent.1.t
+	desc = bwevent.1.desc
+
+	option = {
+		name = bwevent.1.a
+
+		add_war_support = -0.025
+		add_stability = -0.025
+		add_popularity = {
+			ideology = THIS
+			popularity = -0.05
+		}
+
+		ai_chance = {
+			base = 10
+		}
+	}
+}
+country_event = { # Border-War Won (Attacker)
+	id = bwevent.2
+	timeout_days = 7
+	is_triggered_only = yes
+
+	title = bwevent.2.t
+	desc = bwevent.2.desc
+
+	option = {
+		name = bwevent.2.a
+
+		army_experience = var:THIS.bw_xp_reward
+		add_war_support = var:THIS.bw_ws_reward
+
+		ai_chance = {
+			base = 10
+		}
+	}
+}
+country_event = { # Border-War Lost (Defender)
+	id = bwevent.3
+	timeout_days = 7
+	is_triggered_only = yes
+
+	title = bwevent.3.t
+	desc = bwevent.3.desc
+
+	option = {
+		name = bwevent.3.a
+
+		add_war_support = -0.025
+		add_stability = -0.025
+		add_popularity = {
+			ideology = THIS
+			popularity = -0.05
+		}
+
+		ai_chance = {
+			base = 10
+		}
+	}
+}
+country_event = { # Border-War Won (Defender)
+	id = bwevent.4
+	timeout_days = 7
+	is_triggered_only = yes
+
+	title = bwevent.4.t
+	desc = bwevent.4.desc
+
+	option = {
+		name = bwevent.4.a
+
+		army_experience = var:global.si_border_war_xp_gain_base
+		add_war_support = var:global.si_border_war_ws_gain_base
+
+		ai_chance = {
+			base = 10
+		}
+	}
+}
