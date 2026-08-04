@@ -954,25 +954,27 @@ scripted_gui = {
 							}
 						}
 						FROM = {
+							owner = {
+								NOT = {
+									tag = ROOT
+									has_war_with = ROOT
+									is_subject_of = ROOT
+									is_in_faction_with = ROOT
+									ROOT = {
+										has_country_flag = SI_border_war_major_locked_flag_@PREV
+									}
+								}
+								has_border_war = no
+							}
 							OR = {
 								AND = {
 									owner = {
-										NOT = {
-											tag = ROOT
-											has_war_with = ROOT
-											is_subject_of = ROOT
-											is_in_faction_with = ROOT
-											ROOT = {
-												has_country_flag = SI_border_war_major_locked_flag_@PREV
-											}
-										}
 										OR = {
 											is_neighbor_of = ROOT
 											any_neighbor_country = {
 												is_subject_of = ROOT
 											}
 										}
-										has_border_war = no
 									}
 									any_neighbor_state = {
 										owner = {
