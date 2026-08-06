@@ -218,13 +218,35 @@ country_event = { # X demand state event
 			transfer_state_to = FROM
 			if = {
 				limit = {
+					NOT = {
+						has_dynamic_modifier = {
+							modifier = SI_opposition_to_new_owner_modifier
+						}
+						is_core_of = FROM
+					}
+				}
+				add_resistance = 30
+			}
+			if = {
+				limit = {
 					NOT = { is_core_of = FROM }
 				}
 				add_dynamic_modifier = {
 					modifier = SI_opposition_to_new_owner_modifier
 					days = 180
 				}
-				add_resistance = 30
+			}
+
+			if = {
+				limit = {
+					has_dynamic_modifier = {
+						modifier = SI_opposition_to_new_owner_modifier
+					}
+					is_core_of = FROM
+				}
+				remove_dynamic_modifier = {
+					modifier = SI_opposition_to_new_owner_modifier
+				}
 			}
 		}
 

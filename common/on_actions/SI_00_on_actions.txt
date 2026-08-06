@@ -630,6 +630,17 @@ on_actions = {
 				}
 			}
 
+			every_core_state = {
+				limit = {
+					has_dynamic_modifier = {
+						modifier = SI_opposition_to_new_owner_modifier
+					}
+				}
+				remove_dynamic_modifier = {
+					modifier = SI_opposition_to_new_owner_modifier
+				}
+			}
+
 		}
 	}
 
