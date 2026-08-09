@@ -10,6 +10,8 @@ on_actions = {
 
 			set_variable = { global.si_demand_vassalisation_cooldown_days = 90 }
 
+			set_variable = { global.si_demand_wargoal_cost_multiplier = 0.5 }
+
 			if = {
 				limit = {
 					has_game_rule = {
@@ -386,6 +388,79 @@ on_actions = {
 			set_variable = { global.si_ai_reluctance_time_days = 180 }
 			set_variable = { global.si_ai_reluctance_points_per_stage = 15 }
 
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = si_dmz_cooldown_rules
+						option = SI_DMZ_COOLDOWN_HALF
+					}
+				}
+				set_variable = { global.temp_calc_var = 0.5 }
+			}
+			else_if = {
+				limit = {
+					has_game_rule = {
+						rule = si_dmz_cooldown_rules
+						option = SI_DMZ_COOLDOWN_ONEPLUSHALF
+					}
+				}
+				set_variable = { global.temp_calc_var = 1.5 }
+			}
+			else_if = {
+				limit = {
+					has_game_rule = {
+						rule = si_dmz_cooldown_rules
+						option = SI_DMZ_COOLDOWN_DOUBLE
+					}
+				}
+				set_variable = { global.temp_calc_var = 2 }
+			}
+			else = {
+				set_variable = { global.temp_calc_var = 1 }
+			}
+			set_variable = { global.dmz_demand_cooldown_days = 35 }
+			multiply_variable = { global.dmz_demand_cooldown_days = global.temp_calc_var }
+			round_variable = global.dmz_demand_cooldown_days
+
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = si_state_militarisation_rules
+						option = SI_STATE_MILITARISATION_MP
+					}
+				}
+				set_variable = { global.dmz_cmp_cost_per_state = 3.5 }
+				set_variable = { global.dmz_pp_cost_per_state = 6.0 }
+			}
+			else = {
+				set_variable = { global.dmz_cmp_cost_per_state = 0 }
+				set_variable = { global.dmz_pp_cost_per_state = 0 }
+			}
+
+			every_state = {
+				limit = {
+					is_demilitarized_zone = yes
+				}
+				set_state_flag = {
+					flag = DMZ_starting_dmz_flag
+					value = 1
+					days = 910
+				}
+			}
+
+			set_variable = { global.DMZ_sideicon_menu_y_pos = 46 }
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = si_resources_demand_rules
+						option = SI_RESOURCES_DEMAND_NOT_RULE
+					}
+				}
+				set_variable = { global.DMZ_sideicon_menu_y_pos = 6 }
+			}
+
+			set_variable = { global.DMZ_max_states_var = 5 }
+
 			clear_variable = global.temp_calc_var
 		}
 	}
@@ -399,6 +474,22 @@ on_actions = {
 				}
 				set_global_flag = has_mod_arxyfox_state_interactions_in_one
 			}
+
+			if = {
+				limit = {
+					any_state = {
+						has_state_flag = DMZ_starting_dmz_flag
+					}
+				}
+				every_state = {
+					limit = {
+						has_state_flag = DMZ_starting_dmz_flag
+						is_demilitarized_zone = no
+					}
+					clr_state_flag = DMZ_starting_dmz_flag
+				}
+			}
+
 
 			ROOT = {
 				if = {
@@ -627,17 +718,6 @@ on_actions = {
 					add_dynamic_modifier = {
 						modifier = SI_factories_total_take_modifier
 					}
-				}
-			}
-
-			every_core_state = {
-				limit = {
-					has_dynamic_modifier = {
-						modifier = SI_opposition_to_new_owner_modifier
-					}
-				}
-				remove_dynamic_modifier = {
-					modifier = SI_opposition_to_new_owner_modifier
 				}
 			}
 

@@ -35,6 +35,13 @@ scripted_gui = {
 					option = SI_RESOURCES_DEMAND_DEFAULT
 				}
 			}
+			state_resources_nemu_button_click_enabled = {
+				ROOT = {
+					NOT = {
+						has_country_flag = DMZ_menu_flag
+					}
+				}
+			}
 		}
 	}
 	state_resources_transfer_menu_gui = {

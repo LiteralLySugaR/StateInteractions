@@ -779,12 +779,7 @@ country_event = { # X isnt giving up state
 			}
 		}
 
-		if = {
-			limit = {
-				ROOT = { is_ai = no }
-			}
-			add_political_power = ROOT.si_requested_state_cost_pp
-		}
+		add_political_power = ROOT.si_requested_state_cost_pp
 
 		if = {
 			limit = {
@@ -1390,12 +1385,7 @@ country_event = { # X denies vassalisation
 			}
 		}
 
-		if = {
-			limit = {
-				ROOT = { is_ai = no }
-			}
-			add_political_power = ROOT.si_requested_vsl_cost
-		}
+		add_political_power = ROOT.si_requested_vsl_cost
 
 		create_wargoal = {
 			target = FROM

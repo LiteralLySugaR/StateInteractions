@@ -111,6 +111,11 @@ spriteTypes = {
 	}
 
 	spriteType = {
+		name = "GFX_SI_sideicon_dmz_icon"
+		textureFile = "gfx/interface/InteractionsSideIconDmz.dds"
+	}
+
+	spriteType = {
 		name = "GFX_SI_dummy_sprite"
 		textureFile = "gfx/interface/SI_resource_divider.dds"
 	}

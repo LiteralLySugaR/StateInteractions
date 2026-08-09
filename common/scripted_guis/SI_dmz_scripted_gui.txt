@@ -1,0 +1,487 @@
+scripted_gui = {
+	
+	state_dmz_gui = {
+		context_type = selected_state_context
+
+		window_name = "state_dmz_container"
+
+		parent_window_name = "countrystateview"
+
+		visible = {
+			always = yes
+		}
+
+		properties = {
+			state_dmz_button = {
+				y = global.DMZ_sideicon_menu_y_pos
+			}
+		}
+
+		effects = {
+			state_dmz_button_click = {
+				ROOT = {
+					if = {
+						limit = {
+							has_country_flag = DMZ_menu_flag
+						}
+						clr_country_flag = DMZ_menu_flag
+					}
+					else = {
+						set_country_flag = DMZ_menu_flag
+					}
+				}
+			}
+		}
+
+		triggers = {
+			state_dmz_button_visible = {
+				NOT = {
+					has_game_rule = {
+						rule = si_state_militarisation_rules
+						option = SI_STATE_MILITARISATION_DISABLED
+					}
+				}
+			}
+			state_dmz_button_click_enabled = {
+				ROOT = {
+					NOT = {
+						has_country_flag = SI_menu_3_flag
+					}
+				}
+			}
+		}
+	}
+
+	state_dmz_menu_gui = {
+		context_type = selected_state_context
+
+		window_name = "state_dmz_menu_container"
+
+		parent_window_name = "countrystateview"
+
+		visible = {
+			ROOT = {
+				has_country_flag = DMZ_menu_flag
+			}
+		}
+
+		######  ######  ######  ######  ######  ######  ######
+		##      ##      ##      ##      ##        ##    ##
+		######  ######  ######  ######  ##        ##    ######
+		##      ##      ##      ##      ##        ##        ##
+		######  ##      ##      ######  ######    ##    ######
+
+		effects = {
+			dmz_menu_cancel_button_click = {
+				ROOT = {
+					if = {
+						limit = {
+							has_country_flag = DMZ_menu_flag
+						}
+						clr_country_flag = DMZ_menu_flag
+					}
+					else = {
+						set_country_flag = DMZ_menu_flag
+					}
+				}
+			}
+
+			dmz_state_mark_button_click = {
+				FROM = {
+					add_to_array = { ROOT.dmz_target_states_array = FROM.id }
+				}
+				if = {
+					limit = {
+						FROM.owner = {
+							NOT = {
+								tag = ROOT
+								is_subject_of = ROOT
+							}
+						}
+					}
+					add_to_variable = { ROOT.DMZ_pp_cost_var = global.dmz_pp_cost_per_state }
+					add_to_variable = { ROOT.DMZ_cmp_cost_var = global.dmz_cmp_cost_per_state }
+				}
+				set_variable = { ROOT.target_country_var = FROM.owner }
+			}
+			dmz_state_unmark_button_click = {
+				FROM = {
+					remove_from_array = { ROOT.dmz_target_states_array = FROM.id }
+				}
+
+				if = {
+					limit = {
+						FROM.owner = {
+							NOT = {
+								tag = ROOT
+								is_subject_of = ROOT
+							}
+						}
+					}
+					subtract_from_variable = { ROOT.DMZ_pp_cost_var = global.dmz_pp_cost_per_state }
+					subtract_from_variable = { ROOT.DMZ_cmp_cost_var = global.dmz_cmp_cost_per_state }
+				}
+
+				if = {
+					limit = {
+						all_state = {
+							NOT = {
+								is_in_array = { ROOT.dmz_target_states_array = THIS.id }
+							}
+						}
+					}
+					set_variable = { ROOT.target_country_var = 0 }
+				}
+			}
+
+			dmz_action_clear_button_click = {
+				every_state = {
+					limit = {
+						is_in_array = { ROOT.dmz_target_states_array = THIS.id }
+					}
+					remove_from_array = { ROOT.dmz_target_states_array = THIS.id }
+				}
+				set_variable = { ROOT.dmz_target_militarisation_var = 0 }
+
+				set_variable = { ROOT.DMZ_pp_cost_var = 0 }
+				set_variable = { ROOT.DMZ_cmp_cost_var = 0 }
+
+				set_variable = { ROOT.target_country_var = 0 }
+			}
+
+			dmz_militarise_button_click = {
+				set_variable = { ROOT.dmz_target_militarisation_var = 1 }
+			}
+			dmz_demilitarise_button_click = {
+				set_variable = { ROOT.dmz_target_militarisation_var = 2 }
+			}
+
+			dmz_action_submit_button_click = {
+				if = {
+					limit = {
+						has_game_rule = {
+							rule = si_state_militarisation_rules
+							option = SI_STATE_MILITARISATION_DEFAULT
+						}
+					}
+					every_state = {
+						limit = {
+							is_in_array = { ROOT.dmz_target_states_array = THIS.id }
+						}
+
+						every_country = { # Clearing all other countries marks if theres any before the main effects
+							limit = {
+								NOT = { tag = ROOT }
+							}
+							if = {
+								limit = {
+									is_in_array = { THIS.dmz_target_states_array = PREV.id }
+								}
+								remove_from_array = { THIS.dmz_target_states_array = PREV.id }
+							}
+						}
+
+						if = {
+							limit = {
+								check_variable = { ROOT.dmz_target_militarisation_var = 2 }
+							}
+							set_demilitarized_zone = yes
+						}
+						else = {
+							set_demilitarized_zone = no
+						}
+						remove_from_array = { ROOT.dmz_target_states_array = THIS.id }
+					}
+					set_variable = { ROOT.dmz_target_militarisation_var = 0 }
+
+				}
+				else = { # MP effects
+					set_variable = { ROOT.dmz_passed_pp_cost = ROOT.DMZ_pp_cost_var }
+					multiply_variable = { ROOT.dmz_passed_pp_cost = -1 }
+					set_variable = { ROOT.dmz_passed_cmp_cost = ROOT.DMZ_cmp_cost_var }
+					multiply_variable = { ROOT.dmz_passed_cmp_cost = -1 }
+
+					ROOT = {
+						add_political_power = var:ROOT.dmz_passed_pp_cost
+						add_command_power = var:ROOT.dmz_passed_cmp_cost
+					}
+
+					if = { # No limitations on DMZing own and subject's states
+						limit = {
+							var:ROOT.target_country_var = {
+								OR = {
+									tag = ROOT
+									is_subject_of = ROOT
+								}
+							}
+						}
+						every_state = {
+							limit = {
+								is_in_array = { ROOT.dmz_target_states_array = THIS.id }
+							}
+
+							every_country = { # Clearing all other countries marks if theres any before the main effects
+								limit = {
+									NOT = { tag = ROOT }
+								}
+								if = {
+									limit = {
+										is_in_array = { THIS.dmz_target_states_array = PREV.id }
+									}
+									remove_from_array = { THIS.dmz_target_states_array = PREV.id }
+								}
+							}
+				
+							if = {
+								limit = {
+									check_variable = { ROOT.dmz_target_militarisation_var = 2 }
+								}
+								set_demilitarized_zone = yes
+							}
+							else = {
+								set_demilitarized_zone = no
+							}
+							remove_from_array = { ROOT.dmz_target_states_array = THIS.id }
+						}
+					}
+					else = { # DMZing others
+						#Passing states from array to individual vars
+						set_variable = { ROOT.dmz_state1_var = ROOT.dmz_target_states_array^0 }
+						set_variable = { ROOT.dmz_state2_var = ROOT.dmz_target_states_array^1 }
+						set_variable = { ROOT.dmz_state3_var = ROOT.dmz_target_states_array^2 }
+						set_variable = { ROOT.dmz_state4_var = ROOT.dmz_target_states_array^3 }
+						set_variable = { ROOT.dmz_state5_var = ROOT.dmz_target_states_array^4 }
+
+						every_state = {
+							limit = {
+								is_in_array = { ROOT.dmz_target_states_array = THIS.id }
+							}
+
+							every_country = {
+								limit = {
+									NOT = { tag = ROOT }
+								}
+								if = {
+									limit = {
+										is_in_array = { THIS.dmz_target_states_array = PREV.id }
+									}
+									remove_from_array = { THIS.dmz_target_states_array = PREV.id }
+								}
+							}
+
+							remove_from_array = { ROOT.dmz_target_states_array = THIS }
+						}
+
+						if = { # Demilitarise
+							limit = {
+								check_variable = { ROOT.dmz_target_militarisation_var = 2 }
+							}
+							var:ROOT.target_country_var = { country_event = { id = dmz.1 days = 1 random_days = 6 } }
+						}
+						else = { # Remilitarise
+							var:ROOT.target_country_var = { country_event = { id = dmz.3 days = 1 random_days = 6 } }
+						}
+
+						var:ROOT.target_country_var = {
+							set_country_flag = {
+								flag = SI_got_dmzed_flag
+								value = 1
+								days = 30
+							}
+						}
+					}
+
+					ROOT = {
+						add_timed_idea = {
+							idea = SI_major_demands_idea
+							days = var:global.dmz_demand_cooldown_days
+						}
+					}
+					
+					set_variable = { ROOT.DMZ_pp_cost_var = 0 }
+					set_variable = { ROOT.DMZ_cmp_cost_var = 0 }
+					
+					set_variable = { ROOT.target_country_var = 0 }
+
+					set_variable = { ROOT.dmz_target_militarisation_var = 0 }
+				}
+			}
+		}
+
+		######  ####    ######  ######  ######  ######  ####    ######
+          ##    ##  ##    ##    ##      ##      ##      ##  ##  ##
+          ##    ####      ##    ##  ##  ##  ##  ######  ####    ######
+          ##    ##  ##    ##    ##  ##  ##  ##  ##      ##  ##      ##
+          ##    ##  ##  ######  ######  ######  ######  ##  ##  ######
+
+		triggers = {
+			dmz_state_mark_button_click_enabled = {
+				if = {
+					limit = {
+						has_game_rule = {
+							rule = si_state_militarisation_rules
+							option = SI_STATE_MILITARISATION_MP
+						}
+					}
+					custom_trigger_tooltip = {
+						tooltip = SI_dmz_array_size_less_5_tt
+						check_variable = { ROOT.dmz_target_states_array^num < var:global.DMZ_max_states_var }
+					}
+					FROM = {
+						custom_trigger_tooltip = {
+							tooltip = SI_dmz_not_demand_subject_or_locked_tt
+							NOT = { has_state_flag = SI_state_demand_subject_flag }
+						}
+					}
+					hidden_trigger = {
+						OR = {
+							check_variable = { ROOT.target_country_var = 0 }
+							var:ROOT.target_country_var = {
+								tag = FROM.owner
+							}
+						}
+					}
+					FROM.owner = {
+						has_war = no
+						custom_trigger_tooltip = {
+							tooltip = SI_dmz_not_recently_asked_tt
+							NOT = {
+								has_country_flag = SI_got_dmzed_flag
+							}
+						}
+						if = {
+							limit = {
+								is_in_faction_with = ROOT
+								NOT = { tag = ROOT }
+							}
+							is_subject_of = ROOT
+						}
+						if = {
+							limit = {
+								NOT = { tag = ROOT }
+							}
+							any_country = {
+								is_neighbor_of = PREV
+								OR = {
+									is_subject_of = ROOT
+									tag = ROOT
+								}
+							}
+						}
+					}
+					FROM = {
+						if = {
+							limit = {
+								owner = {
+									NOT = {
+										tag = ROOT
+										is_subject_of = ROOT
+									}
+								}
+							}
+							is_demilitarized_zone = no
+						}
+						custom_trigger_tooltip = {
+							tooltip = SI_dmz_not_borderwar_locked_tt
+							NOT = {
+								has_state_flag = BW_locked_flag
+							}
+							is_border_conflict = no
+						}
+						custom_trigger_tooltip = {
+							tooltip = SI_dmz_not_starting_locked_tt
+							NOT = {
+								has_state_flag = DMZ_starting_dmz_flag
+							}
+						}
+						custom_trigger_tooltip = {
+							tooltip = SI_dmz_not_recently_dmzed_tt
+							NOT = {
+								has_state_flag = DMZ_recent_militarisation_flag
+							}
+						}
+					}
+				}
+				FROM = {
+					is_capital = no
+				}
+			}
+
+			dmz_state_mark_button_visible = {
+				FROM = {
+					NOT = {
+						is_in_array = { ROOT.dmz_target_states_array = FROM.id }
+					}
+				}
+			}
+			dmz_state_unmark_button_visible = {
+				FROM = {
+					is_in_array = { ROOT.dmz_target_states_array = FROM.id }
+				}
+			}
+
+			dmz_militarise_button_click_enabled = {
+				check_variable = {
+					var = ROOT.dmz_target_militarisation_var
+					value = 1
+					compare = not_equals
+				}
+			}
+			dmz_demilitarise_button_click_enabled = {
+				check_variable = {
+					var = ROOT.dmz_target_militarisation_var
+					value = 2
+					compare = not_equals
+				}
+			}
+
+			dmz_action_submit_button_click_enabled = {
+				any_state = {
+					is_in_array = { ROOT.dmz_target_states_array = THIS.id }
+				}
+				OR = {
+					check_variable = { ROOT.dmz_target_militarisation_var = 1 }
+					check_variable = { ROOT.dmz_target_militarisation_var = 2 }
+				}
+				ROOT = {
+					NOT = {
+						has_idea = SI_major_demands_idea
+					}
+					if = {
+						limit = {
+							NOT = {
+								has_global_flag = SI_debug_flag
+							}
+						}
+						has_political_power > var:ROOT.DMZ_pp_cost_var
+						command_power > var:ROOT.DMZ_cmp_cost_var
+					}
+				}
+				FROM.owner = {
+					ROOT = {
+						NOT = { has_country_flag = SI_border_war_major_locked_flag_@PREV }
+					}
+				}
+				if = {
+					limit = {
+						has_game_rule = {
+							rule = si_state_militarisation_rules
+							option = SI_STATE_MILITARISATION_MP
+						}
+						NOT = {
+							has_global_flag = SI_debug_flag
+						}
+					}
+					FROM.owner = {
+						OR = {
+							is_ai = no
+							is_subject_of = ROOT
+							tag = ROOT
+						}
+					}
+				}
+			}
+		}
+	}
+
+}

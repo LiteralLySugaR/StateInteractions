@@ -1184,4 +1184,310 @@ guiTypes = {
 			}
 		}
 	}
+
+	####    #    #  ######
+	##  ##  ##  ##      ##
+	##  ##  # ## #    ##
+	##  ##  #    #  ##
+	####    #    #  ######
+
+	containerWindowType = {
+		name = "state_dmz_container"
+
+		buttonType = {
+			name = "state_dmz_button"
+
+			# position = { x = 327 y = 409 }
+
+			# quadTextureSprite = "GFX_SI_resource_transfer_menu"
+
+			position = { x = 459 y = 46 }
+
+			quadTextureSprite = "GFX_SI_sideicon_dmz_icon"
+
+			scale = 0.7
+
+			pdx_tooltip = "SI_dmzview_button"
+
+			shortcut = "ctrl+shift+d"
+		}
+	}
+	containerWindowType = {
+		name = "state_dmz_menu_container"
+
+		position = { x = 460 y = 4 }
+		
+		size = { width = 380 height = 457 }
+		
+		fade_time = 250
+
+		fade_type = linear
+
+		background = {
+			name = "sr_background"
+
+			spriteType = "GFX_tiled_bg"
+		}
+
+		buttonType = {
+			name = "dmz_menu_cancel_button"
+
+			position = {
+				x = 15
+				y = 16
+			}
+
+			spriteType = "GFX_delete_template_button"
+
+			pdx_tooltip = "SI_dmzview_button"
+
+			shortcut = "ctrl+shift+d"
+		}
+
+		instantTextBoxType = {
+			name = "dmz_header"
+
+			position = { x = 12 y = 20 }
+
+			maxWidth = 354
+
+			maxHeight = 25
+
+			fixedsize = yes
+
+			format = centre
+
+			alwaystransparent = yes
+
+			text = "SI_dmz_menu_header"
+
+			font = hoi_24header
+		}
+
+		iconType = {
+			name = "dmz_divider_1"
+
+			position = { x = 69 y = 53 }
+
+			spriteType = "GFX_SI_resource_divider"
+		}
+
+		instantTextBoxType = {
+			name = "dmz_state_subheader"
+
+			position = { x = 12 y = 68 }
+
+			maxWidth = 354
+
+			maxHeight = 50
+
+			format = centre
+
+			text = "SI_dmz_menu_state"
+
+			font = hoi_30header
+		}
+
+		containerWindowType = {
+			name = "dmz_state_mark_buttons_container"
+
+			position = { x = 110 y = 88 }
+
+			buttonType = {
+				name = "dmz_state_mark_button"
+
+				position = { x = 10 y = 36 }
+				
+				quadTextureSprite = "GFX_sort_button_140x29"
+
+				frame = 1
+
+				font = "hoi_18mbs"
+
+				text = "SI_state_mark_button"
+
+				shortcut = "ctrl+z"
+
+				pdx_tooltip = "SI_dmz_mark_state_tt"
+			}
+			buttonType = {
+				name = "dmz_state_unmark_button"
+
+				position = { x = 10 y = 36 }
+
+				quadTextureSprite = "GFX_sort_button_140x29"
+
+				frame = 2
+
+				font = "hoi_18mbs"
+
+				text = "SI_state_unmark_button"
+
+				shortcut = "ctrl+z"
+
+				pdx_tooltip = "SI_dmz_unmark_state_tt"
+			}
+		}
+
+		buttonType = {
+			name = "dmz_action_clear_button"
+
+			position = { x = 117 y = 165 }
+
+			spriteType = "button_type_7"
+
+			buttonFont = hoi_18mbs
+			buttonText = "SI_dmz_clear_all_selection"
+
+			shortcut = "ctrl+d"
+
+			pdx_tooltip = "SI_dmz_action_clear_button_tt"
+		}
+
+		containerWindowType = {
+			name = "dmz_cost_container"
+
+			position = { x = 12 y = 200 }
+
+			instantTextBoxType = {
+				name = "dmz_cost_text"
+
+				position = { x = 0 y = 0 }
+
+				maxWidth = 354
+				maxHeight = 50
+
+				format = centre
+
+				font = hoi_24header
+
+				text = "SI_dmz_menu_request_cost"
+			}
+
+			containerWindowType = {
+				name = "dmz_pp_cost_container"
+
+				position = { x = 148 y = 30 }
+
+				iconType = {
+					name = "sr_cost_pp"
+
+					position = { x = 0 y = 0 }
+
+					scale = 1
+
+					spriteType = "GFX_pol_power_icon"
+				}
+
+				instantTextBoxType = {
+					name = "dmz_pp_cost_text"
+
+					position = { x = 34 y = 2 }
+
+					font = hoi_24header
+
+					format = left
+
+					maxWidth = 180
+
+					text = "SI_dmz_pp_cost"
+				}
+			}
+			containerWindowType = {
+				name = "dmz_cmp_cost_container"
+
+				position = { x = 148 y = 60 }
+
+				iconType = {
+					name = "sr_cost_cmp"
+
+					position = { x = 0 y = 0 }
+
+					scale = 1
+
+					spriteType = "GFX_command_power"
+				}
+
+				instantTextBoxType = {
+					name = "dmz_cmp_cost_text"
+
+					position = { x = 34 y = -1 }
+
+					font = hoi_24header
+
+					format = left
+
+					maxWidth = 180
+
+					text = "SI_dmz_cmp_cost"
+				}
+			}
+		}
+
+		containerWindowType = {
+			name = "dmz_militarise_buttons_container"
+
+			position = { x = 37 y = 325 }
+
+			instantTextBoxType = {
+				name = "dmz_militarisation_header"
+
+				position = { x = -25 y = -35 }
+
+				maxWidth = 354
+
+				maxHeight = 25
+
+				fixedsize = yes
+
+				format = centre
+
+				text = "SI_dmz_militarisation_header"
+
+				font = hoi_24header
+			}
+
+			buttonType = {
+				name = "dmz_militarise_button"
+	
+				position = { x = 0 y = 0 }
+	
+				spriteType = "button_type_7"
+	
+				buttonFont = hoi_18mbs
+				buttonText = "SI_dmz_militarise"
+
+				pdx_tooltip = "SI_dmz_militarise_tt"
+
+				shortcut = "ctrl+shift+z"
+			}
+			buttonType = {
+				name = "dmz_demilitarise_button"
+	
+				position = { x = 160 y = 0 }
+	
+				spriteType = "button_type_7"
+	
+				buttonFont = hoi_18mbs
+				buttonText = "SI_dmz_demilitarise"
+
+				pdx_tooltip = "SI_dmz_demilitarise_tt"
+
+				shortcut = "ctrl+shift+x"
+			}
+		}
+
+		buttonType = {
+			name = "dmz_action_submit_button"
+
+			position = { x = 117 y = 380 }
+
+			spriteType = "button_type_7"
+
+			buttonFont = hoi_18mbs
+			buttonText = "SI_dmz_submit_selection"
+
+			pdx_tooltip = "SI_dmz_submit_tt"
+		}
+	}
 }

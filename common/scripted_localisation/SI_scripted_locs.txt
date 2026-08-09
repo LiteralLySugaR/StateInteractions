@@ -363,3 +363,62 @@ defined_text = {
 		localization_key = SI_artillery_gamerule_default
 	}
 }
+defined_text = {
+	name = SiMilitarisationRule
+
+	text = {
+		trigger = {
+			has_game_rule = {
+				rule = si_state_militarisation_rules
+				option = SI_STATE_MILITARISATION_DISABLED
+			}
+		}
+		localization_key = SI_militarisation_gamerule_disabled
+	}
+	text = {
+		trigger = {
+			has_game_rule = {
+				rule = si_state_militarisation_rules
+				option = SI_STATE_MILITARISATION_MP
+			}
+		}
+		localization_key = SI_militarisation_gamerule_multiplayer
+	}
+	text = {
+		localization_key = SI_militarisation_gamerule_default
+	}
+}
+defined_text = {
+	name = SiDmzRule
+
+	text = {
+		trigger = {
+			has_game_rule = {
+				rule = si_dmz_cooldown_rules
+				option = SI_DMZ_COOLDOWN_HALF
+			}
+		}
+		localization_key = SI_dmz_gamerule_half
+	}
+	text = {
+		trigger = {
+			has_game_rule = {
+				rule = si_dmz_cooldown_rules
+				option = SI_DMZ_COOLDOWN_ONEPLUSHALF
+			}
+		}
+		localization_key = SI_dmz_gamerule_oneplushalf
+	}
+	text = {
+		trigger = {
+			has_game_rule = {
+				rule = si_dmz_cooldown_rules
+				option = SI_DMZ_COOLDOWN_DOUBLE
+			}
+		}
+		localization_key = SI_dmz_gamerule_double
+	}
+	text = {
+		localization_key = SI_dmz_gamerule_default
+	}
+}

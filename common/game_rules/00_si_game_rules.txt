@@ -313,3 +313,52 @@ si_artillery_cooldown_rules = {
 		desc = "SI_RULE_ARTILLERY_COOLDOWN_DOUBLE_DESC"
 	}
 }
+si_state_militarisation_rules = {
+
+	name = "SI_STATE_MILITARISATION_RULES"
+	group = "SI_GENERAL_GROUP"
+	icon = GFX_SI_mini_icon
+
+	default = {
+		name = SI_STATE_MILITARISATION_DEFAULT
+		text = "SI_RULE_STATE_MILITARISATION_DEFAULT"
+		desc = "SI_RULE_STATE_MILITARISATION_DEFAULT_DESC"
+	}
+	option = {
+		name = SI_STATE_MILITARISATION_MP
+		text = "SI_RULE_STATE_MILITARISATION_MP"
+		desc = "SI_RULE_STATE_MILITARISATION_MP_DESC"
+	}
+	option = {
+		name = SI_STATE_MILITARISATION_DISABLED
+		text = "SI_RULE_STATE_MILITARISATION_DISABLED"
+		desc = "SI_RULE_STATE_MILITARISATION_DISABLED_DESC"
+	}
+}
+si_dmz_cooldown_rules = {
+
+	name = "SI_DMZ_RULES"
+	group = "SI_GENERAL_GROUP"
+	icon = GFX_SI_mini_icon
+
+	default = {
+		name = SI_DMZ_DEFAULT
+		text = "SI_RULE_DMZ_COOLDOWN_DEFAULT"
+		desc = "SI_RULE_DMZ_COOLDOWN_DEFAULT_DESC"
+	}
+	option = {
+		name = SI_DMZ_COOLDOWN_HALF
+		text = "SI_RULE_DMZ_COOLDOWN_HALF"
+		desc = "SI_RULE_DMZ_COOLDOWN_HALF_DESC"
+	}
+	option = {
+		name = SI_DMZ_COOLDOWN_ONEPLUSHALF
+		text = "SI_RULE_DMZ_COOLDOWN_ONEPLUSHALF"
+		desc = "SI_RULE_DMZ_COOLDOWN_ONEPLUSHALF_DESC"
+	}
+	option = {
+		name = SI_DMZ_COOLDOWN_DOUBLE
+		text = "SI_RULE_DMZ_COOLDOWN_DOUBLE"
+		desc = "SI_RULE_DMZ_COOLDOWN_DOUBLE_DESC"
+	}
+}

@@ -361,6 +361,8 @@ scripted_gui = {
 
 				set_variable = { ROOT.temp_calc_var = 1 }
 				set_variable = { ROOT.si_requested_state_cost_pp = FROM.si_demand_state_pp_required }
+				multiply_variable = { ROOT.si_requested_state_cost_pp = global.si_demand_wargoal_cost_multiplier }
+				round_variable = ROOT.si_requested_state_cost_pp
 				if = {
 					limit = {
 						has_game_rule = {
@@ -954,6 +956,7 @@ scripted_gui = {
 							}
 						}
 						FROM = {
+							is_demilitarized_zone = no
 							owner = {
 								NOT = {
 									tag = ROOT
@@ -1167,6 +1170,7 @@ scripted_gui = {
 							num_divisions > 2
 							NOT = {
 								has_idea = SI_minor_demands_idea
+								is_subject_of = FROM.owner
 							}
 						}
 						FROM.owner = {
