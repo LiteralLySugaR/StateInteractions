@@ -956,7 +956,6 @@ scripted_gui = {
 							}
 						}
 						FROM = {
-							is_demilitarized_zone = no
 							owner = {
 								NOT = {
 									tag = ROOT

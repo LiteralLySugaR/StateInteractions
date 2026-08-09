@@ -21,7 +21,7 @@
   SI_caved_to_demands:0 "Caved to Demands"
 
   dmz.1.t:0 "[FROM.GetNameDefCap] demands demilitarisation!"
-  dmz.1.desc:0 "Diplomatic mission has been sent to us by [FROM.GetNameDef]. They are demanding that we demilitarise certain regions of our country. Although that means they won't be able to demand those states, should we put ourselves in a military disadvantage for land integrity and possibly good relations with [FROM.GetNameDef]?"
+  dmz.1.desc:0 "Diplomatic mission has been sent to us by [FROM.GetNameDef]. They are demanding that we demilitarise certain regions of our country. Although that means they won't be able to demand those states, should we put ourselves in a military disadvantage for possibly good relations with [FROM.GetNameDef]?"
   dmz.1.a:0 "We should agree."
   dmz.1.b:0 "We will stand against!"
 
