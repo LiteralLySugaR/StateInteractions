@@ -28,44 +28,94 @@ country_event = { # FROM demands Demilitarisation
 		name = dmz.1.a
 
 		add_stability = -0.035
-		var:FROM.dmz_state1_var = {
-			set_demilitarized_zone = yes
-			set_state_flag = {
-				flag = DMZ_recent_militarisation_flag
-				days = 180
-				value = 1
+		if = {
+			limit = {
+				check_variable = {
+					var = var:FROM.dmz_state1_var
+					value = 0
+					compare = not_equals
+				}
+			}
+			var:FROM.dmz_state1_var = {
+				set_demilitarized_zone = yes
+				set_state_flag = {
+					flag = DMZ_recent_militarisation_flag
+					days = 180
+					value = 1
+				}
+				set_variable = { THIS.dmz_owner_tag = FROM }
 			}
 		}
-		var:FROM.dmz_state2_var = {
-			set_demilitarized_zone = yes
-			set_state_flag = {
-				flag = DMZ_recent_militarisation_flag
-				days = 180
-				value = 1
+		if = {
+			limit = {
+				check_variable = {
+					var = var:FROM.dmz_state2_var
+					value = 0
+					compare = not_equals
+				}
+			}
+			var:FROM.dmz_state2_var = {
+				set_demilitarized_zone = yes
+				set_state_flag = {
+					flag = DMZ_recent_militarisation_flag
+					days = 180
+					value = 1
+				}
+				set_variable = { THIS.dmz_owner_tag = FROM }
 			}
 		}
-		var:FROM.dmz_state3_var = {
-			set_demilitarized_zone = yes
-			set_state_flag = {
-				flag = DMZ_recent_militarisation_flag
-				days = 180
-				value = 1
+		if = {
+			limit = {
+				check_variable = {
+					var = var:FROM.dmz_state3_var
+					value = 0
+					compare = not_equals
+				}
+			}
+			var:FROM.dmz_state3_var = {
+				set_demilitarized_zone = yes
+				set_state_flag = {
+					flag = DMZ_recent_militarisation_flag
+					days = 180
+					value = 1
+				}
+				set_variable = { THIS.dmz_owner_tag = FROM }
 			}
 		}
-		var:FROM.dmz_state4_var = {
-			set_demilitarized_zone = yes
-			set_state_flag = {
-				flag = DMZ_recent_militarisation_flag
-				days = 180
-				value = 1
+		if = {
+			limit = {
+				check_variable = {
+					var = var:FROM.dmz_state4_var
+					value = 0
+					compare = not_equals
+				}
+			}
+			var:FROM.dmz_state4_var = {
+				set_demilitarized_zone = yes
+				set_state_flag = {
+					flag = DMZ_recent_militarisation_flag
+					days = 180
+					value = 1
+				}
+				set_variable = { THIS.dmz_owner_tag = FROM }
 			}
 		}
-		var:FROM.dmz_state5_var = {
-			set_demilitarized_zone = yes
-			set_state_flag = {
-				flag = DMZ_recent_militarisation_flag
-				days = 180
-				value = 1
+		if = {
+			limit = {
+				check_variable = {
+					var = var:FROM.dmz_state5_var
+					value = 0
+					compare = not_equals
+				}
+			}
+			var:FROM.dmz_state5_var = {
+				set_demilitarized_zone = yes
+				set_state_flag = {
+					flag = DMZ_recent_militarisation_flag
+					days = 180
+					value = 1
+				}
+				set_variable = { THIS.dmz_owner_tag = FROM }
 			}
 		}
 
@@ -146,25 +196,70 @@ country_event = { # FROM propose Remilitarisation
 		name = dmz.3.a
 
 		add_war_support = 0.035
-		var:FROM.dmz_state1_var = {
-			set_demilitarized_zone = no
-			clr_state_flag = DMZ_recent_militarisation_flag
+		if = {
+			limit = {
+				check_variable = {
+					var = var:FROM.dmz_state1_var
+					value = 0
+					compare = not_equals
+				}
+			}
+			var:FROM.dmz_state1_var = {
+				set_demilitarized_zone = no
+				clr_state_flag = DMZ_recent_militarisation_flag
+			}
 		}
-		var:FROM.dmz_state2_var = {
-			set_demilitarized_zone = no
-			clr_state_flag = DMZ_recent_militarisation_flag
+		if = {
+			limit = {
+				check_variable = {
+					var = var:FROM.dmz_state2_var
+					value = 0
+					compare = not_equals
+				}
+			}
+			var:FROM.dmz_state2_var = {
+				set_demilitarized_zone = no
+				clr_state_flag = DMZ_recent_militarisation_flag
+			}
 		}
-		var:FROM.dmz_state3_var = {
-			set_demilitarized_zone = no
-			clr_state_flag = DMZ_recent_militarisation_flag
+		if = {
+			limit = {
+				check_variable = {
+					var = var:FROM.dmz_state3_var
+					value = 0
+					compare = not_equals
+				}
+			}
+			var:FROM.dmz_state3_var = {
+				set_demilitarized_zone = no
+				clr_state_flag = DMZ_recent_militarisation_flag
+			}
 		}
-		var:FROM.dmz_state4_var = {
-			set_demilitarized_zone = no
-			clr_state_flag = DMZ_recent_militarisation_flag
+		if = {
+			limit = {
+				check_variable = {
+					var = var:FROM.dmz_state4_var
+					value = 0
+					compare = not_equals
+				}
+			}
+			var:FROM.dmz_state4_var = {
+				set_demilitarized_zone = no
+				clr_state_flag = DMZ_recent_militarisation_flag
+			}
 		}
-		var:FROM.dmz_state5_var = {
-			set_demilitarized_zone = no
-			clr_state_flag = DMZ_recent_militarisation_flag
+		if = {
+			limit = {
+				check_variable = {
+					var = var:FROM.dmz_state5_var
+					value = 0
+					compare = not_equals
+				}
+			}
+			var:FROM.dmz_state5_var = {
+				set_demilitarized_zone = no
+				clr_state_flag = DMZ_recent_militarisation_flag
+			}
 		}
 
 		hidden_effect = {
@@ -189,6 +284,30 @@ country_event = { # FROM propose Remilitarisation
 
 		ai_chance = {
 			base = 0
+		}
+	}
+}
+
+country_event = { # FROM remilitarises states
+	id = dmz.4
+	timeout_days = 14
+	is_triggered_only = yes
+
+	title = dmz.4.t
+	desc = dmz.4.desc
+
+	option = { # Let them do it.
+		name = dmz.4.a
+
+		add_stability = -0.035
+	}
+	option = { # Push on them!
+		name = dmz.4.b
+
+		add_political_power = -50
+		add_opinion_modifier = {
+			target = FROM
+			modifier = SI_diplomatic_protest
 		}
 	}
 }

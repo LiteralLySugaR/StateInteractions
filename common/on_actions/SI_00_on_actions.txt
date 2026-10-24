@@ -6,9 +6,51 @@ on_actions = {
 			
 			set_variable = { global.temp_calc_var = 1 }
 
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = si_interactions_cooldown_rules
+						option = SI_INTERACTIONS_COOLDOWN_QUARTER
+					}
+				}
+				set_variable = { global.temp_calc_var = 0.25 }
+			}
+			else_if = {
+				limit = {
+					has_game_rule = {
+						rule = si_interactions_cooldown_rules
+						option = SI_INTERACTIONS_COOLDOWN_HALF
+					}
+				}
+				set_variable = { global.temp_calc_var = 0.5 }
+			}
+			else_if = {
+				limit = {
+					has_game_rule = {
+						rule = si_interactions_cooldown_rules
+						option = SI_INTERACTIONS_COOLDOWN_ONEPLUSHALF
+					}
+				}
+				set_variable = { global.temp_calc_var = 1.5 }
+			}
+			else_if = {
+				limit = {
+					has_game_rule = {
+						rule = si_interactions_cooldown_rules
+						option = SI_INTERACTIONS_COOLDOWN_DOUBLE
+					}
+				}
+				set_variable = { global.temp_calc_var = 2 }
+			}
+			else = {
+				set_variable = { global.temp_calc_var = 1 }
+			}
 			set_variable = { global.si_demand_state_cooldown_days = 45 }
-
+			multiply_variable = { global.si_demand_state_cooldown_days = global.temp_calc_var }
+			round_variable = global.si_demand_state_cooldown_days
 			set_variable = { global.si_demand_vassalisation_cooldown_days = 90 }
+			multiply_variable = { global.si_demand_vassalisation_cooldown_days = global.temp_calc_var }
+			round_variable = global.si_demand_vassalisation_cooldown_days
 
 			set_variable = { global.si_demand_wargoal_cost_multiplier = 0.5 }
 
@@ -187,9 +229,52 @@ on_actions = {
 			set_variable = { global.sr_demand_cooldown_days = 15 }
 
 			set_variable = { global.si_border_war_cooldown_days = 70 }
-			
+
+
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = si_interactions_cost_rules
+						option = SI_INTERACTIONS_COST_QUARTER
+					}
+				}
+				set_variable = { global.temp_calc_var = 0.25 }
+			}
+			else_if = {
+				limit = {
+					has_game_rule = {
+						rule = si_interactions_cost_rules
+						option = SI_INTERACTIONS_COST_HALF
+					}
+				}
+				set_variable = { global.temp_calc_var = 0.5 }
+			}
+			else_if = {
+				limit = {
+					has_game_rule = {
+						rule = si_interactions_cost_rules
+						option = SI_INTERACTIONS_COST_ONEPLUSHALF
+					}
+				}
+				set_variable = { global.temp_calc_var = 1.5 }
+			}
+			else_if = {
+				limit = {
+					has_game_rule = {
+						rule = si_interactions_cost_rules
+						option = SI_INTERACTIONS_COST_DOUBLE
+					}
+				}
+				set_variable = { global.temp_calc_var = 2 }
+			}
+			else = {
+				set_variable = { global.temp_calc_var = 1 }
+			}
 			set_variable = { global.si_demand_vassalisation_pp_required = 300 }
-			set_variable = { global.si_demand_vassalisation_pp_take = -300 }
+			multiply_variable = { global.si_demand_vassalisation_pp_required = global.temp_calc_var }
+			round_variable = global.si_demand_vassalisation_pp_required
+			set_variable = { global.si_demand_vassalisation_pp_take = global.si_demand_vassalisation_pp_required }
+			multiply_variable = { global.si_demand_vassalisation_pp_take = -1 }
 			
 			set_variable = { global.si_claim_state_cp_required = 15 }
 			set_variable = { global.si_claim_state_cp_take = -15 }
@@ -199,7 +284,82 @@ on_actions = {
 			set_variable = { global.si_artillery_art_required = 500 }
 			set_variable = { global.si_artillery_art_take = -500 }
 			
-			set_variable = { global.sr_resources_per_factory = 6 }
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = sr_resources_per_factory_rules
+						option = SR_RPF_04
+					}
+				}
+				set_variable = { global.temp_calc_var = 4 }
+			}
+			else_if = {
+				limit = {
+					has_game_rule = {
+						rule = sr_resources_per_factory_rules
+						option = SR_RPF_05
+					}
+				}
+				set_variable = { global.temp_calc_var = 5 }
+			}
+			else_if = {
+				limit = {
+					has_game_rule = {
+						rule = sr_resources_per_factory_rules
+						option = SR_RPF_07
+					}
+				}
+				set_variable = { global.temp_calc_var = 7 }
+			}
+			else_if = {
+				limit = {
+					has_game_rule = {
+						rule = sr_resources_per_factory_rules
+						option = SR_RPF_08
+					}
+				}
+				set_variable = { global.temp_calc_var = 8 }
+			}
+			else_if = {
+				limit = {
+					has_game_rule = {
+						rule = sr_resources_per_factory_rules
+						option = SR_RPF_09
+					}
+				}
+				set_variable = { global.temp_calc_var = 9 }
+			}
+			else_if = {
+				limit = {
+					has_game_rule = {
+						rule = sr_resources_per_factory_rules
+						option = SR_RPF_10
+					}
+				}
+				set_variable = { global.temp_calc_var = 10 }
+			}
+			else_if = {
+				limit = {
+					has_game_rule = {
+						rule = sr_resources_per_factory_rules
+						option = SR_RPF_11
+					}
+				}
+				set_variable = { global.temp_calc_var = 11 }
+			}
+			else_if = {
+				limit = {
+					has_game_rule = {
+						rule = sr_resources_per_factory_rules
+						option = SR_RPF_12
+					}
+				}
+				set_variable = { global.temp_calc_var = 12 }
+			}
+			else = {
+				set_variable = { global.temp_calc_var = 6 }
+			}
+			set_variable = { global.sr_resources_per_factory = global.temp_calc_var }
 			
 			set_variable = { global.si_border_war_cp_required = 50 }
 			set_variable = { global.si_border_war_cp_take = -50 }
@@ -215,6 +375,86 @@ on_actions = {
 			set_variable = { global.si_border_war_reward_multiplier_default = 1 }
 			add_to_variable = { global.si_border_war_reward_multiplier_default = global.si_border_war_grace_multiplier_step }
 			set_variable = { global.si_border_war_min_industry = 9 }
+
+			# Category 01: wasteland, enclave, tiny_island	DEFAULT: 200
+			# Category 02: pastoral, small_island			DEFAULT: 225
+			# Category 03: rural							DEFAULT: 250
+			# Category 04: town								DEFAULT: 275
+			# Category 05: large_town						DEFAULT: 300
+			# Category 06: city								DEFAULT: 325
+			# Category 07: large_city						DEFAULT: 350
+			# Category 08: metropolis						DEFAULT: 375
+			# Category 09: megalopolis						DEFAULT: 400
+			# Category 10: no cost specified				DEFAULT: 250
+
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = si_interactions_cost_rules
+						option = SI_INTERACTIONS_COST_QUARTER
+					}
+				}
+				set_variable = { global.temp_calc_var = 0.25 }
+			}
+			else_if = {
+				limit = {
+					has_game_rule = {
+						rule = si_interactions_cost_rules
+						option = SI_INTERACTIONS_COST_HALF
+					}
+				}
+				set_variable = { global.temp_calc_var = 0.5 }
+			}
+			else_if = {
+				limit = {
+					has_game_rule = {
+						rule = si_interactions_cost_rules
+						option = SI_INTERACTIONS_COST_ONEPLUSHALF
+					}
+				}
+				set_variable = { global.temp_calc_var = 1.5 }
+			}
+			else_if = {
+				limit = {
+					has_game_rule = {
+						rule = si_interactions_cost_rules
+						option = SI_INTERACTIONS_COST_DOUBLE
+					}
+				}
+				set_variable = { global.temp_calc_var = 2 }
+			}
+			else = {
+				set_variable = { global.temp_calc_var = 1 }
+			}
+			set_variable = { global.si_state_cat_range_01 = 200 }
+			multiply_variable = { global.si_state_cat_range_01 = global.temp_calc_var }
+			round_variable = global.si_state_cat_range_01
+			set_variable = { global.si_state_cat_range_02 = 225 }
+			multiply_variable = { global.si_state_cat_range_02 = global.temp_calc_var }
+			round_variable = global.si_state_cat_range_02
+			set_variable = { global.si_state_cat_range_03 = 250 }
+			multiply_variable = { global.si_state_cat_range_03 = global.temp_calc_var }
+			round_variable = global.si_state_cat_range_03
+			set_variable = { global.si_state_cat_range_04 = 275 }
+			multiply_variable = { global.si_state_cat_range_04 = global.temp_calc_var }
+			round_variable = global.si_state_cat_range_04
+			set_variable = { global.si_state_cat_range_05 = 300 }
+			multiply_variable = { global.si_state_cat_range_05 = global.temp_calc_var }
+			round_variable = global.si_state_cat_range_05
+			set_variable = { global.si_state_cat_range_06 = 325 }
+			multiply_variable = { global.si_state_cat_range_06 = global.temp_calc_var }
+			round_variable = global.si_state_cat_range_06
+			set_variable = { global.si_state_cat_range_07 = 350 }
+			multiply_variable = { global.si_state_cat_range_07 = global.temp_calc_var }
+			round_variable = global.si_state_cat_range_07
+			set_variable = { global.si_state_cat_range_08 = 375 }
+			multiply_variable = { global.si_state_cat_range_08 = global.temp_calc_var }
+			round_variable = global.si_state_cat_range_08
+			set_variable = { global.si_state_cat_range_09 = 400 }
+			multiply_variable = { global.si_state_cat_range_09 = global.temp_calc_var }
+			round_variable = global.si_state_cat_range_09
+
+			set_variable = { global.si_state_cat_range_10 = global.si_state_cat_range_03 }
 
 			every_state = {
 				set_variable = { THIS.si_core_state_cp_required = 50 }
@@ -242,8 +482,7 @@ on_actions = {
 				set_variable = { THIS.sr_chromium_target_tag = 0 }
 				set_variable = { THIS.sr_coal_target_tag = 0 }
 
-				set_variable = { THIS.si_demand_state_pp_required = 250 }
-				set_variable = { THIS.si_demand_state_pp_take = -250 }
+				set_variable = { THIS.si_demand_state_pp_required = global.si_state_cat_range_10 }
 				if = {
 					limit = {
 						OR = {
@@ -252,8 +491,7 @@ on_actions = {
 							has_state_category = tiny_island
 						}
 					}
-					set_variable = { THIS.si_demand_state_pp_required = 200 }
-					set_variable = { THIS.si_demand_state_pp_take = -200 }
+					set_variable = { THIS.si_demand_state_pp_required = global.si_state_cat_range_01 }
 				}
 				if = {
 					limit = {
@@ -262,63 +500,58 @@ on_actions = {
 							has_state_category = small_island
 						}
 					}
-					set_variable = { THIS.si_demand_state_pp_required = 225 }
-					set_variable = { THIS.si_demand_state_pp_take = -225 }
+					set_variable = { THIS.si_demand_state_pp_required = global.si_state_cat_range_02 }
 				}
 				if = {
 					limit = {
 						has_state_category = rural
 					}
-					set_variable = { THIS.si_demand_state_pp_required = 250 }
-					set_variable = { THIS.si_demand_state_pp_take = -250 }
+					set_variable = { THIS.si_demand_state_pp_required = global.si_state_cat_range_03 }
 				}
 				if = {
 					limit = {
 						has_state_category = town
 					}
-					set_variable = { THIS.si_demand_state_pp_required = 275 }
-					set_variable = { THIS.si_demand_state_pp_take = -275 }
+					set_variable = { THIS.si_demand_state_pp_required = global.si_state_cat_range_04 }
 				}
 				if = {
 					limit = {
 						has_state_category = large_town
 					}
-					set_variable = { THIS.si_demand_state_pp_required = 300 }
-					set_variable = { THIS.si_demand_state_pp_take = -300 }
+					set_variable = { THIS.si_demand_state_pp_required = global.si_state_cat_range_05 }
 				}
 				if = {
 					limit = {
 						has_state_category = city
 					}
-					set_variable = { THIS.si_demand_state_pp_required = 325 }
-					set_variable = { THIS.si_demand_state_pp_take = -325 }
+					set_variable = { THIS.si_demand_state_pp_required = global.si_state_cat_range_06 }
 				}
 				if = {
 					limit = {
 						has_state_category = large_city
 					}
-					set_variable = { THIS.si_demand_state_pp_required = 350 }
-					set_variable = { THIS.si_demand_state_pp_take = -350 }
+					set_variable = { THIS.si_demand_state_pp_required = global.si_state_cat_range_07 }
 				}
 				if = {
 					limit = {
 						has_state_category = metropolis
 					}
-					set_variable = { THIS.si_demand_state_pp_required = 375 }
-					set_variable = { THIS.si_demand_state_pp_take = -375 }
+					set_variable = { THIS.si_demand_state_pp_required = global.si_state_cat_range_08 }
 				}
 				if = {
 					limit = {
 						has_state_category = megalopolis
 					}
-					set_variable = { THIS.si_demand_state_pp_required = 400 }
-					set_variable = { THIS.si_demand_state_pp_take = -400 }
+					set_variable = { THIS.si_demand_state_pp_required = global.si_state_cat_range_09 }
 				}
+
+				set_variable = { THIS.si_demand_state_pp_take = THIS.si_demand_state_pp_required }
+				multiply_variable = { THIS.si_demand_state_pp_take = -1 }
 			}
 			
 			every_possible_country = {
-				set_variable = { THIS.si_move_capital_pp_required = 250 }
-				set_variable = { THIS.si_move_capital_pp_take = -250 }
+				set_variable = { THIS.si_move_capital_pp_required = 200 }
+				set_variable = { THIS.si_move_capital_pp_take = -200 }
 
 				set_variable = { THIS.sr_factory_cost_var = 1 }
 
@@ -425,6 +658,46 @@ on_actions = {
 			if = {
 				limit = {
 					has_game_rule = {
+						rule = si_dmz_cost_rules
+						option = SI_DMZ_COST_QUARTER
+					}
+				}
+				set_variable = { global.temp_calc_var = 0.25 }
+			}
+			else_if = {
+				limit = {
+					has_game_rule = {
+						rule = si_dmz_cost_rules
+						option = SI_DMZ_COST_HALF
+					}
+				}
+				set_variable = { global.temp_calc_var = 0.5 }
+			}
+			else_if = {
+				limit = {
+					has_game_rule = {
+						rule = si_dmz_cost_rules
+						option = SI_DMZ_COST_ONEPLUSHALF
+					}
+				}
+				set_variable = { global.temp_calc_var = 1.5 }
+			}
+			else_if = {
+				limit = {
+					has_game_rule = {
+						rule = si_dmz_cost_rules
+						option = SI_DMZ_COST_DOUBLE
+					}
+				}
+				set_variable = { global.temp_calc_var = 2 }
+			}
+			else = {
+				set_variable = { global.temp_calc_var = 1 }
+			}
+
+			if = {
+				limit = {
+					has_game_rule = {
 						rule = si_state_militarisation_rules
 						option = SI_STATE_MILITARISATION_MP
 					}
@@ -436,6 +709,8 @@ on_actions = {
 				set_variable = { global.dmz_cmp_cost_per_state = 0 }
 				set_variable = { global.dmz_pp_cost_per_state = 0 }
 			}
+			multiply_variable = { global.dmz_cmp_cost_per_state = global.temp_calc_var }
+			multiply_variable = { global.dmz_pp_cost_per_state = global.temp_calc_var }
 
 			every_state = {
 				limit = {
@@ -516,149 +791,20 @@ on_actions = {
 				}
 			}
 
-			every_state = {
-				if = {
-					limit = {
-						OR = {
-							has_state_category = wasteland
-							has_state_category = enclave
-							has_state_category = tiny_island
-						}
-						check_variable = {
-							var = THIS.si_demand_state_pp_required
-							value = 200
-							compare = not_equals
-						}
-					}
-					set_variable = { THIS.si_demand_state_pp_required = 200 }
-					set_variable = { THIS.si_demand_state_pp_take = -200 }
-				}
-				if = {
-					limit = {
-						OR = {
-							has_state_category = pastoral
-							has_state_category = small_island
-						}
-						check_variable = {
-							var = THIS.si_demand_state_pp_required
-							value = 225
-							compare = not_equals
-						}
-					}
-					set_variable = { THIS.si_demand_state_pp_required = 225 }
-					set_variable = { THIS.si_demand_state_pp_take = -225 }
-				}
-				if = {
-					limit = {
-						has_state_category = rural
-						check_variable = {
-							var = THIS.si_demand_state_pp_required
-							value = 250
-							compare = not_equals
-						}
-					}
-					set_variable = { THIS.si_demand_state_pp_required = 250 }
-					set_variable = { THIS.si_demand_state_pp_take = -250 }
-				}
-				if = {
-					limit = {
-						has_state_category = town
-						check_variable = {
-							var = THIS.si_demand_state_pp_required
-							value = 275
-							compare = not_equals
-						}
-					}
-					set_variable = { THIS.si_demand_state_pp_required = 275 }
-					set_variable = { THIS.si_demand_state_pp_take = -275 }
-				}
-				if = {
-					limit = {
-						has_state_category = large_town
-						check_variable = {
-							var = THIS.si_demand_state_pp_required
-							value = 300
-							compare = not_equals
-						}
-					}
-					set_variable = { THIS.si_demand_state_pp_required = 300 }
-					set_variable = { THIS.si_demand_state_pp_take = -300 }
-				}
-				if = {
-					limit = {
-						has_state_category = city
-						check_variable = {
-							var = THIS.si_demand_state_pp_required
-							value = 325
-							compare = not_equals
-						}
-					}
-					set_variable = { THIS.si_demand_state_pp_required = 325 }
-					set_variable = { THIS.si_demand_state_pp_take = -325 }
-				}
-				if = {
-					limit = {
-						has_state_category = large_city
-						check_variable = {
-							var = THIS.si_demand_state_pp_required
-							value = 350
-							compare = not_equals
-						}
-					}
-					set_variable = { THIS.si_demand_state_pp_required = 350 }
-					set_variable = { THIS.si_demand_state_pp_take = -350 }
-				}
-				if = {
-					limit = {
-						has_state_category = metropolis
-						check_variable = {
-							var = THIS.si_demand_state_pp_required
-							value = 375
-							compare = not_equals
-						}
-					}
-					set_variable = { THIS.si_demand_state_pp_required = 375 }
-					set_variable = { THIS.si_demand_state_pp_take = -375 }
-				}
-				if = {
-					limit = {
-						has_state_category = megalopolis
-						check_variable = {
-							var = THIS.si_demand_state_pp_required
-							value = 400
-							compare = not_equals
-						}
-					}
-					set_variable = { THIS.si_demand_state_pp_required = 400 }
-					set_variable = { THIS.si_demand_state_pp_take = -400 }
-				}
-				if = {
-					limit = {
-						check_variable = {
-							var = THIS.si_demand_state_pp_required
-							value = 0
-							compare = equals
-						}
-					}
-					set_variable = { THIS.si_demand_state_pp_required = 250 }
-					set_variable = { THIS.si_demand_state_pp_take = -250 }
-				}
-			}
-
 			if = {
 				limit = {
 					ROOT = {
 						check_variable = {
 							var = ROOT.si_move_capital_pp_required
-							value = 250
+							value = 200
 							compare = equals
 						}
 						has_war = yes
 					}
 				}
 				ROOT = {
-					set_variable = { ROOT.si_move_capital_pp_required = 150 }
-					set_variable = { ROOT.si_move_capital_pp_take = -150 }
+					set_variable = { ROOT.si_move_capital_pp_required = 100 }
+					set_variable = { ROOT.si_move_capital_pp_take = -100 }
 				}
 			}
 			if = {
@@ -666,15 +812,15 @@ on_actions = {
 					ROOT = {
 						check_variable = {
 							var = ROOT.si_move_capital_pp_required
-							value = 250
+							value = 200
 							compare = not_equals
 						}
 						has_war = no
 					}
 				}
 				ROOT = {
-					set_variable = { ROOT.si_move_capital_pp_required = 250 }
-					set_variable = { ROOT.si_move_capital_pp_take = -250 }
+					set_variable = { ROOT.si_move_capital_pp_required = 200 }
+					set_variable = { ROOT.si_move_capital_pp_take = -200 }
 				}
 			}
 
@@ -719,6 +865,133 @@ on_actions = {
 						modifier = SI_factories_total_take_modifier
 					}
 				}
+			}
+
+		}
+	}
+
+	on_weekly = {
+		effect = {
+			
+			every_state = {
+				if = {
+					limit = {
+						OR = {
+							has_state_category = wasteland
+							has_state_category = enclave
+							has_state_category = tiny_island
+						}
+						check_variable = {
+							var = THIS.si_demand_state_pp_required
+							value = global.si_state_cat_range_01
+							compare = not_equals
+						}
+					}
+					set_variable = { THIS.si_demand_state_pp_required = global.si_state_cat_range_01 }
+				}
+				if = {
+					limit = {
+						OR = {
+							has_state_category = pastoral
+							has_state_category = small_island
+						}
+						check_variable = {
+							var = THIS.si_demand_state_pp_required
+							value = global.si_state_cat_range_02
+							compare = not_equals
+						}
+					}
+					set_variable = { THIS.si_demand_state_pp_required = global.si_state_cat_range_02 }
+				}
+				if = {
+					limit = {
+						has_state_category = rural
+						check_variable = {
+							var = THIS.si_demand_state_pp_required
+							value = global.si_state_cat_range_03
+							compare = not_equals
+						}
+					}
+					set_variable = { THIS.si_demand_state_pp_required = global.si_state_cat_range_03 }
+				}
+				if = {
+					limit = {
+						has_state_category = town
+						check_variable = {
+							var = THIS.si_demand_state_pp_required
+							value = global.si_state_cat_range_04
+							compare = not_equals
+						}
+					}
+					set_variable = { THIS.si_demand_state_pp_required = global.si_state_cat_range_04 }
+				}
+				if = {
+					limit = {
+						has_state_category = large_town
+						check_variable = {
+							var = THIS.si_demand_state_pp_required
+							value = global.si_state_cat_range_05
+							compare = not_equals
+						}
+					}
+					set_variable = { THIS.si_demand_state_pp_required = global.si_state_cat_range_05 }
+				}
+				if = {
+					limit = {
+						has_state_category = city
+						check_variable = {
+							var = THIS.si_demand_state_pp_required
+							value = global.si_state_cat_range_06
+							compare = not_equals
+						}
+					}
+					set_variable = { THIS.si_demand_state_pp_required = global.si_state_cat_range_06 }
+				}
+				if = {
+					limit = {
+						has_state_category = large_city
+						check_variable = {
+							var = THIS.si_demand_state_pp_required
+							value = global.si_state_cat_range_07
+							compare = not_equals
+						}
+					}
+					set_variable = { THIS.si_demand_state_pp_required = global.si_state_cat_range_07 }
+				}
+				if = {
+					limit = {
+						has_state_category = metropolis
+						check_variable = {
+							var = THIS.si_demand_state_pp_required
+							value = global.si_state_cat_range_08
+							compare = not_equals
+						}
+					}
+					set_variable = { THIS.si_demand_state_pp_required = global.si_state_cat_range_08 }
+				}
+				if = {
+					limit = {
+						has_state_category = megalopolis
+						check_variable = {
+							var = THIS.si_demand_state_pp_required
+							value = global.si_state_cat_range_09
+							compare = not_equals
+						}
+					}
+					set_variable = { THIS.si_demand_state_pp_required = global.si_state_cat_range_09 }
+				}
+				if = {
+					limit = {
+						check_variable = {
+							var = THIS.si_demand_state_pp_required
+							value = 0
+							compare = equals
+						}
+					}
+					set_variable = { THIS.si_demand_state_pp_required = global.si_state_cat_range_10 }
+				}
+				set_variable = { THIS.si_demand_state_pp_take = THIS.si_demand_state_pp_required }
+				multiply_variable = { THIS.si_demand_state_pp_take = -1 }
 			}
 
 		}

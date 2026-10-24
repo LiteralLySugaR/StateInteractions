@@ -362,3 +362,155 @@ si_dmz_cooldown_rules = {
 		desc = "SI_RULE_DMZ_COOLDOWN_DOUBLE_DESC"
 	}
 }
+si_interactions_cost_rules = {
+
+	name = "SI_INTERACTIONS_COST_RULES"
+	group = "SI_GENERAL_GROUP"
+	icon = GFX_SI_mini_icon
+
+	default = {
+		name = SI_INTERACTIONS_COST_DEFAULT
+		text = "SI_RULE_INTERACTIONS_COST_DEFAULT"
+		desc = "SI_RULE_INTERACTIONS_COST_DEFAULT_DESC"
+	}
+	option = {
+		name = SI_INTERACTIONS_COST_QUARTER
+		text = "SI_RULE_INTERACTIONS_COST_QUARTER"
+		desc = "SI_RULE_INTERACTIONS_COST_QUARTER_DESC"
+	}
+	option = {
+		name = SI_INTERACTIONS_COST_HALF
+		text = "SI_RULE_INTERACTIONS_COST_HALF"
+		desc = "SI_RULE_INTERACTIONS_COST_HALF_DESC"
+	}
+	option = {
+		name = SI_INTERACTIONS_COST_ONEPLUSHALF
+		text = "SI_RULE_INTERACTIONS_COST_ONEPLUSHALF"
+		desc = "SI_RULE_INTERACTIONS_COST_ONEPLUSHALF_DESC"
+	}
+	option = {
+		name = SI_INTERACTIONS_COST_DOUBLE
+		text = "SI_RULE_INTERACTIONS_COST_DOUBLE"
+		desc = "SI_RULE_INTERACTIONS_COST_DOUBLE_DESC"
+	}
+
+}
+si_interactions_cooldown_rules = {
+
+	name = "SI_INTERACTIONS_COOLDOWN_RULES"
+	group = "SI_GENERAL_GROUP"
+	icon = GFX_SI_mini_icon
+
+	default = {
+		name = SI_INTERACTIONS_COOLDOWN_DEFAULT
+		text = "SI_RULE_INTERACTIONS_COOLDOWN_DEFAULT"
+		desc = "SI_RULE_INTERACTIONS_COOLDOWN_DEFAULT_DESC"
+	}
+	option = {
+		name = SI_INTERACTIONS_COOLDOWN_QUARTER
+		text = "SI_RULE_INTERACTIONS_COOLDOWN_QUARTER"
+		desc = "SI_RULE_INTERACTIONS_COOLDOWN_QUARTER_DESC"
+	}
+	option = {
+		name = SI_INTERACTIONS_COOLDOWN_HALF
+		text = "SI_RULE_INTERACTIONS_COOLDOWN_HALF"
+		desc = "SI_RULE_INTERACTIONS_COOLDOWN_HALF_DESC"
+	}
+	option = {
+		name = SI_INTERACTIONS_COOLDOWN_ONEPLUSHALF
+		text = "SI_RULE_INTERACTIONS_COOLDOWN_ONEPLUSHALF"
+		desc = "SI_RULE_INTERACTIONS_COOLDOWN_ONEPLUSHALF_DESC"
+	}
+	option = {
+		name = SI_INTERACTIONS_COOLDOWN_DOUBLE
+		text = "SI_RULE_INTERACTIONS_COOLDOWN_DOUBLE"
+		desc = "SI_RULE_INTERACTIONS_COOLDOWN_DOUBLE_DESC"
+	}
+
+}
+si_dmz_cost_rules = {
+
+	name = "SI_DMZ_COST_RULES"
+	group = "SI_GENERAL_GROUP"
+	icon = GFX_SI_mini_icon
+
+	default = {
+		name = SI_DMZ_COST_DEFAULT
+		text = "SI_RULE_DMZ_COST_DEFAULT"
+		desc = "SI_RULE_DMZ_COST_DEFAULT_DESC"
+	}
+	option = {
+		name = SI_DMZ_COST_QUARTER
+		text = "SI_RULE_DMZ_COST_QUARTER"
+		desc = "SI_RULE_DMZ_COST_QUARTER_DESC"
+	}
+	option = {
+		name = SI_DMZ_COST_HALF
+		text = "SI_RULE_DMZ_COST_HALF"
+		desc = "SI_RULE_DMZ_COST_HALF_DESC"
+	}
+	option = {
+		name = SI_DMZ_COST_ONEPLUSHALF
+		text = "SI_RULE_DMZ_COST_ONEPLUSHALF"
+		desc = "SI_RULE_DMZ_COST_ONEPLUSHALF_DESC"
+	}
+	option = {
+		name = SI_DMZ_COST_DOUBLE
+		text = "SI_RULE_DMZ_COST_DOUBLE"
+		desc = "SI_RULE_DMZ_COST_DOUBLE_DESC"
+	}
+
+}
+sr_resources_per_factory_rules = {
+
+	name = "SR_RPF_RULES"
+	group = "SI_GENERAL_GROUP"
+	icon = GFX_SI_mini_icon
+
+	default = {
+		name = SR_RPF_DEFAULT
+		text = "SR_RULE_RPF_DEFAULT"
+		desc = "SR_RULE_RPF_DEFAULT_DESC"
+	}
+	option = {
+		name = SR_RPF_04
+		text = "SR_RULE_RPF_04"
+		desc = "SR_RULE_RPF_04_DESC"
+	}
+	option = {
+		name = SR_RPF_05
+		text = "SR_RULE_RPF_05"
+		desc = "SR_RULE_RPF_05_DESC"
+	}
+	option = {
+		name = SR_RPF_07
+		text = "SR_RULE_RPF_07"
+		desc = "SR_RULE_RPF_07_DESC"
+	}
+	option = {
+		name = SR_RPF_08
+		text = "SR_RULE_RPF_08"
+		desc = "SR_RULE_RPF_08_DESC"
+	}
+	option = {
+		name = SR_RPF_09
+		text = "SR_RULE_RPF_09"
+		desc = "SR_RULE_RPF_09_DESC"
+	}
+	option = {
+		name = SR_RPF_10
+		text = "SR_RULE_RPF_10"
+		desc = "SR_RULE_RPF_10_DESC"
+	}
+	option = {
+		name = SR_RPF_11
+		text = "SR_RULE_RPF_11"
+		desc = "SR_RULE_RPF_11_DESC"
+	}
+	option = {
+		name = SR_RPF_12
+		text = "SR_RULE_RPF_12"
+		desc = "SR_RULE_RPF_12_DESC"
+	}
+
+}
