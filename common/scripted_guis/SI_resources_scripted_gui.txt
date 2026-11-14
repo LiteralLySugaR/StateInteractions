@@ -29,13 +29,11 @@ scripted_gui = {
 		}
 
 		triggers = {
-			state_resources_nemu_button_visible = {
+			state_resources_nemu_button_click_enabled = {
 				has_game_rule = {
 					rule = si_resources_demand_rules
 					option = SI_RESOURCES_DEMAND_DEFAULT
 				}
-			}
-			state_resources_nemu_button_click_enabled = {
 				ROOT = {
 					NOT = {
 						has_country_flag = DMZ_menu_flag

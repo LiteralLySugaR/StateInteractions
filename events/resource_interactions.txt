@@ -51,7 +51,7 @@ country_event = { # FROM offers resource contract
 		}
 
 		hidden_effect = {
-			FROM.sr_target_state = {
+			var:FROM.sr_target_state = {
 				set_state_flag = SR_resources_taken_flag_@FROM
 			}
 			if = {
@@ -857,7 +857,7 @@ country_event = { # FROM terminates contract (for contract reciever)
 		add_to_variable = { var:FROM.sr_total_factories_sent = var:FROM.sr_slot_2_factories_sent }
 		add_to_variable = { var:FROM.sr_total_factories_sent = var:FROM.sr_slot_3_factories_sent }
 
-		stateid_temp_a = { clr_state_flag = SR_resources_taken_flag_@PREV }
+		var:stateid_temp_a = { clr_state_flag = SR_resources_taken_flag_@PREV }
 		ROOT = {
 			if = {
 				limit = {

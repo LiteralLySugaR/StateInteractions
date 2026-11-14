@@ -1,4 +1,4 @@
-version="4.2"
+version="4.3"
 tags={
 	"Gameplay"
 	"Utilities"
@@ -14,5 +14,5 @@ dependencies={
 	"Novum Vexillum"
 	"Equestria at War"
 }
-supported_version="1.19.3.0"
+supported_version="1.19.5.0"
 remote_file_id="3654481928"

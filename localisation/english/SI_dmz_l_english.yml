@@ -35,11 +35,21 @@
   dmz.3.a:0 "Good proposal!"
   dmz.3.b:0 "We cannot break an agreement."
 
+  dmz.4.t:0 "[FROM.GetNameDefCap] steps for remilitarisation!"
+  dmz.4.desc:0 "The agreement to keep demilitarised part of their country appears to shatter as [FROM.GetAdjective] troops enter the demilitarised zone enforced by us."
+  dmz.4.a:0 "Let them do it."
+  dmz.4.b:0 "Press on them!"
+
+  dmz.5.t:0 "[FROM.GetNameDefCap] press for demilitarisation"
+  dmz.5.desc:0 "[FROM.GetAdjective] delegation have arrived with a harsh response to our recent state remilitarisation, they demand immediate withdrawal of our troops from the region and remain its demilitarised status."
+  dmz.5.a:0 "Lets not anger them."
+  dmz.5.b:0 "Thats none of their business!"
+
   SI_dmz_not_borderwar_locked_tt:0 "Is §RNOT§! locked by a §YBorder-War§!"
   SI_dmz_not_starting_locked_tt:0 "Is §RNOT§! demilitarised from game start (Effective for §Y2.5 years§!)"
   SI_dmz_not_recently_dmzed_tt:0 "Was §RNOT§! recently §YDemilitarised§!"
   SI_dmz_not_demand_subject_or_locked_tt:0 "Is §RNOT§! subject of demands"
-  SI_dmz_array_size_less_5_tt:0 "Have selected less than §Y[?global.DMZ_max_states_var] States§!"
+  SI_dmz_array_size_less_tt:0 "Have selected less than §Y[?global.DMZ_max_states_var] States§!"
   SI_dmz_not_recently_asked_tt:0 "Was §RNOT§! recently asked to demilitarise"
 
   SI_STATE_MILITARISATION_RULES:0 "State Militarisation Tool Rules"

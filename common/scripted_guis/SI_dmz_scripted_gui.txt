@@ -1,5 +1,5 @@
 scripted_gui = {
-	
+
 	state_dmz_gui = {
 		context_type = selected_state_context
 
@@ -9,12 +9,6 @@ scripted_gui = {
 
 		visible = {
 			always = yes
-		}
-
-		properties = {
-			state_dmz_button = {
-				y = global.DMZ_sideicon_menu_y_pos
-			}
 		}
 
 		effects = {
@@ -34,15 +28,13 @@ scripted_gui = {
 		}
 
 		triggers = {
-			state_dmz_button_visible = {
+			state_dmz_button_click_enabled = {
 				NOT = {
 					has_game_rule = {
 						rule = si_state_militarisation_rules
 						option = SI_STATE_MILITARISATION_DISABLED
 					}
 				}
-			}
-			state_dmz_button_click_enabled = {
 				ROOT = {
 					NOT = {
 						has_country_flag = SI_menu_3_flag
@@ -220,7 +212,7 @@ scripted_gui = {
 								is_in_array = { ROOT.dmz_target_states_array = THIS.id }
 							}
 
-							every_country = { # Clearing all other countries marks if theres any before the main effects
+							every_country = { # Clearing all other countries marks before the main effects
 								limit = {
 									NOT = { tag = ROOT }
 								}
@@ -241,18 +233,21 @@ scripted_gui = {
 							else = {
 								set_demilitarized_zone = no
 
-								every_country = {
-									limit = {
-										tag = var:PREV.dmz_owner_tag
-										NOT = {
-											is_in_array = {
-												array = ROOT.dmz_owners_array
-												value = THIS
+								var:THIS.dmz_owner_tag = {
+									if = {
+										limit = {
+											NOT = {
+												is_in_array = {
+													array = ROOT.dmz_owners_array
+													value = THIS
+												}
+												tag = ROOT
 											}
 										}
+										add_to_array = { ROOT.dmz_owners_array = THIS }
 									}
-									add_to_array = { ROOT.dmz_owners_array = THIS }
 								}
+								set_state_flag = SI_dmz_pending_resolve_flag
 							}
 							remove_from_array = { ROOT.dmz_target_states_array = THIS.id }
 						}
@@ -264,6 +259,10 @@ scripted_gui = {
 								}
 							}
 							country_event = { id = dmz.4 days = 1 random_days = 6 }
+							remove_from_array = {
+								array = ROOT.dmz_owners_array
+								value = THIS
+							}
 						}
 					}
 					else = { # DMZing others
@@ -352,7 +351,7 @@ scripted_gui = {
 						}
 					}
 					custom_trigger_tooltip = {
-						tooltip = SI_dmz_array_size_less_5_tt
+						tooltip = SI_dmz_array_size_less_tt
 						check_variable = { ROOT.dmz_target_states_array^num < var:global.DMZ_max_states_var }
 					}
 					FROM = {
