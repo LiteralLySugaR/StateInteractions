@@ -1,5 +1,5 @@
 ﻿l_english:
- SI_stateview_button:0 "Toggle §YState Interaction§! menu\n--------------------\nActive gamerules:\n- State Transfer (§Y[SiStateTransferGameRule]§!)\n- AI Behaviour (§Y[SiAiBehaviourRule]§!)\n- AI Rejection (§Y[SiAiRejectionRule]§!)\n- Coring Compliance (§Y[SiCoreComplianceRule]§!)\n- Coastal Claiming (§Y[SiClaimShoreRule]§!)\n- Resources Demand (§Y[SiResourceDemandRule]§!)\n- Claim Cooldown (§Y[SiClaimRule]§!)\n- Core Cooldown (§Y[SiCoreRule]§!)\n- Move Capital Cooldown (§Y[SiCapitalRule]§!)\n- Demand Wargoal Cost (§Y[SiWargoalCostRule]§!)\n- Artillery Cooldown (§Y[SiArtilleryRule]§!)\n- Militarisation (§Y[SiMilitarisationRule]§!)\n- Militarisation Cooldown (§Y[SiDmzRule]§!)"
+ SI_stateview_button:0 "Toggle §YState Interaction§! menu\n--------------------\nActive gamerules:\n- State Transfer (§Y[SiStateTransferGameRule]§!)\n- AI Behaviour (§Y[SiAiBehaviourRule]§!)\n- AI Rejection (§Y[SiAiRejectionRule]§!)\n- Coring Compliance (§Y[SiCoreComplianceRule]§!)\n- Coastal Claiming (§Y[SiClaimShoreRule]§!)\n- Resources Demand (§Y[SiResourceDemandRule]§!)\n- Claim Cooldown (§Y[SiClaimRule]§!)\n- Core Cooldown (§Y[SiCoreRule]§!)\n- Move Capital Cooldown (§Y[SiCapitalRule]§!)\n- Demand Wargoal Cost (§Y[SiWargoalCostRule]§!)\n- Artillery Cooldown (§Y[SiArtilleryRule]§!)\n- Militarisation (§Y[SiMilitarisationRule]§!)\n- Militarisation Cooldown (§Y[SiDmzRule]§!)\n- Interactions Cost (§Y[SiInteractionsCostRule]§!)\n- Interactions Cooldown (§Y[SiInteractionsCooldownRule]§!)\n- Militarisation Cost (§Y[SiDmzCostRule]§!)\n- Resources per Factory (§Y[SrRpfRule]§!)\n- Subject State Demanding (§Y[SiSubjectStateDemandRule]§!)"
 
  SI_state_demand_button:0 "Demand §Y[FROM.GetName]§![FROM.owner.GetFlag] ([?FROM.si_demand_state_pp_required] £GFX_pol_power )\n--------------------\n§YAdditional requirements§!\n- §Y[FROM.owner.GetName]§! is §RNOT§! at war with you, your subject or ally\n- §Y[FROM.owner.GetName]§! is §RNOT§! you, your subject or ally\n- §Y[FROM.GetName]§! has border with you or your subject\n- §Y[FROM.GetName]§! is §RNOT§! subject of demands\n- §Y[FROM.GetName]§! is §RNOT§! part of border conflict\n- You are §RNOT§! a subject of another country\n- If §Y[FROM.GetName]§! is coastal then either claimed, or core of yours\n--------------------\nCooldown: §Y[?global.si_demand_state_cooldown_days]§! days (§gMajor interactions§!)"
 
@@ -93,6 +93,7 @@
  SI_INTERACTIONS_COOLDOWN_RULES:0 "Interactions Cooldown Rules"
  SI_DMZ_COST_RULES:0 "Militarisation Tool Cost"
  SR_RPF_RULES:0 "Resources Per Factory Rules"
+ SI_STATE_SUBJECT_DEMAND_RULES:0 "Subject's State Demanding Rules"
 
  SI_RULE_STATE_TRANSFER_DEFAULT:0 "Default (SP)"
  SI_RULE_STATE_TRANSFER_DEFAULT_DESC:0 "State transfer works without limitations."
@@ -238,6 +239,13 @@
  SR_RULE_RPF_12:0 "12"
  SR_RULE_RPF_12_DESC:0 "(Resource Demanding) You will get 12 resources per factory."
 
+ SI_RULE_STATE_SUBJECT_DEMAND_DEFAULT:0 "Default"
+ SI_RULE_STATE_SUBJECT_DEMAND_DEFAULT_DESC:0 "Upon demanding a puppet's state, if the the puppet has low autonomy the event will fire for the overlord, otherwise for the puppet."
+ SI_RULE_STATE_SUBJECT_DEMAND_SIMPLE:0 "Simple"
+ SI_RULE_STATE_SUBJECT_DEMAND_SIMPLE_DESC:0 "Upon demanding a puppet's state, the event will fire for the overlord."
+ SI_RULE_STATE_SUBJECT_DEMAND_OWNER:0 "Owner"
+ SI_RULE_STATE_SUBJECT_DEMAND_OWNER_DESC:0 "Demanding a puppet's state will always fire the event for the puppet."
+
  SI_retaliation_tt:0 "§RA war is imminent if they decide to push.§!"
 
  SI_state_demanded_threat:0 "Demanded State"
@@ -295,6 +303,33 @@
  SI_artillery_gamerule_half:0 "x0.5"
  SI_artillery_gamerule_oneplushalf:0 "x1.5"
  SI_artillery_gamerule_double:0 "x2.0"
+ SI_interactions_cost_gamerule_default:0 "x1.0"
+ SI_interactions_cost_gamerule_quarter:0 "x0.25"
+ SI_interactions_cost_gamerule_half:0 "x0.5"
+ SI_interactions_cost_gamerule_oneplushalf:0 "x1.5"
+ SI_interactions_cost_gamerule_double:0 "x2.0"
+ SI_interactions_cooldown_gamerule_default:0 "x1.0"
+ SI_interactions_cooldown_gamerule_quarter:0 "x0.25"
+ SI_interactions_cooldown_gamerule_half:0 "x0.5"
+ SI_interactions_cooldown_gamerule_oneplushalf:0 "x1.5"
+ SI_interactions_cooldown_gamerule_double:0 "x2.0"
+ SI_dmz_cost_gamerule_default:0 "x1.0"
+ SI_dmz_cost_gamerule_quarter:0 "x0.25"
+ SI_dmz_cost_gamerule_half:0 "x0.5"
+ SI_dmz_cost_gamerule_oneplushalf:0 "x1.5"
+ SI_dmz_cost_gamerule_double:0 "x2.0"
+ SI_rpf_gamerule_default:0 "6"
+ SI_rpf_gamerule_04:0 "4"
+ SI_rpf_gamerule_05:0 "5"
+ SI_rpf_gamerule_07:0 "7"
+ SI_rpf_gamerule_08:0 "8"
+ SI_rpf_gamerule_09:0 "9"
+ SI_rpf_gamerule_10:0 "10"
+ SI_rpf_gamerule_11:0 "11"
+ SI_rpf_gamerule_12:0 "12"
+ SI_state_subject_demand_gamerule_default:0 "Default"
+ SI_state_subject_demand_gamerule_simple:0 "Simple"
+ SI_state_subject_demand_gamerule_owner:0 "Owner"
 
  SI_opposition_to_new_owner_modifier:0 "New Ownership Opposition"
  SI_shelling_modifier:0 "Suppressive Shelling"

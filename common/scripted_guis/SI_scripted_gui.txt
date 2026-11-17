@@ -329,6 +329,33 @@ scripted_gui = {
 			}
 
 			state_menu_demand_state_button_click = {
+				set_variable = { ROOT.si_state_owner_var = FROM.owner }
+				if = { # Do we need to rewrite the var above with the overlord?
+					limit = {
+						OR = {
+							AND = {
+								has_game_rule = {
+									rule = si_state_subject_demand_rules
+									option = SI_STATE_SUBJECT_DEMAND_DEFAULT
+								}
+								FROM.owner = { is_puppet = yes } # I consider this low autonomy
+							}
+							AND = {
+								has_game_rule = {
+									rule = si_state_subject_demand_rules
+									option = SI_STATE_SUBJECT_DEMAND_SIMPLE
+								}
+								FROM.owner = { is_subject = yes } # I consider this autonomy in general
+							}
+						}
+					}
+					FROM.owner = {
+						overlord = {
+							set_variable = { ROOT.si_state_owner_var = THIS }
+						}
+					}
+				}
+
 				if = {
 					limit = {
 						ROOT = {
@@ -404,7 +431,9 @@ scripted_gui = {
 				multiply_variable = { ROOT.si_requested_state_cost_pp = -1 }
 				clear_variable = ROOT.temp_calc_var
 
-				set_variable = { ROOT.requested_state_@FROM.owner = FROM }
+				var:ROOT.si_state_owner_var = {
+					set_variable = { ROOT.requested_state_@THIS = FROM }
+				}
 
 				set_variable = { ROOT.request_target_civilian_factories_@THIS = var:FROM.industrial_complex_level }
 				multiply_variable = { ROOT.request_target_civilian_factories_@THIS = 5 }
@@ -421,7 +450,7 @@ scripted_gui = {
 						add_to_variable = { PREV.total_population_factor_var = THIS.state_population_k }
 					}
 				}
-				FROM.owner = {
+				var:ROOT.si_state_owner_var = {
 					set_variable = { THIS.total_population_factor_var = 0 }
 					every_owned_state = {
 						add_to_variable = { PREV.total_population_factor_var = THIS.state_population_k }
@@ -435,7 +464,7 @@ scripted_gui = {
 					max = 2.0
 				}
 
-				FROM.owner = {
+				var:ROOT.si_state_owner_var = {
 					set_variable = { ROOT.relations_value_positive_scaled_@THIS = THIS.opinion@ROOT }
 					clamp_variable = { var = ROOT.relations_value_positive_scaled_@THIS min = 0 }
 					divide_variable = { ROOT.relations_value_positive_scaled_@THIS = 3 }
@@ -472,6 +501,7 @@ scripted_gui = {
 						random_days = 6
 					}
 				}
+
 				FROM = {
 					set_state_flag = {
 						flag = SI_state_demand_subject_flag
@@ -488,7 +518,7 @@ scripted_gui = {
 					if = {
 						limit = {
 							ROOT = { is_major = no }
-							FROM.owner = { is_major = no }
+							var:ROOT.si_state_owner_var = { is_major = no }
 						}
 						add_named_threat = {
 							threat = 1.0
@@ -500,34 +530,25 @@ scripted_gui = {
 							OR = {
 								AND = {
 									ROOT = { is_major = yes }
-									FROM.owner = { is_major = no }
+									var:ROOT.si_state_owner_var = { is_major = no }
 								}
 								AND = {
 									ROOT = { is_major = no }
-									FROM.owner = { is_major = yes }
+									var:ROOT.si_state_owner_var = { is_major = yes }
 								}
 							}
 						}
 						add_named_threat = {
-							threat = 2
+							threat = 2.0
 							name = SI_state_demanded_threat
 						}
 					}
 					else = {
 						add_named_threat = {
-							threat = 3
+							threat = 3.0
 							name = SI_state_demanded_threat
 						}
 					}
-				}
-
-				# Debug
-				if = {
-					limit = {
-						ROOT = { is_ai = yes }
-						is_debug = yes
-					}
-					log = "(SI) [ROOT.GetName] demanded [FROM.GetName] from [FROM.owner.GetName]"
 				}
 			}
 

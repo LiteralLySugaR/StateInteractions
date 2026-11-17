@@ -422,3 +422,236 @@ defined_text = {
 		localization_key = SI_dmz_gamerule_default
 	}
 }
+defined_text = {
+	name = SiInteractionsCostRule
+
+	text = {
+		trigger = {
+			has_game_rule = {
+				rule = si_interactions_cost_rules
+				option = SI_INTERACTIONS_COST_QUARTER
+			}
+		}
+		localization_key = SI_interactions_cost_gamerule_quarter
+	}
+	text = {
+		trigger = {
+			has_game_rule = {
+				rule = si_interactions_cost_rules
+				option = SI_INTERACTIONS_COST_HALF
+			}
+		}
+		localization_key = SI_interactions_cost_gamerule_half
+	}
+	text = {
+		trigger = {
+			has_game_rule = {
+				rule = si_dmz_cooldown_rules
+				option = SI_DMZ_COOLDOWN_ONEPLUSHALF
+			}
+		}
+		localization_key = SI_interactions_cost_gamerule_oneplushalf
+	}
+	text = {
+		trigger = {
+			has_game_rule = {
+				rule = si_dmz_cooldown_rules
+				option = SI_DMZ_COOLDOWN_DOUBLE
+			}
+		}
+		localization_key = SI_interactions_cost_gamerule_double
+	}
+	text = {
+		localization_key = SI_interactions_cost_gamerule_default
+	}
+}
+defined_text = {
+	name = SiInteractionsCooldownRule
+
+	text = {
+		trigger = {
+			has_game_rule = {
+				rule = si_interactions_cooldown_rules
+				option = SI_INTERACTIONS_COOLDOWN_QUARTER
+			}
+		}
+		localization_key = SI_interactions_cooldown_gamerule_quarter
+	}
+	text = {
+		trigger = {
+			has_game_rule = {
+				rule = si_interactions_cooldown_rules
+				option = SI_INTERACTIONS_COOLDOWN_HALF
+			}
+		}
+		localization_key = SI_interactions_cooldown_gamerule_half
+	}
+	text = {
+		trigger = {
+			has_game_rule = {
+				rule = si_interactions_cooldown_rules
+				option = SI_INTERACTIONS_COOLDOWN_ONEPLUSHALF
+			}
+		}
+		localization_key = SI_interactions_cooldown_gamerule_oneplushalf
+	}
+	text = {
+		trigger = {
+			has_game_rule = {
+				rule = si_interactions_cooldown_rules
+				option = SI_INTERACTIONS_COOLDOWN_DOUBLE
+			}
+		}
+		localization_key = SI_interactions_cooldown_gamerule_double
+	}
+	text = {
+		localization_key = SI_interactions_cooldown_gamerule_default
+	}
+}
+defined_text = {
+	name = SiDmzCostRule
+
+	text = {
+		trigger = {
+			has_game_rule = {
+				rule = si_dmz_cost_rules
+				option = SI_DMZ_COST_QUARTER
+			}
+		}
+		localization_key = SI_dmz_cost_gamerule_quarter
+	}
+	text = {
+		trigger = {
+			has_game_rule = {
+				rule = si_dmz_cost_rules
+				option = SI_DMZ_COST_HALF
+			}
+		}
+		localization_key = SI_dmz_cost_gamerule_half
+	}
+	text = {
+		trigger = {
+			has_game_rule = {
+				rule = si_dmz_cost_rules
+				option = SI_DMZ_COST_ONEPLUSHALF
+			}
+		}
+		localization_key = SI_dmz_cost_gamerule_oneplushalf
+	}
+	text = {
+		trigger = {
+			has_game_rule = {
+				rule = si_dmz_cost_rules
+				option = SI_DMZ_COST_DOUBLE
+			}
+		}
+		localization_key = SI_dmz_cost_gamerule_double
+	}
+	text = {
+		localization_key = SI_dmz_cost_gamerule_default
+	}
+}
+defined_text = {
+	name = SrRpfRule
+
+	text = {
+		trigger = {
+			has_game_rule = {
+				rule = sr_resources_per_factory_rules
+				option = SR_RPF_04
+			}
+		}
+		localization_key = SI_rpf_gamerule_04
+	}
+	text = {
+		trigger = {
+			has_game_rule = {
+				rule = sr_resources_per_factory_rules
+				option = SR_RPF_05
+			}
+		}
+		localization_key = SI_rpf_gamerule_05
+	}
+	text = {
+		trigger = {
+			has_game_rule = {
+				rule = sr_resources_per_factory_rules
+				option = SR_RPF_07
+			}
+		}
+		localization_key = SI_rpf_gamerule_07
+	}
+	text = {
+		trigger = {
+			has_game_rule = {
+				rule = sr_resources_per_factory_rules
+				option = SR_RPF_08
+			}
+		}
+		localization_key = SI_rpf_gamerule_08
+	}
+	text = {
+		trigger = {
+			has_game_rule = {
+				rule = sr_resources_per_factory_rules
+				option = SR_RPF_09
+			}
+		}
+		localization_key = SI_rpf_gamerule_09
+	}
+	text = {
+		trigger = {
+			has_game_rule = {
+				rule = sr_resources_per_factory_rules
+				option = SR_RPF_10
+			}
+		}
+		localization_key = SI_rpf_gamerule_10
+	}
+	text = {
+		trigger = {
+			has_game_rule = {
+				rule = sr_resources_per_factory_rules
+				option = SR_RPF_11
+			}
+		}
+		localization_key = SI_rpf_gamerule_11
+	}
+	text = {
+		trigger = {
+			has_game_rule = {
+				rule = sr_resources_per_factory_rules
+				option = SR_RPF_12
+			}
+		}
+		localization_key = SI_rpf_gamerule_12
+	}
+	text = {
+		localization_key = SI_rpf_gamerule_default
+	}
+}
+defined_text = {
+	name = SiSubjectStateDemandRule
+
+	text = {
+		trigger = {
+			has_game_rule = {
+				rule = si_state_subject_demand_rules
+				option = SI_STATE_SUBJECT_DEMAND_SIMPLE
+			}
+		}
+		localization_key = SI_state_subject_demand_gamerule_simple
+	}
+	text = {
+		trigger = {
+			has_game_rule = {
+				rule = si_state_subject_demand_rules
+				option = SI_STATE_SUBJECT_DEMAND_OWNER
+			}
+		}
+		localization_key = SI_state_subject_demand_gamerule_owner
+	}
+	text = {
+		localization_key = SI_state_subject_demand_gamerule_default
+	}
+}

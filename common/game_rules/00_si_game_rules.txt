@@ -514,3 +514,26 @@ sr_resources_per_factory_rules = {
 	}
 
 }
+si_state_subject_demand_rules = {
+
+	name = "SI_STATE_SUBJECT_DEMAND_RULES"
+	group = "SI_GENERAL_GROUP"
+	icon = GFX_SI_mini_icon
+
+	default = {
+		name = SI_STATE_SUBJECT_DEMAND_DEFAULT
+		text = "SI_RULE_STATE_SUBJECT_DEMAND_DEFAULT"
+		desc = "SI_RULE_STATE_SUBJECT_DEMAND_DEFAULT_DESC"
+	}
+	option = {
+		name = SI_STATE_SUBJECT_DEMAND_SIMPLE
+		text = "SI_RULE_STATE_SUBJECT_DEMAND_SIMPLE"
+		desc = "SI_RULE_STATE_SUBJECT_DEMAND_SIMPLE_DESC"
+	}
+	option = {
+		name = SI_STATE_SUBJECT_DEMAND_OWNER
+		text = "SI_RULE_STATE_SUBJECT_DEMAND_OWNER"
+		desc = "SI_RULE_STATE_SUBJECT_DEMAND_OWNER_DESC"
+	}
+
+}

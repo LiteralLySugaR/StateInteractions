@@ -1,5 +1,5 @@
 ﻿l_russian:
- SI_stateview_button:0 "Переключить меню §YВзаимодействий с Регионами§!\n--------------------\nАктивные правила:\n- Передача регионов (§Y[SiStateTransferGameRule]§!)\n- Поведение ИИ (§Y[SiAiBehaviourRule]§!)\n- Поведение Отказа ИИ (§Y[SiAiRejectionRule]§!)\n- Подчинение для Национализации (§Y[SiCoreComplianceRule]§!)\n- Претензии на берег (§Y[SiClaimShoreRule]§!)\n- Запрос Ресурсов (§Y[SiResourceDemandRule]§!)\n- Перерыв Претензий (§Y[SiClaimRule]§!)\n- Перерыв Национализации (§Y[SiCoreRule]§!)\n- Перерыв Перемещения Столицы (§Y[SiCapitalRule]§!)\n- Стоимость Цели Войны (§Y[SiWargoalCostRule]§!)\n- Перерыв Артиллерии (§Y[SiArtilleryRule]§!)\n- Милитаризация (§Y[SiMilitarisationRule]§!)\n- Перерыв Милитаризации (§Y[SiDmzRule]§!)"
+ SI_stateview_button:0 "Переключить меню §YВзаимодействий с Регионами§!\n--------------------\nАктивные правила:\n- Передача регионов (§Y[SiStateTransferGameRule]§!)\n- Поведение ИИ (§Y[SiAiBehaviourRule]§!)\n- Поведение Отказа ИИ (§Y[SiAiRejectionRule]§!)\n- Подчинение для Национализации (§Y[SiCoreComplianceRule]§!)\n- Претензии на берег (§Y[SiClaimShoreRule]§!)\n- Запрос Ресурсов (§Y[SiResourceDemandRule]§!)\n- Перерыв Претензий (§Y[SiClaimRule]§!)\n- Перерыв Национализации (§Y[SiCoreRule]§!)\n- Перерыв Перемещения Столицы (§Y[SiCapitalRule]§!)\n- Стоимость Цели Войны (§Y[SiWargoalCostRule]§!)\n- Перерыв Артиллерии (§Y[SiArtilleryRule]§!)\n- Милитаризация (§Y[SiMilitarisationRule]§!)\n- Перерыв Милитаризации (§Y[SiDmzRule]§!)\n- Стоимость Взаимодействий (§Y[SiInteractionsCostRule]§!)\n- Перерыв Взаимодействий (§Y[SiInteractionsCooldownRule]§!)\n- Стоимость Милитаризации (§Y[SiDmzCostRule]§!)\n- Ресурсов за Фабрику (§Y[SrRpfRule]§!)\n- Запрос Региона Вассала (§Y[SiSubjectStateDemandRule]§!)"
 
  SI_state_demand_button:0 "Запросить §Y[FROM.GetName]§![FROM.owner.GetFlag] ([?FROM.si_demand_state_pp_required] £GFX_pol_power )\n--------------------\n§YДополнительные требования§!\n- §Y[FROM.owner.GetName]§! §RНЕ§! в войне с вами, вашим субъектом или союзником\n- §Y[FROM.owner.GetName]§! §RНЕ§! вы, ваши субъект или союзник\n- §Y[FROM.GetName]§! имеет границу с вами или вашим субъектом\n- §Y[FROM.GetName]§! §RНЕ§! субъект запросов\n- §Y[FROM.GetName]§! не находиться в состоянии погран конфликта\n- Вы §RНЕ§! субъект другой страны\n- Если §Y[FROM.GetName]§! береговой регион то либо вы претендуете на наго, либо является вашей национальной\n--------------------\nПерерыв: §Y[?global.si_demand_state_cooldown_days]§! дней (§gКрупное взаимодействие§!)"
 
@@ -91,6 +91,7 @@
  SI_INTERACTIONS_COOLDOWN_RULES:0 "Правила Перерыва Взаимодействий"
  SI_DMZ_COST_RULES:0 "Правила Стоимости Утилиты Милитаризации"
  SR_RPF_RULES:0 "Правила Ресурсов за Фабрику"
+ SI_STATE_SUBJECT_DEMAND_RULES:0 "Правила Запроса Регионов Вассала"
 
  SI_RULE_STATE_TRANSFER_DEFAULT:0 "По Умолчанию (Одиночная игра)"
  SI_RULE_STATE_TRANSFER_DEFAULT_DESC:0 "Передача регионов работает без ограничений."
@@ -236,6 +237,13 @@
  SR_RULE_RPF_12:0 "12"
  SR_RULE_RPF_12_DESC:0 "(Запрос Ресурсов) Вы будете получать 12 единиц ресурсов за фабрику."
 
+ SI_RULE_STATE_SUBJECT_DEMAND_DEFAULT:0 "По Умолчанию"
+ SI_RULE_STATE_SUBJECT_DEMAND_DEFAULT_DESC:0 "Запрашивая регион вассала, если у него низкая автономия ивент будет присылаться владельцу вассала, в ином случае вассалу."
+ SI_RULE_STATE_SUBJECT_DEMAND_SIMPLE:0 "Простой"
+ SI_RULE_STATE_SUBJECT_DEMAND_SIMPLE_DESC:0 "Запрашивая регион вассала ивент будет присылаться владельцу вассала."
+ SI_RULE_STATE_SUBJECT_DEMAND_OWNER:0 "Владельцу"
+ SI_RULE_STATE_SUBJECT_DEMAND_OWNER_DESC:0 "Запрашивая регион вассала ивент будет всегда приходить ему."
+
  SI_retaliation_tt:0 "§RВойна неибежна если они решат давить до конца.§!"
 
  SI_state_demanded_threat:0 "Запрошен Регион"
@@ -293,6 +301,33 @@
  SI_artillery_gamerule_half:0 "x0.5"
  SI_artillery_gamerule_oneplushalf:0 "x1.5"
  SI_artillery_gamerule_double:0 "x2.0"
+ SI_interactions_cost_gamerule_default:0 "По Умолчанию x1.0"
+ SI_interactions_cost_gamerule_quarter:0 "x0.25"
+ SI_interactions_cost_gamerule_half:0 "x0.5"
+ SI_interactions_cost_gamerule_oneplushalf:0 "x1.5"
+ SI_interactions_cost_gamerule_double:0 "x2.0"
+ SI_interactions_cooldown_gamerule_default:0 "По Умолчанию x1.0"
+ SI_interactions_cooldown_gamerule_quarter:0 "x0.25"
+ SI_interactions_cooldown_gamerule_half:0 "x0.5"
+ SI_interactions_cooldown_gamerule_oneplushalf:0 "x1.5"
+ SI_interactions_cooldown_gamerule_double:0 "x2.0"
+ SI_dmz_cost_gamerule_default:0 "По Умолчанию x1.0"
+ SI_dmz_cost_gamerule_quarter:0 "x0.25"
+ SI_dmz_cost_gamerule_half:0 "x0.5"
+ SI_dmz_cost_gamerule_oneplushalf:0 "x1.5"
+ SI_dmz_cost_gamerule_double:0 "x2.0"
+ SI_rpf_gamerule_default:0 "6"
+ SI_rpf_gamerule_04:0 "4"
+ SI_rpf_gamerule_05:0 "5"
+ SI_rpf_gamerule_07:0 "7"
+ SI_rpf_gamerule_08:0 "8"
+ SI_rpf_gamerule_09:0 "9"
+ SI_rpf_gamerule_10:0 "10"
+ SI_rpf_gamerule_11:0 "11"
+ SI_rpf_gamerule_12:0 "12"
+ SI_state_subject_demand_gamerule_default:0 "По Умолчанию"
+ SI_state_subject_demand_gamerule_simple:0 "Простой"
+ SI_state_subject_demand_gamerule_owner:0 "Владельцу"
 
  SI_opposition_to_new_owner_modifier:0 "Оппозиция Новому Владельцу"
  SI_shelling_modifier:0 "Подавительный Огонь"
